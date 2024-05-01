@@ -82,7 +82,6 @@
             textBox1.PlaceholderText = "Username";
             textBox1.Size = new Size(249, 23);
             textBox1.TabIndex = 3;
-            textBox1.Text = "Username";
             // 
             // textBox2
             // 
@@ -92,7 +91,6 @@
             textBox2.PlaceholderText = "Password";
             textBox2.Size = new Size(249, 23);
             textBox2.TabIndex = 4;
-            textBox2.Text = "Password";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label2
@@ -121,6 +119,7 @@
             ForeColor = Color.DeepSkyBlue;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Username";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

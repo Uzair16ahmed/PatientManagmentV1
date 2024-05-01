@@ -90,7 +90,7 @@ namespace PatientManagmentV1
             Populate();
         }
 
-        
+
         private void DoctorGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             PatId.Text = PatientGV.SelectedRows[0].Cells[0].Value.ToString();
@@ -101,6 +101,11 @@ namespace PatientManagmentV1
             PatGender.Text = PatientGV.SelectedRows[0].Cells[5].Value.ToString();
             PatBlood.Text = PatientGV.SelectedRows[0].Cells[6].Value.ToString();
             PatDisease.Text = PatientGV.SelectedRows[0].Cells[7].Value.ToString();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

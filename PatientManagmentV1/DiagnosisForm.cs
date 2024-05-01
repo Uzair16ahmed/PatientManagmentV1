@@ -159,17 +159,22 @@ namespace PatientManagmentV1
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             //e.Graphics.DrawString(label4.Text + "\n\n\n\n\n\n\n\n\n\n", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230));
-            e.Graphics.DrawString(label4.Text , new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230));
-            e.Graphics.DrawString(PatientNamelbl.Text + "\n"+ Diagnosislbl.Text + "\n" + Symptomslbl.Text + "\n"+ Medicineslbl.Text, new Font("Century Gothic", 12, FontStyle.Regular), Brushes.Black, new Point(130, 150));
+            e.Graphics.DrawString(label4.Text, new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230));
+            e.Graphics.DrawString(PatientNamelbl.Text + "\n" + Diagnosislbl.Text + "\n" + Symptomslbl.Text + "\n" + Medicineslbl.Text, new Font("Century Gothic", 12, FontStyle.Regular), Brushes.Black, new Point(130, 150));
             e.Graphics.DrawString(label4.Text + "\n", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230, 500));
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if(printPreviewDialog1.ShowDialog() ==  DialogResult.OK)
+            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
             {
                 printDocument1.Print();
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

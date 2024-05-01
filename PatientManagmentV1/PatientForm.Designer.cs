@@ -48,6 +48,7 @@
             button1 = new Button();
             label3 = new Label();
             PatientGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PatientGV).BeginInit();
             SuspendLayout();
@@ -55,6 +56,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DeepSkyBlue;
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -280,6 +282,18 @@
             PatientGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             PatientGV.CellContentClick += DoctorGV_CellContentClick;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(1018, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 29);
+            label5.TabIndex = 10;
+            label5.Text = "X";
+            label5.Click += label5_Click;
+            // 
             // PatientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -332,5 +346,6 @@
         private Button button1;
         private Label label3;
         private Guna.UI2.WinForms.Guna2DataGridView PatientGV;
+        private Label label5;
     }
 }
