@@ -47,9 +47,9 @@
             button2 = new Button();
             button1 = new Button();
             label3 = new Label();
-            DoctorGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            PatientGV = new Guna.UI2.WinForms.Guna2DataGridView();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DoctorGV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PatientGV).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -60,7 +60,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1024, 96);
+            panel1.Size = new Size(1056, 96);
             panel1.TabIndex = 1;
             // 
             // label2
@@ -223,16 +223,16 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(545, 99);
+            label3.Location = new Point(598, 99);
             label3.Name = "label3";
             label3.Size = new Size(182, 36);
             label3.TabIndex = 15;
             label3.Text = "PATIENTS LIST";
             // 
-            // DoctorGV
+            // PatientGV
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
-            DoctorGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            PatientGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -240,9 +240,9 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            DoctorGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            DoctorGV.ColumnHeadersHeight = 30;
-            DoctorGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            PatientGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            PatientGV.ColumnHeadersHeight = 30;
+            PatientGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -250,43 +250,43 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            DoctorGV.DefaultCellStyle = dataGridViewCellStyle3;
-            DoctorGV.GridColor = Color.FromArgb(231, 229, 255);
-            DoctorGV.Location = new Point(342, 149);
-            DoctorGV.Name = "DoctorGV";
-            DoctorGV.RowHeadersVisible = false;
-            DoctorGV.Size = new Size(663, 394);
-            DoctorGV.TabIndex = 16;
-            DoctorGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            DoctorGV.ThemeStyle.AlternatingRowsStyle.Font = null;
-            DoctorGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            DoctorGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            DoctorGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            DoctorGV.ThemeStyle.BackColor = Color.White;
-            DoctorGV.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            DoctorGV.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            DoctorGV.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            DoctorGV.ThemeStyle.HeaderStyle.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DoctorGV.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            DoctorGV.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            DoctorGV.ThemeStyle.HeaderStyle.Height = 30;
-            DoctorGV.ThemeStyle.ReadOnly = false;
-            DoctorGV.ThemeStyle.RowsStyle.BackColor = Color.White;
-            DoctorGV.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DoctorGV.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            DoctorGV.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            DoctorGV.ThemeStyle.RowsStyle.Height = 25;
-            DoctorGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            DoctorGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            DoctorGV.CellContentClick += DoctorGV_CellContentClick;
+            PatientGV.DefaultCellStyle = dataGridViewCellStyle3;
+            PatientGV.GridColor = Color.FromArgb(231, 229, 255);
+            PatientGV.Location = new Point(342, 149);
+            PatientGV.Name = "PatientGV";
+            PatientGV.RowHeadersVisible = false;
+            PatientGV.Size = new Size(702, 394);
+            PatientGV.TabIndex = 16;
+            PatientGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            PatientGV.ThemeStyle.AlternatingRowsStyle.Font = null;
+            PatientGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            PatientGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            PatientGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            PatientGV.ThemeStyle.BackColor = Color.White;
+            PatientGV.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            PatientGV.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            PatientGV.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            PatientGV.ThemeStyle.HeaderStyle.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PatientGV.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            PatientGV.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            PatientGV.ThemeStyle.HeaderStyle.Height = 30;
+            PatientGV.ThemeStyle.ReadOnly = false;
+            PatientGV.ThemeStyle.RowsStyle.BackColor = Color.White;
+            PatientGV.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            PatientGV.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            PatientGV.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            PatientGV.ThemeStyle.RowsStyle.Height = 25;
+            PatientGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            PatientGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            PatientGV.CellContentClick += DoctorGV_CellContentClick;
             // 
             // PatientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(1024, 597);
-            Controls.Add(DoctorGV);
+            ClientSize = new Size(1056, 597);
+            Controls.Add(PatientGV);
             Controls.Add(label3);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -308,7 +308,7 @@
             Load += PatientForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)DoctorGV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PatientGV).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,6 +331,6 @@
         private Button button2;
         private Button button1;
         private Label label3;
-        private Guna.UI2.WinForms.Guna2DataGridView DoctorGV;
+        private Guna.UI2.WinForms.Guna2DataGridView PatientGV;
     }
 }

@@ -28,7 +28,7 @@ namespace PatientManagmentV1
             SqlCommandBuilder builder = new SqlCommandBuilder(da);
             var ds = new DataSet();
             da.Fill(ds);
-            DoctorGV.DataSource = ds.Tables[0];
+            PatientGV.DataSource = ds.Tables[0];
             Con.Close();
         }
 
@@ -56,7 +56,7 @@ namespace PatientManagmentV1
         private void button2_Click(object sender, EventArgs e)
         {
             Con.Open();
-            string query = "update PatientTbl set PatName = '" + PatName.Text + "', PatAddress='" + PatAddress.Text + "', PatPhone='" + PatPhone.Text + "' where PatId=" + PatId.Text + " ";
+            string query = "update PatientTbl set PatName = '" + PatName.Text + "', PatAddress='" + PatAddress.Text + "', PatPhone='" + PatPhone.Text + "', PatAge=" + PatAge.Text + ",PatGender='" + PatGender.SelectedItem.ToString() + "',PatBlood='" + PatBlood.SelectedItem.ToString() + "', PatDisease='" + PatDisease.Text + "'  where PatId=" + PatId.Text + " ";
             SqlCommand cmd = new SqlCommand(query, Con);
             cmd.ExecuteNonQuery();
             MessageBox.Show("Patient Successfully Updated");
@@ -90,16 +90,17 @@ namespace PatientManagmentV1
             Populate();
         }
 
+        
         private void DoctorGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            PatId.Text = DoctorGV.SelectedRows[0].Cells[0].Value.ToString();
-            PatName.Text = DoctorGV.SelectedRows[0].Cells[1].Value.ToString();
-            PatAddress.Text = DoctorGV.SelectedRows[0].Cells[2].Value.ToString();
-            PatPhone.Text = DoctorGV.SelectedRows[0].Cells[3].Value.ToString();
-            PatAge.Text = DoctorGV.SelectedRows[0].Cells[4].Value.ToString();
-            PatGender.Text = DoctorGV.SelectedRows[0].Cells[5].Value.ToString();
-            PatBlood.Text = DoctorGV.SelectedRows[0].Cells[6].Value.ToString();
-            PatDisease.Text = DoctorGV.SelectedRows[0].Cells[7].Value.ToString();
+            PatId.Text = PatientGV.SelectedRows[0].Cells[0].Value.ToString();
+            PatName.Text = PatientGV.SelectedRows[0].Cells[1].Value.ToString();
+            PatAddress.Text = PatientGV.SelectedRows[0].Cells[2].Value.ToString();
+            PatPhone.Text = PatientGV.SelectedRows[0].Cells[3].Value.ToString();
+            PatAge.Text = PatientGV.SelectedRows[0].Cells[4].Value.ToString();
+            PatGender.Text = PatientGV.SelectedRows[0].Cells[5].Value.ToString();
+            PatBlood.Text = PatientGV.SelectedRows[0].Cells[6].Value.ToString();
+            PatDisease.Text = PatientGV.SelectedRows[0].Cells[7].Value.ToString();
         }
     }
 }
