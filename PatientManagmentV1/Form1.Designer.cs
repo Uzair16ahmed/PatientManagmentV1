@@ -31,8 +31,8 @@
             panel1 = new Panel();
             label1 = new Label();
             button1 = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            UsernameTb = new TextBox();
+            PassTb = new TextBox();
             label2 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -74,24 +74,25 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // textBox1
+            // UsernameTb
             // 
-            textBox1.ForeColor = Color.DeepSkyBlue;
-            textBox1.Location = new Point(54, 150);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Username";
-            textBox1.Size = new Size(249, 23);
-            textBox1.TabIndex = 3;
+            UsernameTb.ForeColor = SystemColors.Desktop;
+            UsernameTb.Location = new Point(54, 150);
+            UsernameTb.Name = "UsernameTb";
+            UsernameTb.PlaceholderText = "Username";
+            UsernameTb.Size = new Size(249, 23);
+            UsernameTb.TabIndex = 3;
             // 
-            // textBox2
+            // PassTb
             // 
-            textBox2.ForeColor = Color.DeepSkyBlue;
-            textBox2.Location = new Point(54, 205);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Password";
-            textBox2.Size = new Size(249, 23);
-            textBox2.TabIndex = 4;
-            textBox2.TextChanged += textBox2_TextChanged;
+            PassTb.ForeColor = SystemColors.Desktop;
+            PassTb.Location = new Point(54, 205);
+            PassTb.Name = "PassTb";
+            PassTb.PlaceholderText = "Password";
+            PassTb.Size = new Size(249, 23);
+            PassTb.TabIndex = 4;
+            PassTb.UseSystemPasswordChar = true;
+            PassTb.TextChanged += textBox2_TextChanged;
             // 
             // label2
             // 
@@ -112,8 +113,8 @@
             BackColor = Color.Gainsboro;
             ClientSize = new Size(362, 391);
             Controls.Add(label2);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(PassTb);
+            Controls.Add(UsernameTb);
             Controls.Add(button1);
             Controls.Add(panel1);
             ForeColor = Color.DeepSkyBlue;
@@ -132,8 +133,8 @@
         private Panel panel1;
         private Label label1;
         private Button button1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox UsernameTb;
+        private TextBox PassTb;
         private Label label2;
     }
 }

@@ -28,26 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            guna2CircleProgressBar1 = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            components = new System.ComponentModel.Container();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Myprogressbar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // guna2CircleProgressBar1
+            // Myprogressbar
             // 
-            guna2CircleProgressBar1.FillColor = Color.FromArgb(200, 213, 218, 223);
-            guna2CircleProgressBar1.Font = new Font("Segoe UI", 12F);
-            guna2CircleProgressBar1.ForeColor = Color.White;
-            guna2CircleProgressBar1.Location = new Point(219, 89);
-            guna2CircleProgressBar1.Minimum = 0;
-            guna2CircleProgressBar1.Name = "guna2CircleProgressBar1";
-            guna2CircleProgressBar1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2CircleProgressBar1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleProgressBar1.Size = new Size(130, 130);
-            guna2CircleProgressBar1.TabIndex = 4;
-            guna2CircleProgressBar1.Text = "guna2CircleProgressBar1";
+            Myprogressbar.FillColor = Color.FromArgb(200, 213, 218, 223);
+            Myprogressbar.Font = new Font("Segoe UI", 12F);
+            Myprogressbar.ForeColor = Color.White;
+            Myprogressbar.Location = new Point(219, 89);
+            Myprogressbar.Minimum = 0;
+            Myprogressbar.Name = "Myprogressbar";
+            Myprogressbar.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            Myprogressbar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            Myprogressbar.Size = new Size(130, 130);
+            Myprogressbar.TabIndex = 4;
+            Myprogressbar.Text = "guna2CircleProgressBar1";
             // 
             // label3
             // 
@@ -82,6 +84,10 @@
             label1.TabIndex = 5;
             label1.Text = "PATIENT MANAGEMENT SYSTEM";
             // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // SplashForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -91,18 +97,21 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(label3);
-            Controls.Add(guna2CircleProgressBar1);
+            Controls.Add(Myprogressbar);
             FormBorderStyle = FormBorderStyle.None;
             Name = "SplashForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "SplashForm";
+            Load += SplashForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2CircleProgressBar guna2CircleProgressBar1;
+        private Guna.UI2.WinForms.Guna2CircleProgressBar Myprogressbar;
         private Label label3;
         private Label label2;
         private Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

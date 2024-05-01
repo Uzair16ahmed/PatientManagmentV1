@@ -21,5 +21,24 @@ namespace PatientManagmentV1
         {
 
         }
+        int startPoint = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            startPoint += 1;
+            Myprogressbar.Value = startPoint;
+            if (Myprogressbar.Value == 100)
+            {
+                Myprogressbar.Value = 0;
+                timer1.Stop();
+                Form1 login = new Form1();
+                login.Show();
+                this.Hide();
+            }
+        }
+
+        private void SplashForm_Load(object sender, EventArgs e)
+        {
+            this.timer1.Start();
+        }
     }
 }
