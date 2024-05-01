@@ -43,6 +43,7 @@
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
+            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DoctorGV).BeginInit();
             SuspendLayout();
@@ -50,6 +51,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DeepSkyBlue;
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -224,6 +226,18 @@
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(907, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 29);
+            label5.TabIndex = 10;
+            label5.Text = "X";
+            label5.Click += label5_Click;
+            // 
             // DoctorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -266,5 +280,6 @@
         private Button button2;
         private Button button3;
         private Button button4;
+        private Label label5;
     }
 }

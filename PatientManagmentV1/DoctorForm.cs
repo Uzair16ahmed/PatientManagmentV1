@@ -99,5 +99,10 @@ namespace PatientManagmentV1
             DocExp.Text = DoctorGV.SelectedRows[0].Cells[2].Value.ToString();
             DocPass.Text = DoctorGV.SelectedRows[0].Cells[3].Value.ToString();
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
