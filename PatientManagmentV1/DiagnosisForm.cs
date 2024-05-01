@@ -23,5 +23,10 @@ namespace PatientManagmentV1
             h.Show();
             this.Hide();
         }
+
+        private void DiagnosisForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
