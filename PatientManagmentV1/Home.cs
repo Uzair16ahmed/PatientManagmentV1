@@ -49,5 +49,19 @@ namespace PatientManagmentV1
             Diag.Show();
             this.Hide();
         }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            MedicineForm med = new MedicineForm();
+            med.Show();
+            this.Hide();
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            LabForm lab = new LabForm();
+            lab.Show();
+            this.Hide();
+        }
     }
 }
