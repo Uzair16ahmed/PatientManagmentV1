@@ -1,6 +1,6 @@
 ﻿namespace PatientManagmentV1
 {
-    partial class MedicineForm
+    partial class LabForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,12 +39,12 @@
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
-            MedId = new TextBox();
-            MedicineName = new TextBox();
-            MedicineGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            LabName = new TextBox();
+            LabId = new TextBox();
+            LabGV = new Guna.UI2.WinForms.Guna2DataGridView();
             label3 = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)MedicineGV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LabGV).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -57,7 +57,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(945, 96);
-            panel1.TabIndex = 1;
+            panel1.TabIndex = 2;
             // 
             // label5
             // 
@@ -76,11 +76,11 @@
             label2.AutoSize = true;
             label2.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(417, 45);
+            label2.Location = new Point(442, 45);
             label2.Name = "label2";
-            label2.Size = new Size(136, 36);
+            label2.Size = new Size(61, 36);
             label2.TabIndex = 2;
-            label2.Text = "MEDICINE";
+            label2.Text = "LAB";
             // 
             // label1
             // 
@@ -99,10 +99,10 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(162, 394);
+            button4.Location = new Point(165, 381);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
-            button4.TabIndex = 13;
+            button4.TabIndex = 17;
             button4.Text = "Home";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
@@ -113,10 +113,10 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(276, 323);
+            button3.Location = new Point(279, 310);
             button3.Name = "button3";
             button3.Size = new Size(94, 46);
-            button3.TabIndex = 12;
+            button3.TabIndex = 16;
             button3.Text = "Delete";
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
@@ -127,10 +127,10 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(163, 323);
+            button2.Location = new Point(166, 310);
             button2.Name = "button2";
             button2.Size = new Size(93, 46);
-            button2.TabIndex = 11;
+            button2.TabIndex = 15;
             button2.Text = "Update";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
@@ -141,36 +141,36 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(52, 323);
+            button1.Location = new Point(55, 310);
             button1.Name = "button1";
             button1.Size = new Size(92, 46);
-            button1.TabIndex = 10;
+            button1.TabIndex = 14;
             button1.Text = "Add";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // MedId
+            // LabName
             // 
-            MedId.BackColor = Color.Gainsboro;
-            MedId.Location = new Point(53, 179);
-            MedId.Name = "MedId";
-            MedId.PlaceholderText = "MedicineID";
-            MedId.Size = new Size(182, 23);
-            MedId.TabIndex = 14;
+            LabName.BackColor = Color.Gainsboro;
+            LabName.Location = new Point(64, 231);
+            LabName.Name = "LabName";
+            LabName.PlaceholderText = "Lab Name";
+            LabName.Size = new Size(182, 23);
+            LabName.TabIndex = 19;
             // 
-            // MedicineName
+            // LabId
             // 
-            MedicineName.BackColor = Color.Gainsboro;
-            MedicineName.Location = new Point(52, 235);
-            MedicineName.Name = "MedicineName";
-            MedicineName.PlaceholderText = "Medicine Name";
-            MedicineName.Size = new Size(182, 23);
-            MedicineName.TabIndex = 15;
+            LabId.BackColor = Color.Gainsboro;
+            LabId.Location = new Point(64, 174);
+            LabId.Name = "LabId";
+            LabId.PlaceholderText = "LabID";
+            LabId.Size = new Size(182, 23);
+            LabId.TabIndex = 18;
             // 
-            // MedicineGV
+            // LabGV
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
-            MedicineGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            LabGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -178,9 +178,9 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            MedicineGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            MedicineGV.ColumnHeadersHeight = 30;
-            MedicineGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            LabGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            LabGV.ColumnHeadersHeight = 30;
+            LabGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -188,35 +188,35 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
-            MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.Location = new Point(427, 163);
-            MedicineGV.Name = "MedicineGV";
-            MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(493, 345);
-            MedicineGV.TabIndex = 17;
-            MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
-            MedicineGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            MedicineGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            MedicineGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            MedicineGV.ThemeStyle.BackColor = Color.White;
-            MedicineGV.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            MedicineGV.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            MedicineGV.ThemeStyle.HeaderStyle.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MedicineGV.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            MedicineGV.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            MedicineGV.ThemeStyle.HeaderStyle.Height = 30;
-            MedicineGV.ThemeStyle.ReadOnly = false;
-            MedicineGV.ThemeStyle.RowsStyle.BackColor = Color.White;
-            MedicineGV.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            MedicineGV.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            MedicineGV.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            MedicineGV.ThemeStyle.RowsStyle.Height = 25;
-            MedicineGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            MedicineGV.CellContentClick += MedicineGV_CellContentClick;
+            LabGV.DefaultCellStyle = dataGridViewCellStyle3;
+            LabGV.GridColor = Color.FromArgb(231, 229, 255);
+            LabGV.Location = new Point(421, 156);
+            LabGV.Name = "LabGV";
+            LabGV.RowHeadersVisible = false;
+            LabGV.Size = new Size(493, 345);
+            LabGV.TabIndex = 20;
+            LabGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            LabGV.ThemeStyle.AlternatingRowsStyle.Font = null;
+            LabGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            LabGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            LabGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            LabGV.ThemeStyle.BackColor = Color.White;
+            LabGV.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            LabGV.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            LabGV.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            LabGV.ThemeStyle.HeaderStyle.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LabGV.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            LabGV.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            LabGV.ThemeStyle.HeaderStyle.Height = 30;
+            LabGV.ThemeStyle.ReadOnly = false;
+            LabGV.ThemeStyle.RowsStyle.BackColor = Color.White;
+            LabGV.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            LabGV.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            LabGV.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            LabGV.ThemeStyle.RowsStyle.Height = 25;
+            LabGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            LabGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            LabGV.CellContentClick += LabGV_CellContentClick;
             // 
             // label3
             // 
@@ -224,35 +224,34 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(574, 110);
+            label3.Location = new Point(611, 108);
             label3.Name = "label3";
-            label3.Size = new Size(205, 36);
-            label3.TabIndex = 18;
-            label3.Text = "MEDICINES LIST";
+            label3.Size = new Size(130, 36);
+            label3.TabIndex = 21;
+            label3.Text = "LABS LIST";
             // 
-            // MedicineForm
+            // LabForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Gainsboro;
             ClientSize = new Size(945, 597);
             Controls.Add(label3);
-            Controls.Add(MedicineGV);
-            Controls.Add(MedicineName);
-            Controls.Add(MedId);
+            Controls.Add(LabGV);
+            Controls.Add(LabName);
+            Controls.Add(LabId);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "MedicineForm";
+            Name = "LabForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MedicineForm";
-            Load += MedicineForm_Load;
+            Text = "LabForm";
+            Load += LabForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)MedicineGV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)LabGV).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -267,9 +266,9 @@
         private Button button3;
         private Button button2;
         private Button button1;
-        private TextBox MedId;
-        private TextBox MedicineName;
-        private Guna.UI2.WinForms.Guna2DataGridView MedicineGV;
+        private TextBox LabName;
+        private TextBox LabId;
+        private Guna.UI2.WinForms.Guna2DataGridView LabGV;
         private Label label3;
     }
 }
