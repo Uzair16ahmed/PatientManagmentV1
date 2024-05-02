@@ -19,6 +19,14 @@ namespace PatientManagmentV1
             InitializeComponent();
         }
 
+        private void Clear()
+        {
+            DocId.Text = "";
+            DocName.Text = "";
+            DocExp.Text = "";
+            DocPass.Text = "";
+        }
+
         void Populate()
         {
             Con.Open();
@@ -40,6 +48,7 @@ namespace PatientManagmentV1
             MessageBox.Show("Doctor Successfully Updated");
             Con.Close();
             Populate();
+            Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -62,6 +71,7 @@ namespace PatientManagmentV1
                 MessageBox.Show("Doctor Successfully Added");
                 Con.Close();
                 Populate();
+                Clear();
             }
 
         }
@@ -84,6 +94,7 @@ namespace PatientManagmentV1
                 MessageBox.Show("Doctor Successfully Deleted");
                 Con.Close();
                 Populate();
+                Clear();
             }
         }
 
