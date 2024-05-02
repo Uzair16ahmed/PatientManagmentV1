@@ -20,6 +20,20 @@ namespace PatientManagmentV1
             InitializeComponent();
         }
 
+        private void Clear()
+        {
+
+            PatId.Text = "";
+            PatName.Text = "";
+            PatAddress.Text = "";
+            PatPhone.Text = "";
+            PatAge.Text = "";
+            PatGender.Text = "";
+            PatBlood.Text = "";
+            PatDisease.Text = "";
+
+        }
+
         void Populate()
         {
             Con.Open();
@@ -50,6 +64,7 @@ namespace PatientManagmentV1
                 MessageBox.Show("Patient Successfully Added");
                 Con.Close();
                 Populate();
+                Clear();
             }
         }
 
@@ -62,6 +77,7 @@ namespace PatientManagmentV1
             MessageBox.Show("Patient Successfully Updated");
             Con.Close();
             Populate();
+            Clear();
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -75,6 +91,7 @@ namespace PatientManagmentV1
                 MessageBox.Show("Patient Successfully Deleted");
                 Con.Close();
                 Populate();
+                Clear();
             }
         }
 

@@ -553,7 +553,6 @@
         private Label label5;
         private TextBox PatGender;
         private TextBox Assessment;
-        private ComboBox comboBox2;
         private ComboBox MedSchedule;
         private TextBox MedDose;
         private ComboBox MedIntake;
