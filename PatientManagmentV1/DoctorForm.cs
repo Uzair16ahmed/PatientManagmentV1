@@ -23,7 +23,7 @@ namespace PatientManagmentV1
         {
             DocId.Text = "";
             DocName.Text = "";
-            RoleCb.SelectedItem = "";
+            RoleCb.SelectedIndex = -1;
             DocPass.Text = "";
         }
 
@@ -77,10 +77,11 @@ namespace PatientManagmentV1
                     {
                     // Ensure the connection is always closed, even if an error occurs
                     if (Con.State == ConnectionState.Open)
-                    {
-                        Con.Close();
+                        {
+                            Con.Close();
+                        }
+                    
                     }
-                }
 
                 // Assuming Populate() is a method to refresh or update the data displayed
                 Populate();
