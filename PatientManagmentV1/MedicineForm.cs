@@ -53,47 +53,133 @@ namespace PatientManagmentV1
         private void button1_Click(object sender, EventArgs e)
         {
             if (MedId.Text == "" || MedicineName.Text == "")
+            {
                 MessageBox.Show("No Empty Value Accepted");
+            }
             else
             {
-                Con.Open();
-                string query = "insert into MedicineTbl values(" + MedId.Text + ",'" + MedicineName.Text + "')";
-                SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Medicine Successfully Added");
-                Con.Close();
+                
+                try
+                {
+                    Con.Open();
+                    string query = "INSERT INTO MedicineTbl (MedId, MedicineName) VALUES (@MedId, @MedicineName)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, Con))
+                    {
+                        // Adding parameters to prevent SQL Injection
+                        cmd.Parameters.AddWithValue("@MedId", MedId.Text);  // Convert to integer if MedId is a numeric field
+                        cmd.Parameters.AddWithValue("@MedicineName", MedicineName.Text);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Medicine Successfully Added");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    if(Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
                 Populate();
                 Clear();
+                
             }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Con.Open();
-            string query = "update MedicineTbl set MedicineName = '" + MedicineName.Text + "' where MedId=" + MedId.Text + " ";
-            SqlCommand cmd = new SqlCommand(query, Con);
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Medicine Successfully Updated");
-            Con.Close();
-            Populate();
-            Clear();
+            if (MedId.Text == "" || MedicineName.Text == "")
+            {
+                MessageBox.Show("No Empty Value Accepted");
+            }
+            else
+            {
+                
+                try
+                {
+                    Con.Open();
+                    string query = "UPDATE MedicineTbl SET MedicineName = @MedicineName WHERE MedId = @MedId";
+
+                    using (SqlCommand cmd = new SqlCommand(query, Con))
+                    {
+                        // Add parameters to ensure safe query execution
+                        cmd.Parameters.AddWithValue("@MedicineName", MedicineName.Text);
+                        cmd.Parameters.AddWithValue("@MedId", MedId.Text); // Assuming MedId is a string, convert to int if necessary
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Medicine Successfully Updated");
+                        
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    if(Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
+                Populate(); // Refresh data display
+                Clear();
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (MedId.Text == "")
+            {
                 MessageBox.Show("Enter the Medicine Id");
+            }
             else
             {
-                Con.Open();
-                string query = "delete from MedicineTbl where MedId=" + MedId.Text + "";
-                SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Medicine Successfully Deleted");
-                Con.Close();
-                Populate();
-                Clear();
+                // Check if the logged-in user's role is "Admin"
+                if (DoctorSession.Role != "Admin")
+                {
+                    MessageBox.Show("You are not authorized to delete medicines.");
+                }
+                else
+                {
+                    
+                    try
+                    {
+                        Con.Open();
+                        string query = "DELETE FROM MedicineTbl WHERE MedId = @MedId";
+
+                        using (SqlCommand cmd = new SqlCommand(query, Con))
+                        {
+                            cmd.Parameters.AddWithValue("@MedId", MedId.Text);  // Convert to integer if MedId is numeric
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Medicine Successfully Deleted");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if(Con.State == ConnectionState.Open)
+                        {
+                            Con.Close();
+                        }
+                    }
+                Populate(); // Refresh the data display
+                Clear();    // Clear any form fields
+                }
+                
             }
+
         }
 
         private void MedicineForm_Load(object sender, EventArgs e)
