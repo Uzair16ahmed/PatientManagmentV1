@@ -15,7 +15,7 @@ namespace PatientManagmentV1
 {
     public partial class DiagnosisForm : Form
     {
-        SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\PatientManagementSystemV1.mdf;Integrated Security=True;Connect Timeout=30");
+        readonly SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\PatientManagementSystemV1.mdf;Integrated Security=True;Connect Timeout=30");
 
         public DiagnosisForm()
         {
@@ -141,28 +141,80 @@ namespace PatientManagmentV1
             MedSchedule.Text = "";
         }
 
-        string patientName;
-        string patientGender;
-        string patientAge;
+  
+        //void FetchPatientName()
+        //{
+        //    Con.Open();
+        //    string sql = "select * from PatientTbl where PatId=" + PatientIdCb.SelectedValue.ToString() + " ";
+        //    SqlCommand cmd = new SqlCommand(sql, Con);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    da.Fill(dt);
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        patientName = dr["PatName"].ToString();
+        //        patientGender = dr["PatGender"].ToString();
+        //        patientAge = dr["PatAge"].ToString();
+        //        PatientTb.Text = patientName;
+        //        PatGender.Text = patientGender;
+        //        PatAge.Text = patientAge;
+        //    }
+        //    Con.Close();
+        //}
         void FetchPatientName()
         {
-            Con.Open();
-            string sql = "select * from PatientTbl where PatId=" + PatientIdCb.SelectedValue.ToString() + " ";
-            SqlCommand cmd = new SqlCommand(sql, Con);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-            foreach (DataRow dr in dt.Rows)
+            if (PatientIdCb.SelectedValue == null)
             {
-                patientName = dr["PatName"].ToString();
-                patientGender = dr["PatGender"].ToString();
-                patientAge = dr["PatAge"].ToString();
-                PatientTb.Text = patientName;
-                PatGender.Text = patientGender;
-                PatAge.Text = patientAge;
+                MessageBox.Show("Please select a valid patient ID.");
+                return;
             }
-            Con.Close();
+
+                try
+                {
+                    Con.Open();
+                    string sql = "SELECT * FROM PatientTbl WHERE PatId = @PatId";
+                    using (SqlCommand cmd = new SqlCommand(sql, Con))
+                    {
+                        // Safely add the patient ID as a parameter to avoid SQL injection
+                        cmd.Parameters.AddWithValue("@PatId", PatientIdCb.SelectedValue.ToString());
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
+                                PatientTb.Text = dr["PatName"].ToString();
+                                PatGender.Text = dr["PatGender"].ToString();
+                                PatAge.Text = dr["PatAge"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No patient found with the specified ID.");
+                                // Optionally clear any previous data displayed
+                                PatientTb.Text = "";
+                                PatGender.Text = "";
+                                PatAge.Text = "";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    // Connection will be closed by the using statement
+                    if(Con.State == ConnectionState.Open)
+                    {
+                    Con.Close();
+                    }
+                }
         }
+
         void Populate()
         {
             Con.Open();
@@ -279,19 +331,49 @@ namespace PatientManagmentV1
         private void button3_Click(object sender, EventArgs e)
         {
             if (DiagId.Text == "")
+            {
                 MessageBox.Show("Enter the Diagnosis Id");
+            }
             else
             {
-                Con.Open();
-                string query = "delete from DiagnosisTbl where DiagId=" + DiagId.Text + "";
-                SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Diagnosis Successfully Deleted");
-                Con.Close();
-                Populate();
-                Clear();
-                ClearMedicineSelections();
+                // Check if the logged-in user's role allows for deletion
+                if (DoctorSession.Role != "Admin")
+                {
+                    MessageBox.Show("You are not authorized to delete diagnosis records.");
+                }
+                else
+                {
+                    
+                    try
+                    {
+                        Con.Open();
+                        string query = "DELETE FROM DiagnosisTbl WHERE DiagId = @DiagId";
+
+                        using (SqlCommand cmd = new SqlCommand(query, Con))
+                        {
+                            cmd.Parameters.AddWithValue("@DiagId", DiagId.Text);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Diagnosis Successfully Deleted");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if(Con.State == ConnectionState.Open)
+                        {
+                            Con.Close();
+                        }
+                    }
+                    Populate(); // Refresh the data display
+                    Clear();    // Clear any form fields
+                    ClearMedicineSelections(); // Additional cleanup function
+                }
             }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -383,12 +465,12 @@ namespace PatientManagmentV1
             string formattedDate = GetFormattedCreationDate(DiagnosisGV);
 
             //e.Graphics.DrawString(label4.Text + "\n\n\n\n\n\n\n\n\n\n", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230));
-            e.Graphics.DrawString("Patient Report", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(280));
+            e.Graphics?.DrawString("Patient Report", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(280));
 
             Graphics graphic = e.Graphics;
-            Font font = new Font("Courier New", 12);  // Choose appropriate font
+            Font font = new("Courier New", 12);  // Choose appropriate font
             float fontHeight = font.GetHeight();
-            Font headerFont = new Font("Arial", 16, FontStyle.Bold);
+            Font headerFont = new("Arial", 16, FontStyle.Bold);
             int startX = 40;
             int startY = 40;
             int offset = 40;
@@ -407,7 +489,7 @@ namespace PatientManagmentV1
             graphic.DrawString("Patient Information", headerFont, Brushes.Black, startX, startY + offset);
             offset = offset + (int)fontHeight + 20;
 
-            graphic.DrawString($"Patient Id: {PatientIdCb.SelectedValue.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString($"Patient Id: {PatientIdCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + (int)fontHeight + 5;
             graphic.DrawString($"Name: {PatientTb.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + (int)fontHeight + 5;
@@ -431,7 +513,7 @@ namespace PatientManagmentV1
             offset = offset + (int)fontHeight + 20;
 
             // Continuing Lab results
-            graphic.DrawString($"Lab Name: {LabNameCb.SelectedValue.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString($"Lab Name: {LabNameCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
             //offset = offset + (int)fontHeight + 5;
             //graphic.DrawString("Hemoglobin: 13.8 g/dL", font, new SolidBrush(Color.Black), startX, startY + offset);
 

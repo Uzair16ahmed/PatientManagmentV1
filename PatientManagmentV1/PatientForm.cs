@@ -22,16 +22,14 @@ namespace PatientManagmentV1
 
         private void Clear()
         {
-
             PatId.Text = "";
             PatName.Text = "";
             PatAddress.Text = "";
             PatPhone.Text = "";
             PatAge.Text = "";
-            PatGender.Text = "";
-            PatBlood.Text = "";
+            PatGender.SelectedItem = null;
+            PatBlood.SelectedItem = null;
             PatDisease.Text = "";
-
         }
 
         void Populate()
@@ -53,46 +51,155 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (PatId.Text == "" || PatName.Text == "" || PatAddress.Text == "" || PatPhone.Text == "" || PatAge.Text == "" || PatDisease.Text == "")
+            if (PatId.Text == "" || PatName.Text == "" || PatAddress.Text == "" || PatPhone.Text == "" || PatAge.Text == "" || PatGender.SelectedItem == null || PatBlood.SelectedItem == null || PatDisease.Text == "")
+            {
                 MessageBox.Show("No Empty Value Accepted");
+            }
             else
             {
-                Con.Open();
-                string query = "insert into PatientTbl values(" + PatId.Text + ",'" + PatName.Text + "','" + PatAddress.Text + "','" + PatPhone.Text + "'," + PatAge.Text + ",'" + PatGender.SelectedItem.ToString() + "','" + PatBlood.SelectedItem.ToString() + "','" + PatDisease.Text + "')";
-                SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Patient Successfully Added");
-                Con.Close();
-                Populate();
-                Clear();
+                try
+                {
+                    Con.Open();
+                    string query = @"
+                    INSERT INTO PatientTbl (PatId, PatName, PatAddress, PatPhone, PatAge, PatGender, PatBlood, PatDisease) 
+                    VALUES (@PatId, @PatName, @PatAddress, @PatPhone, @PatAge, @PatGender, @PatBlood, @PatDisease)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, Con))
+                    {
+                        // Add parameters to ensure safe query execution
+                        cmd.Parameters.AddWithValue("@PatId", PatId.Text);
+                        cmd.Parameters.AddWithValue("@PatName", PatName.Text);
+                        cmd.Parameters.AddWithValue("@PatAddress", PatAddress.Text);
+                        cmd.Parameters.AddWithValue("@PatPhone", PatPhone.Text);
+                        cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
+                        cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@PatBlood", PatBlood.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@PatDisease", PatDisease.Text);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Patient Successfully Added");
+                         
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    if(Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
+                Populate(); // Refresh the data display
+                Clear();    // Clear any form fields
+
             }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Con.Open();
-            string query = "update PatientTbl set PatName = '" + PatName.Text + "', PatAddress='" + PatAddress.Text + "', PatPhone='" + PatPhone.Text + "', PatAge=" + PatAge.Text + ",PatGender='" + PatGender.SelectedItem.ToString() + "',PatBlood='" + PatBlood.SelectedItem.ToString() + "', PatDisease='" + PatDisease.Text + "'  where PatId=" + PatId.Text + " ";
-            SqlCommand cmd = new SqlCommand(query, Con);
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Patient Successfully Updated");
-            Con.Close();
-            Populate();
-            Clear();
+            if (PatId.Text == "" || PatName.Text == "" || PatAddress.Text == "" || PatPhone.Text == "" ||
+                PatAge.Text == "" || PatGender.SelectedItem == null || PatBlood.SelectedItem == null || PatDisease.Text == "")
+            {
+                MessageBox.Show("Please fill in all fields.");
+            }
+            else
+            {
+                
+                try
+                {
+                    Con.Open();
+                    string query = @"
+                    UPDATE PatientTbl 
+                    SET PatName = @PatName, 
+                        PatAddress = @PatAddress, 
+                        PatPhone = @PatPhone, 
+                        PatAge = @PatAge, 
+                        PatGender = @PatGender, 
+                        PatBlood = @PatBlood, 
+                        PatDisease = @PatDisease 
+                    WHERE PatId = @PatId";
+
+                    using (SqlCommand cmd = new SqlCommand(query, Con))
+                    {
+                        cmd.Parameters.AddWithValue("@PatName", PatName.Text);
+                        cmd.Parameters.AddWithValue("@PatAddress", PatAddress.Text);
+                        cmd.Parameters.AddWithValue("@PatPhone", PatPhone.Text);
+                        cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
+                        cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@PatBlood", PatBlood.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@PatDisease", PatDisease.Text);
+                        cmd.Parameters.AddWithValue("@PatId", PatId.Text);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Patient Successfully Updated");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    if(Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
+                Populate(); // Refresh the data display
+                Clear();    // Clear any form fields
+            }
+
         }
         private void button3_Click(object sender, EventArgs e)
         {
             if (PatId.Text == "")
+            {
                 MessageBox.Show("Enter the Patient Id");
+            }
             else
             {
-                Con.Open();
-                string query = "delete from PatientTbl where PatId=" + PatId.Text + ""; SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Patient Successfully Deleted");
-                Con.Close();
-                Populate();
-                Clear();
+                // Check if the logged-in user's role is "Admin"
+                if (DoctorSession.Role != "Admin")
+                {
+                    MessageBox.Show("You are not authorized to delete patient records.");
+                }
+                else
+                {
+                    try
+                    {
+                        Con.Open();
+                        string query = "DELETE FROM PatientTbl WHERE PatId = @PatId";
+
+                        using (SqlCommand cmd = new SqlCommand(query, Con))
+                        {
+                            cmd.Parameters.AddWithValue("@PatId", PatId.Text);  // Ensure that PatId is properly typed to match your database schema
+
+                            int result = cmd.ExecuteNonQuery();
+                            MessageBox.Show("Patient Successfully Deleted");
+                         
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if(Con.State == ConnectionState.Open)
+                        {
+                            Con.Close();    
+                        }
+                    }
+                    Populate(); // Refresh the data display
+                    Clear();    // Clear any form fields
+                }
+                
             }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
