@@ -32,18 +32,18 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            label5 = new Label();
             label2 = new Label();
             label1 = new Label();
             DocId = new TextBox();
             DocName = new TextBox();
-            DocExp = new TextBox();
             DocPass = new TextBox();
             DoctorGV = new Guna.UI2.WinForms.Guna2DataGridView();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
-            label5 = new Label();
+            RoleCb = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DoctorGV).BeginInit();
             SuspendLayout();
@@ -59,6 +59,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(945, 96);
             panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(907, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 29);
+            label5.TabIndex = 10;
+            label5.Text = "X";
+            label5.Click += label5_Click;
             // 
             // label2
             // 
@@ -100,15 +112,6 @@
             DocName.Size = new Size(182, 23);
             DocName.TabIndex = 2;
             DocName.TextChanged += DocName_TextChanged;
-            // 
-            // DocExp
-            // 
-            DocExp.BackColor = Color.Gainsboro;
-            DocExp.Location = new Point(44, 272);
-            DocExp.Name = "DocExp";
-            DocExp.PlaceholderText = "YearOfExperience";
-            DocExp.Size = new Size(182, 23);
-            DocExp.TabIndex = 3;
             // 
             // DocPass
             // 
@@ -226,17 +229,15 @@
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
-            // label5
+            // RoleCb
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(907, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(26, 29);
-            label5.TabIndex = 10;
-            label5.Text = "X";
-            label5.Click += label5_Click;
+            RoleCb.FormattingEnabled = true;
+            RoleCb.Items.AddRange(new object[] { "Admin", "User" });
+            RoleCb.Location = new Point(44, 271);
+            RoleCb.Name = "RoleCb";
+            RoleCb.Size = new Size(182, 23);
+            RoleCb.TabIndex = 10;
+            RoleCb.Text = "Role";
             // 
             // DoctorForm
             // 
@@ -244,13 +245,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(945, 597);
+            Controls.Add(RoleCb);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(DoctorGV);
             Controls.Add(DocPass);
-            Controls.Add(DocExp);
             Controls.Add(DocName);
             Controls.Add(DocId);
             Controls.Add(panel1);
@@ -273,7 +274,6 @@
         private Label label1;
         private TextBox DocId;
         private TextBox DocName;
-        private TextBox DocExp;
         private TextBox DocPass;
         private Guna.UI2.WinForms.Guna2DataGridView DoctorGV;
         private Button button1;
@@ -281,5 +281,6 @@
         private Button button3;
         private Button button4;
         private Label label5;
+        private ComboBox RoleCb;
     }
 }

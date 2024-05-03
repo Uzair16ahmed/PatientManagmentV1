@@ -23,7 +23,7 @@ namespace PatientManagmentV1
         {
             DocId.Text = "";
             DocName.Text = "";
-            DocExp.Text = "";
+            RoleCb.SelectedItem = "";
             DocPass.Text = "";
         }
 
@@ -41,15 +41,54 @@ namespace PatientManagmentV1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Con.Open();
-            string query = "update DoctorTbl set DocName = '" + DocName.Text + "', DocExp='" + DocExp.Text + "', DocPass='" + DocPass.Text + "' where DocId=" + DocId.Text + " ";
-            SqlCommand cmd = new SqlCommand(query, Con);
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Doctor Successfully Updated");
-            Con.Close();
-            Populate();
-            Clear();
+            if (DocId.Text == "")
+            {
+                MessageBox.Show("Enter the Doctor ID");
+            }
+            else if (DocName.Text == "" || RoleCb.SelectedItem == null || DocPass.Text == "")
+            {
+                MessageBox.Show("Please fill in all fields");
+            }
+            else
+            {
+                    try
+                    {
+                        Con.Open();
+                        string query = "UPDATE DoctorTbl SET DocName = @DocName, Role = @Role, DocPass = @DocPass WHERE DocId = @DocId";
+
+                        SqlCommand cmd = new SqlCommand(query, Con);
+
+                        {
+                            cmd.Parameters.AddWithValue("@DocName", DocName.Text);
+                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem.ToString());
+                            cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
+                            cmd.Parameters.AddWithValue("@DocId", DocId.Text);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Doctor Successfully Updated");
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                    // Ensure the connection is always closed, even if an error occurs
+                    if (Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
+
+                // Assuming Populate() is a method to refresh or update the data displayed
+                Populate();
+                Clear();
+            }   
+
         }
+
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -60,21 +99,50 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (DocId.Text == "" || DocName.Text == "" || DocExp.Text == "" || DocPass.Text == "")
+            if (DocId.Text == "" || DocName.Text == "" || RoleCb.SelectedIndex == -1 || DocPass.Text == "")
+            {
                 MessageBox.Show("No Empty Value Accepted");
+            }
             else
             {
-                Con.Open();
-                string query = "insert into DoctorTbl values(" + DocId.Text + ",'" + DocName.Text + "'," + DocExp.Text + ",'" + DocPass.Text + "')";
-                SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Doctor Successfully Added");
-                Con.Close();
-                Populate();
-                Clear();
-            }
+                    try
+                    {
+                        Con.Open();
+                        // Assuming DocId is an integer. Adjust the type if it is not.
+                        string query = "INSERT INTO DoctorTbl (DocId, DocName, Role, DocPass) VALUES (@DocId, @DocName, @Role, @DocPass)";
+                        SqlCommand cmd = new SqlCommand(query, Con);
+                        
+                        {
+                            // Use proper type conversions to ensure data integrity
+                            cmd.Parameters.AddWithValue("@DocId", DocId.Text); // Convert to integer if DocId is an integer column
+                            cmd.Parameters.AddWithValue("@DocName", DocName.Text);
+                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem.ToString());
+                            cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
 
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Doctor Successfully Added");
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                        // Ensuring the connection is closed even if an error occurs
+                        if (Con.State == ConnectionState.Open)
+                        {
+                            Con.Close();
+                        }
+                    }
+
+                    // Assuming Populate() is a method to update the UI with the latest data
+                    Populate();
+                    Clear();
+                }
         }
+
 
         private void DoctorForm_Load(object sender, EventArgs e)
         {
@@ -85,17 +153,34 @@ namespace PatientManagmentV1
         private void button3_Click(object sender, EventArgs e)
         {
             if (DocId.Text == "")
+            {
                 MessageBox.Show("Enter the Doctor Id");
+            }
             else
             {
-                Con.Open();
-                string query = "delete from DoctorTbl where DocId=" + DocId.Text + ""; SqlCommand cmd = new SqlCommand(query, Con);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Doctor Successfully Deleted");
-                Con.Close();
-                Populate();
-                Clear();
+                // Check if the logged-in doctor is an Admin
+                if (DoctorSession.Role != "Admin")
+                {
+                    MessageBox.Show("You are not allowed to delete data.");
+                }
+                else
+                {
+                    Con.Open();
+                    // Use parameterized queries to prevent SQL Injection
+                    string query = "DELETE FROM DoctorTbl WHERE DocId = @DocId";
+                    SqlCommand cmd = new SqlCommand(query, Con);
+                    {
+                        cmd.Parameters.AddWithValue("@DocId", DocId.Text);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Doctor Successfully Deleted");
+
+                    }
+                    Con.Close();
+                    Populate();
+                    Clear();
+                }
             }
+
         }
 
         private void DocName_TextChanged(object sender, EventArgs e)
@@ -107,7 +192,7 @@ namespace PatientManagmentV1
         {
             DocId.Text = DoctorGV.SelectedRows[0].Cells[0].Value.ToString();
             DocName.Text = DoctorGV.SelectedRows[0].Cells[1].Value.ToString();
-            DocExp.Text = DoctorGV.SelectedRows[0].Cells[2].Value.ToString();
+            RoleCb.SelectedItem = DoctorGV.SelectedRows[0].Cells[2].Value.ToString();
             DocPass.Text = DoctorGV.SelectedRows[0].Cells[3].Value.ToString();
         }
 
