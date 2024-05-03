@@ -30,7 +30,7 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(UsernameTb.Text == "" || PassTb.Text == "")
+            if (UsernameTb.Text == "" || PassTb.Text == "")
             {
                 MessageBox.Show("Enter a Username and Password");
             }
@@ -52,8 +52,13 @@ namespace PatientManagmentV1
                     MessageBox.Show("Wrong Username or Password");
                 }
                 Con.Close();
-               /*  */
+                /*  */
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
