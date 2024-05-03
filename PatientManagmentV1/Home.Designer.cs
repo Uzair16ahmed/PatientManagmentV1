@@ -89,7 +89,7 @@
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(51, 198);
+            pictureBox2.Location = new Point(164, 91);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(81, 64);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -102,7 +102,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(51, 265);
+            label3.Location = new Point(163, 158);
             label3.Name = "label3";
             label3.Size = new Size(67, 21);
             label3.TabIndex = 4;
@@ -160,7 +160,7 @@
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(163, 90);
+            pictureBox5.Location = new Point(51, 198);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(81, 65);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
@@ -185,7 +185,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Calibri", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(163, 158);
+            label6.Location = new Point(51, 266);
             label6.Name = "label6";
             label6.Size = new Size(82, 21);
             label6.TabIndex = 13;
