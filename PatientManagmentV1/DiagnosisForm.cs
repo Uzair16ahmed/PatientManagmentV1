@@ -137,8 +137,8 @@ namespace PatientManagmentV1
             Diagnosis.Text = "";
             Assessment.Text = "";
             MedDose.Text = "";
-            MedIntake.Text = "";
-            MedSchedule.Text = "";
+            MedIntake.Text = "Intake";
+            MedSchedule.Text = "Schedule";
         }
 
   

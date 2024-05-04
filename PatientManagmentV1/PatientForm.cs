@@ -27,8 +27,8 @@ namespace PatientManagmentV1
             PatAddress.Text = "";
             PatPhone.Text = "";
             PatAge.Text = "";
-            PatGender.SelectedItem = null;
-            PatBlood.SelectedItem = null;
+            PatGender.Text = "Gender";
+            PatBlood.Text = "BloodGroup";
             PatDisease.Text = "";
         }
 

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagnosisForm));
             panel1 = new Panel();
             label5 = new Label();
@@ -171,9 +171,9 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(161, 423);
+            button4.Location = new Point(163, 428);
             button4.Name = "button4";
-            button4.Size = new Size(93, 41);
+            button4.Size = new Size(87, 40);
             button4.TabIndex = 18;
             button4.Text = "Home";
             button4.UseVisualStyleBackColor = false;
@@ -185,9 +185,9 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(271, 362);
+            button3.Location = new Point(273, 373);
             button3.Name = "button3";
-            button3.Size = new Size(88, 46);
+            button3.Size = new Size(82, 45);
             button3.TabIndex = 17;
             button3.Text = "Delete";
             button3.UseVisualStyleBackColor = false;
@@ -199,9 +199,9 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(161, 362);
+            button2.Location = new Point(163, 373);
             button2.Name = "button2";
-            button2.Size = new Size(93, 46);
+            button2.Size = new Size(87, 45);
             button2.TabIndex = 16;
             button2.Text = "Update";
             button2.UseVisualStyleBackColor = false;
@@ -213,9 +213,9 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(60, 362);
+            button1.Location = new Point(62, 373);
             button1.Name = "button1";
-            button1.Size = new Size(86, 46);
+            button1.Size = new Size(80, 45);
             button1.TabIndex = 15;
             button1.Text = "Add";
             button1.UseVisualStyleBackColor = false;
@@ -223,26 +223,26 @@
             // 
             // DiagnosisGV
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             DiagnosisGV.ColumnHeadersHeight = 25;
             DiagnosisGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle6;
             DiagnosisGV.GridColor = Color.FromArgb(231, 229, 255);
             DiagnosisGV.Location = new Point(12, 488);
             DiagnosisGV.Name = "DiagnosisGV";
@@ -417,7 +417,7 @@
             // 
             MedSchedule.FormattingEnabled = true;
             MedSchedule.Items.AddRange(new object[] { "1 time a day", "2 time a day", "3 time a day" });
-            MedSchedule.Location = new Point(297, 318);
+            MedSchedule.Location = new Point(297, 334);
             MedSchedule.Name = "MedSchedule";
             MedSchedule.Size = new Size(121, 23);
             MedSchedule.TabIndex = 27;
@@ -426,7 +426,7 @@
             // MedDose
             // 
             MedDose.BackColor = Color.Gainsboro;
-            MedDose.Location = new Point(25, 318);
+            MedDose.Location = new Point(25, 334);
             MedDose.Name = "MedDose";
             MedDose.PlaceholderText = "Dose";
             MedDose.Size = new Size(121, 23);
@@ -436,7 +436,7 @@
             // 
             MedIntake.FormattingEnabled = true;
             MedIntake.Items.AddRange(new object[] { "Oral", "Injection", "Drip" });
-            MedIntake.Location = new Point(161, 318);
+            MedIntake.Location = new Point(163, 334);
             MedIntake.Name = "MedIntake";
             MedIntake.Size = new Size(121, 23);
             MedIntake.TabIndex = 30;
@@ -453,11 +453,12 @@
             // 
             // medComboBox
             // 
-            medComboBox.ColumnWidth = 5;
+            medComboBox.ColumnWidth = 8;
             medComboBox.FormattingEnabled = true;
             medComboBox.Location = new Point(25, 279);
+            medComboBox.Margin = new Padding(12);
             medComboBox.Name = "medComboBox";
-            medComboBox.Size = new Size(182, 22);
+            medComboBox.Size = new Size(182, 40);
             medComboBox.Sorted = true;
             medComboBox.TabIndex = 32;
             // 

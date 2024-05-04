@@ -23,7 +23,7 @@ namespace PatientManagmentV1
         {
             DocId.Text = "";
             DocName.Text = "";
-            RoleCb.SelectedIndex = -1;
+            RoleCb.Text = "Role";
             DocPass.Text = "";
         }
 
