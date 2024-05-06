@@ -71,20 +71,20 @@ namespace PatientManagmentV1
             }
         }
 
-        void PopulateLabCombo()
+        void PopulateExamCombo()
         {
-            string sql = "select * from LabTbl";
+            string sql = "select * from ExaminationTbl";
             SqlCommand cmd = new SqlCommand(sql, Con);
             SqlDataReader rdr;
             try
             {
                 Con.Open();
                 DataTable dt = new DataTable();
-                dt.Columns.Add("LabName", typeof(string));
+                dt.Columns.Add("ExamId", typeof(int));
                 rdr = cmd.ExecuteReader();
                 dt.Load(rdr);
-                LabNameCb.ValueMember = "LabName";
-                LabNameCb.DataSource = dt;
+                ExaminationCb.ValueMember = "ExamId";
+                ExaminationCb.DataSource = dt;
                 Con.Close();
             }
             catch
@@ -92,6 +92,7 @@ namespace PatientManagmentV1
 
             }
         }
+
         private void ClearMedicineSelections()
         {
             for (int i = 0; i < medComboBox.Items.Count; i++)
@@ -99,6 +100,33 @@ namespace PatientManagmentV1
                 medComboBox.SetItemChecked(i, false);
             }
         }
+
+        //private void PreselectMedicinesInList()
+        //{
+        //    // Clear any existing selections first
+        //    for (int i = 0; i < medComboBox.Items.Count; i++)
+        //    {
+        //        medComboBox.SetItemChecked(i, false);
+        //    }
+
+        //    // Check if any row is selected in the DataGridView
+        //    if (DiagnosisGV.SelectedRows.Count > 0)
+        //    {
+        //        string medicineNames = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
+        //        string[] medicines = medicineNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        //        // Trim spaces and preselect the matching items in the CheckedListBox
+        //        foreach (string med in medicines)
+        //        {
+        //            string trimmedMed = med.Trim();
+        //            int index = medComboBox.Items.IndexOf(trimmedMed);
+        //            if (index != -1)
+        //            {
+        //                medComboBox.SetItemChecked(index, true);
+        //            }
+        //        }
+        //    }
+        //}
 
         private void PreselectMedicinesInList()
         {
@@ -111,7 +139,7 @@ namespace PatientManagmentV1
             // Check if any row is selected in the DataGridView
             if (DiagnosisGV.SelectedRows.Count > 0)
             {
-                string medicineNames = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
+                string medicineNames = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
                 string[] medicines = medicineNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Trim spaces and preselect the matching items in the CheckedListBox
@@ -123,9 +151,15 @@ namespace PatientManagmentV1
                     {
                         medComboBox.SetItemChecked(index, true);
                     }
+                    else
+                    {
+                        // For debugging: output to the debug window the medicine that wasn't found
+                        System.Diagnostics.Debug.WriteLine("Medicine not found in ComboBox: " + trimmedMed);
+                    }
                 }
             }
         }
+
 
         void Clear()
         {
@@ -141,26 +175,7 @@ namespace PatientManagmentV1
             MedSchedule.Text = "Schedule";
         }
 
-  
-        //void FetchPatientName()
-        //{
-        //    Con.Open();
-        //    string sql = "select * from PatientTbl where PatId=" + PatientIdCb.SelectedValue.ToString() + " ";
-        //    SqlCommand cmd = new SqlCommand(sql, Con);
-        //    DataTable dt = new DataTable();
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    da.Fill(dt);
-        //    foreach (DataRow dr in dt.Rows)
-        //    {
-        //        patientName = dr["PatName"].ToString();
-        //        patientGender = dr["PatGender"].ToString();
-        //        patientAge = dr["PatAge"].ToString();
-        //        PatientTb.Text = patientName;
-        //        PatGender.Text = patientGender;
-        //        PatAge.Text = patientAge;
-        //    }
-        //    Con.Close();
-        //}
+
         void FetchPatientName()
         {
             if (PatientIdCb.SelectedValue == null)
@@ -169,50 +184,106 @@ namespace PatientManagmentV1
                 return;
             }
 
-                try
+            try
+            {
+                Con.Open();
+                string sql = "SELECT * FROM PatientTbl WHERE PatId = @PatId";
+                using (SqlCommand cmd = new SqlCommand(sql, Con))
                 {
-                    Con.Open();
-                    string sql = "SELECT * FROM PatientTbl WHERE PatId = @PatId";
-                    using (SqlCommand cmd = new SqlCommand(sql, Con))
+                    // Safely add the patient ID as a parameter to avoid SQL injection
+                    cmd.Parameters.AddWithValue("@PatId", PatientIdCb.SelectedValue.ToString());
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        // Safely add the patient ID as a parameter to avoid SQL injection
-                        cmd.Parameters.AddWithValue("@PatId", PatientIdCb.SelectedValue.ToString());
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
 
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        if (dt.Rows.Count > 0)
                         {
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-
-                            if (dt.Rows.Count > 0)
-                            {
-                                DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
-                                PatientTb.Text = dr["PatName"].ToString();
-                                PatGender.Text = dr["PatGender"].ToString();
-                                PatAge.Text = dr["PatAge"].ToString();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No patient found with the specified ID.");
-                                // Optionally clear any previous data displayed
-                                PatientTb.Text = "";
-                                PatGender.Text = "";
-                                PatAge.Text = "";
-                            }
+                            DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
+                            PatientTb.Text = dr["PatName"].ToString();
+                            PatGender.Text = dr["PatGender"].ToString();
+                            PatAge.Text = dr["PatAge"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No patient found with the specified ID.");
+                            // Optionally clear any previous data displayed
+                            PatientTb.Text = "";
+                            PatGender.Text = "";
+                            PatAge.Text = "";
                         }
                     }
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                // Connection will be closed by the using statement
+                if (Con.State == ConnectionState.Open)
                 {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
-                finally
-                {
-                    // Connection will be closed by the using statement
-                    if(Con.State == ConnectionState.Open)
-                    {
                     Con.Close();
+                }
+            }
+        }
+
+        void FetchExamination()
+        {
+            if (ExaminationCb.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a valid Examination ID.");
+                return;
+            }
+
+            try
+            {
+                Con.Open();
+                string sql = "SELECT * FROM ExaminationTbl WHERE ExamId = @ExamId";
+                using (SqlCommand cmd = new SqlCommand(sql, Con))
+                {
+                    // Safely add the patient ID as a parameter to avoid SQL injection
+                    cmd.Parameters.AddWithValue("@ExamId", ExaminationCb.SelectedValue.ToString());
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
+                            Symptoms.Text = dr["Symptoms"].ToString();
+                            Diagnosis.Text = dr["Diagnosis"].ToString();
+                            Assessment.Text = dr["Examination"].ToString();
+                            LabName.Text = dr["LabName"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No patient found with the specified ID.");
+                            // Optionally clear any previous data displayed
+                            Symptoms.Text = "";
+                            Diagnosis.Text = "";
+                            Assessment.Text = "";
+                            LabName.Text = "";
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                // Connection will be closed by the using statement
+                if (Con.State == ConnectionState.Open)
+                {
+                    Con.Close();
+                }
+            }
         }
 
         void Populate()
@@ -234,18 +305,10 @@ namespace PatientManagmentV1
             this.Hide();
         }
 
-        /* void Visible()
-         {
-             Medicineslbl.Visible = true;
-             PatientNamelbl.Visible = true;
-             Diagnosislbl.Visible = true;
-             Symptoms.Visible = true;
-         }*/
-
         private void DiagnosisForm_Load(object sender, EventArgs e)
         {
             PopulateCombo();
-            PopulateLabCombo();
+            PopulateExamCombo();
             PopulateMedicines();
             Populate();
             label9.Text = DateTime.Now.ToString();
@@ -260,17 +323,16 @@ namespace PatientManagmentV1
             PatientTb.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
             PatGender.Text = DiagnosisGV.SelectedRows[0].Cells[3].Value.ToString();
             PatAge.Text = DiagnosisGV.SelectedRows[0].Cells[4].Value.ToString();
-            Symptoms.Text = DiagnosisGV.SelectedRows[0].Cells[5].Value.ToString();
-            Diagnosis.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
-            Assessment.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
-            MedDose.Text = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
-            MedIntake.Text = DiagnosisGV.SelectedRows[0].Cells[10].Value.ToString();
-            MedSchedule.Text = DiagnosisGV.SelectedRows[0].Cells[11].Value.ToString();
-            LabNameCb.SelectedValue = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
+            Symptoms.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
+            Diagnosis.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
+            Assessment.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
+            MedDose.Text = DiagnosisGV.SelectedRows[0].Cells[10].Value.ToString();
+            MedIntake.Text = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
+            MedSchedule.Text = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
             PatientNamelbl.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
-            Symptomslbl.Text = DiagnosisGV.SelectedRows[0].Cells[3].Value.ToString();
-            Diagnosislbl.Text = DiagnosisGV.SelectedRows[0].Cells[4].Value.ToString();
-            Medicineslbl.Text = DiagnosisGV.SelectedRows[0].Cells[5].Value.ToString();
+            Symptomslbl.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
+            Diagnosislbl.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
+            Medicineslbl.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -287,7 +349,7 @@ namespace PatientManagmentV1
                 try
                 {
                     Con.Open();
-                    string query = "INSERT INTO DiagnosisTbl (DiagId, PatId, PatName, PatGender, PatAge, Symptoms, Diagnosis, Assessment, Medicines, MedDose, MedIntake, MedSchedule, LabName) VALUES (@DiagId, @PatId, @PatName, @PatGender,@PatAge, @Symptoms, @Diagnosis, @Assessment, @Medicines, @MedDose, @MedIntake, @MedSchedule, @LabName)";
+                    string query = "INSERT INTO DiagnosisTbl (DiagId, PatId, PatName, PatGender, PatAge, ExamId, Symptoms, Diagnosis, Assessment, Medicines, MedDose, MedIntake, MedSchedule, LabName) VALUES (@DiagId, @PatId, @PatName, @PatGender,@PatAge, @ExamId, @Symptoms, @Diagnosis, @Assessment, @Medicines, @MedDose, @MedIntake, @MedSchedule, @LabName)";
                     SqlCommand cmd = new SqlCommand(query, Con);
 
                     // Adding parameters to avoid SQL Injection
@@ -296,6 +358,7 @@ namespace PatientManagmentV1
                     cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
                     cmd.Parameters.AddWithValue("@PatGender", PatGender.Text);
                     cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
+                    cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
                     cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                     cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                     cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
@@ -303,7 +366,7 @@ namespace PatientManagmentV1
                     cmd.Parameters.AddWithValue("@MedDose", MedDose.Text);
                     cmd.Parameters.AddWithValue("@MedIntake", MedIntake.Text);
                     cmd.Parameters.AddWithValue("@MedSchedule", MedSchedule.Text);
-                    cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue.ToString());
+                    cmd.Parameters.AddWithValue("@LabName", LabName.Text);
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Diagnosis Successfully Added");
@@ -343,7 +406,7 @@ namespace PatientManagmentV1
                 }
                 else
                 {
-                    
+
                     try
                     {
                         Con.Open();
@@ -363,7 +426,7 @@ namespace PatientManagmentV1
                     }
                     finally
                     {
-                        if(Con.State == ConnectionState.Open)
+                        if (Con.State == ConnectionState.Open)
                         {
                             Con.Close();
                         }
@@ -385,7 +448,7 @@ namespace PatientManagmentV1
             {
                 Con.Open();
                 // Update SQL query to include all necessary columns
-                string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDose = @MedDose, MedIntake = @MedIntake, MedSchedule = @MedSchedule, LabName = @LabName WHERE DiagId = @DiagId";
+                string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, ExamId = @ExamId, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDose = @MedDose, MedIntake = @MedIntake, MedSchedule = @MedSchedule, LabName = @LabName WHERE DiagId = @DiagId";
                 SqlCommand cmd = new SqlCommand(query, Con);
 
                 // Add parameters to SqlCommand object
@@ -394,6 +457,7 @@ namespace PatientManagmentV1
                 cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
                 cmd.Parameters.AddWithValue("@PatGender", PatGender.Text);
                 cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
+                cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
                 cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                 cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                 cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
@@ -401,7 +465,7 @@ namespace PatientManagmentV1
                 cmd.Parameters.AddWithValue("@MedDose", MedDose.Text);
                 cmd.Parameters.AddWithValue("@MedIntake", MedIntake.Text);
                 cmd.Parameters.AddWithValue("@MedSchedule", MedSchedule.Text);
-                cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@LabName", LabName.Text);
 
                 // Execute the command
                 cmd.ExecuteNonQuery();
@@ -443,7 +507,7 @@ namespace PatientManagmentV1
             // Attempt to retrieve and format the CreationDate
             try
             {
-                int creationDateColumnIndex = dataGridView.Columns["CreationDate"].Index; // Ensure the column name matches your DataGridView setup
+                int creationDateColumnIndex = dataGridView.Columns["Date"].Index; // Ensure the column name matches your DataGridView setup
                 var selectedRow = dataGridView.SelectedRows[0];
                 DateTime creationDate = Convert.ToDateTime(selectedRow.Cells[creationDateColumnIndex].Value);
                 string formattedDate = creationDate.ToString("dd MMM yyyy HH:mm:ss"); // Format can be adjusted as needed
@@ -540,10 +604,10 @@ namespace PatientManagmentV1
             offset = offset + (int)fontHeight + 20;
 
             // Continuing Lab results
-            graphic.DrawString($"Lab Name: {LabNameCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString($"Lab Name: {LabName.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
             //offset = offset + (int)fontHeight + 5;
             //graphic.DrawString("Hemoglobin: 13.8 g/dL", font, new SolidBrush(Color.Black), startX, startY + offset);
-           
+
             // Check to see if another PrintPage event should be raised
             e.HasMorePages = false;
         }
@@ -564,6 +628,11 @@ namespace PatientManagmentV1
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExaminationCb_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            FetchExamination();
         }
     }
 }
