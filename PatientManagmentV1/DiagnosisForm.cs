@@ -104,10 +104,7 @@ namespace PatientManagmentV1
         private void PreselectMedicinesInList()
         {
             // Clear any existing selections first
-            for (int i = 0; i < medComboBox.Items.Count; i++)
-            {
-                medComboBox.SetItemChecked(i, false);
-            }
+            ClearMedicineSelections();
 
             // Check if any row is selected in the DataGridView
             if (DiagnosisGV.SelectedRows.Count > 0)
@@ -132,7 +129,6 @@ namespace PatientManagmentV1
                 }
             }
         }
-
 
         void Clear()
         {
@@ -295,12 +291,14 @@ namespace PatientManagmentV1
             PatientTb.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
             PatGender.Text = DiagnosisGV.SelectedRows[0].Cells[3].Value.ToString();
             PatAge.Text = DiagnosisGV.SelectedRows[0].Cells[4].Value.ToString();
+            ExaminationCb.SelectedValue = DiagnosisGV.SelectedRows[0].Cells[5].Value.ToString();
             Symptoms.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
             Diagnosis.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
             Assessment.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
             MedDose.Text = DiagnosisGV.SelectedRows[0].Cells[10].Value.ToString();
-            MedIntake.Text = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
+            MedIntake.Text = DiagnosisGV.SelectedRows[0].Cells[11].Value.ToString();
             MedSchedule.Text = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
+            LabName.Text = DiagnosisGV.SelectedRows[0].Cells[13].Value.ToString();
             PatientNamelbl.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
             Symptomslbl.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
             Diagnosislbl.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
@@ -491,7 +489,6 @@ namespace PatientManagmentV1
                 return string.Empty; // Or rethrow the exception to handle it higher up in the call stack
             }
         }
-
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
