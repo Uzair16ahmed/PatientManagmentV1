@@ -42,12 +42,15 @@
             pictureBox6 = new PictureBox();
             label6 = new Label();
             label7 = new Label();
+            label8 = new Label();
+            pictureBox7 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -202,6 +205,29 @@
             label7.TabIndex = 14;
             label7.Text = "LAB";
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Calibri", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(163, 369);
+            label8.Name = "label8";
+            label8.Size = new Size(113, 21);
+            label8.TabIndex = 16;
+            label8.Text = "EXAMINATION";
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new Point(164, 302);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(81, 65);
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.TabIndex = 15;
+            pictureBox7.TabStop = false;
+            pictureBox7.Click += pictureBox7_Click;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -210,6 +236,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(737, 497);
+            Controls.Add(label8);
+            Controls.Add(pictureBox7);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(pictureBox6);
@@ -233,6 +261,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -252,5 +281,7 @@
         private PictureBox pictureBox6;
         private Label label6;
         private Label label7;
+        private Label label8;
+        private PictureBox pictureBox7;
     }
 }

@@ -63,5 +63,12 @@ namespace PatientManagmentV1
             lab.Show();
             this.Hide();
         }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            ExaminationForm exam = new ExaminationForm();
+            exam.Show();
+            this.Hide();
+        }
     }
 }
