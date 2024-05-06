@@ -66,6 +66,7 @@
             medComboBox = new CheckedListBox();
             label6 = new Label();
             PatAge = new TextBox();
+            LabName = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DiagnosisGV).BeginInit();
             diagsummary.SuspendLayout();
@@ -150,7 +151,7 @@
             // Symptoms
             // 
             Symptoms.BackColor = Color.Gainsboro;
-            Symptoms.Location = new Point(236, 155);
+            Symptoms.Location = new Point(236, 195);
             Symptoms.Name = "Symptoms";
             Symptoms.PlaceholderText = "Symptoms";
             Symptoms.Size = new Size(182, 23);
@@ -159,7 +160,7 @@
             // Diagnosis
             // 
             Diagnosis.BackColor = Color.Gainsboro;
-            Diagnosis.Location = new Point(236, 195);
+            Diagnosis.Location = new Point(236, 155);
             Diagnosis.Name = "Diagnosis";
             Diagnosis.PlaceholderText = "Diagnosis";
             Diagnosis.Size = new Size(182, 23);
@@ -409,7 +410,7 @@
             Assessment.BackColor = Color.Gainsboro;
             Assessment.Location = new Point(236, 235);
             Assessment.Name = "Assessment";
-            Assessment.PlaceholderText = "Assessment";
+            Assessment.PlaceholderText = "Examination";
             Assessment.Size = new Size(182, 23);
             Assessment.TabIndex = 24;
             // 
@@ -445,7 +446,7 @@
             // LabNameCb
             // 
             LabNameCb.FormattingEnabled = true;
-            LabNameCb.Location = new Point(236, 278);
+            LabNameCb.Location = new Point(236, 309);
             LabNameCb.Name = "LabNameCb";
             LabNameCb.Size = new Size(182, 23);
             LabNameCb.TabIndex = 31;
@@ -482,11 +483,21 @@
             PatAge.Size = new Size(182, 23);
             PatAge.TabIndex = 34;
             // 
+            // LabName
+            // 
+            LabName.BackColor = Color.Gainsboro;
+            LabName.Location = new Point(236, 279);
+            LabName.Name = "LabName";
+            LabName.PlaceholderText = "LabName";
+            LabName.Size = new Size(182, 23);
+            LabName.TabIndex = 35;
+            // 
             // DiagnosisForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1083, 686);
+            Controls.Add(LabName);
             Controls.Add(PatAge);
             Controls.Add(label6);
             Controls.Add(medComboBox);
@@ -561,5 +572,6 @@
         private CheckedListBox medComboBox;
         private Label label6;
         private TextBox PatAge;
+        private TextBox LabName;
     }
 }
