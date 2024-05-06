@@ -101,33 +101,6 @@ namespace PatientManagmentV1
             }
         }
 
-        //private void PreselectMedicinesInList()
-        //{
-        //    // Clear any existing selections first
-        //    for (int i = 0; i < medComboBox.Items.Count; i++)
-        //    {
-        //        medComboBox.SetItemChecked(i, false);
-        //    }
-
-        //    // Check if any row is selected in the DataGridView
-        //    if (DiagnosisGV.SelectedRows.Count > 0)
-        //    {
-        //        string medicineNames = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
-        //        string[] medicines = medicineNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-        //        // Trim spaces and preselect the matching items in the CheckedListBox
-        //        foreach (string med in medicines)
-        //        {
-        //            string trimmedMed = med.Trim();
-        //            int index = medComboBox.Items.IndexOf(trimmedMed);
-        //            if (index != -1)
-        //            {
-        //                medComboBox.SetItemChecked(index, true);
-        //            }
-        //        }
-        //    }
-        //}
-
         private void PreselectMedicinesInList()
         {
             // Clear any existing selections first
@@ -174,7 +147,6 @@ namespace PatientManagmentV1
             MedIntake.Text = "Intake";
             MedSchedule.Text = "Schedule";
         }
-
 
         void FetchPatientName()
         {
@@ -577,9 +549,9 @@ namespace PatientManagmentV1
             graphic.DrawString("Diagnosis", headerFont, Brushes.Black, startX, startY + offset);
             offset = offset + (int)fontHeight + 20;
 
-            graphic.DrawString($"Patient Symptons: {Symptoms.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
             graphic.DrawString($"Doctor Diagnosis: {Diagnosis.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + (int)fontHeight + 5;
+            graphic.DrawString($"Patient Symptons: {Symptoms.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + (int)fontHeight + 5;
             graphic.DrawString($"Doctor Examination: {Assessment.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
 
