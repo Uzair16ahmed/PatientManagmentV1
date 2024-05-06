@@ -16,5 +16,11 @@ namespace PatientManagmentV1
         {
             InitializeComponent();
         }
+
+        private void ExaminationForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
