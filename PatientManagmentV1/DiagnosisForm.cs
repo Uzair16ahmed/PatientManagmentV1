@@ -507,15 +507,17 @@ namespace PatientManagmentV1
             {
                 graphic.DrawString("No valid date available.", font, new SolidBrush(Color.Black), startX, startY + offset);
             }
+
             // Increment the offset for a new section
             offset = offset + (int)fontHeight + 30;
-            graphic.DrawString("Lab Recommended", headerFont, Brushes.Black, startX, startY + offset);
+            graphic.DrawString("Diagnosis", headerFont, Brushes.Black, startX, startY + offset);
             offset = offset + (int)fontHeight + 20;
 
-            // Continuing Lab results
-            graphic.DrawString($"Lab Name: {LabNameCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            //offset = offset + (int)fontHeight + 5;
-            //graphic.DrawString("Hemoglobin: 13.8 g/dL", font, new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString($"Patient Symptons: {Symptoms.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + (int)fontHeight + 5;
+            graphic.DrawString($"Doctor Diagnosis: {Diagnosis.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + (int)fontHeight + 5;
+            graphic.DrawString($"Doctor Examination: {Assessment.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
 
             // Increment the offset for a new section
             offset = offset + (int)fontHeight + 30;
@@ -531,17 +533,17 @@ namespace PatientManagmentV1
             offset = offset + (int)fontHeight + 5;
             graphic.DrawString($"Schedule: {MedSchedule.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
 
+
             // Increment the offset for a new section
             offset = offset + (int)fontHeight + 30;
-            graphic.DrawString("Diagnosis", headerFont, Brushes.Black, startX, startY + offset);
+            graphic.DrawString("Lab Recommended", headerFont, Brushes.Black, startX, startY + offset);
             offset = offset + (int)fontHeight + 20;
 
-            graphic.DrawString($"Patient Symptons: {Symptoms.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Doctor Diagnosis: {Diagnosis.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Doctor Assessment: {Assessment.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-
+            // Continuing Lab results
+            graphic.DrawString($"Lab Name: {LabNameCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            //offset = offset + (int)fontHeight + 5;
+            //graphic.DrawString("Hemoglobin: 13.8 g/dL", font, new SolidBrush(Color.Black), startX, startY + offset);
+           
             // Check to see if another PrintPage event should be raised
             e.HasMorePages = false;
         }
