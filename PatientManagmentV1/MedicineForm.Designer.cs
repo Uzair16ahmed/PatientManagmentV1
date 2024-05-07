@@ -43,6 +43,11 @@
             MedicineName = new TextBox();
             MedicineGV = new Guna.UI2.WinForms.Guna2DataGridView();
             label3 = new Label();
+            DoseCb = new ComboBox();
+            RouteCb = new ComboBox();
+            FrequencyCb = new ComboBox();
+            DaysCb = new ComboBox();
+            InstructionCb = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MedicineGV).BeginInit();
             SuspendLayout();
@@ -99,7 +104,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(162, 394);
+            button4.Location = new Point(142, 329);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
             button4.TabIndex = 13;
@@ -113,7 +118,7 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(276, 323);
+            button3.Location = new Point(256, 258);
             button3.Name = "button3";
             button3.Size = new Size(94, 46);
             button3.TabIndex = 12;
@@ -127,7 +132,7 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(163, 323);
+            button2.Location = new Point(143, 258);
             button2.Name = "button2";
             button2.Size = new Size(93, 46);
             button2.TabIndex = 11;
@@ -141,7 +146,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(52, 323);
+            button1.Location = new Point(32, 258);
             button1.Name = "button1";
             button1.Size = new Size(92, 46);
             button1.TabIndex = 10;
@@ -152,7 +157,7 @@
             // MedId
             // 
             MedId.BackColor = Color.Gainsboro;
-            MedId.Location = new Point(53, 179);
+            MedId.Location = new Point(24, 123);
             MedId.Name = "MedId";
             MedId.PlaceholderText = "MedicineID";
             MedId.Size = new Size(182, 23);
@@ -161,7 +166,7 @@
             // MedicineName
             // 
             MedicineName.BackColor = Color.Gainsboro;
-            MedicineName.Location = new Point(52, 235);
+            MedicineName.Location = new Point(227, 123);
             MedicineName.Name = "MedicineName";
             MedicineName.PlaceholderText = "Medicine Name";
             MedicineName.Size = new Size(182, 23);
@@ -190,10 +195,10 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
             MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.Location = new Point(427, 163);
+            MedicineGV.Location = new Point(32, 416);
             MedicineGV.Name = "MedicineGV";
             MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(493, 345);
+            MedicineGV.Size = new Size(871, 148);
             MedicineGV.TabIndex = 17;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -224,11 +229,61 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(574, 110);
+            label3.Location = new Point(362, 366);
             label3.Name = "label3";
             label3.Size = new Size(205, 36);
             label3.TabIndex = 18;
             label3.Text = "MEDICINES LIST";
+            // 
+            // DoseCb
+            // 
+            DoseCb.FormattingEnabled = true;
+            DoseCb.Items.AddRange(new object[] { "1 گولی", "2 گولی", "3 گولی", "4 گولی", "5 گولی", "6 گولی", "7 گولی", "8 گولی", "9 گولی", "10 گولی", "11 گولی", "12 گولی" });
+            DoseCb.Location = new Point(431, 123);
+            DoseCb.Name = "DoseCb";
+            DoseCb.Size = new Size(166, 23);
+            DoseCb.TabIndex = 19;
+            DoseCb.Text = "Dose";
+            // 
+            // RouteCb
+            // 
+            RouteCb.FormattingEnabled = true;
+            RouteCb.Items.AddRange(new object[] { "PO ( Oral )", "IV ( Into the Vien )", "IM ( Into the Muscle )", "SC ( Between Skin and Muscle )", "PR", "PV ( Into the Vagina)", "Inhale", "Sublingual ( Beneath the Tongue )", "Topical ( Effected Place )", "As directed" });
+            RouteCb.Location = new Point(616, 123);
+            RouteCb.Name = "RouteCb";
+            RouteCb.Size = new Size(167, 23);
+            RouteCb.TabIndex = 20;
+            RouteCb.Text = "Route";
+            // 
+            // FrequencyCb
+            // 
+            FrequencyCb.FormattingEnabled = true;
+            FrequencyCb.Items.AddRange(new object[] { "صبح میں ایک بار", "دن میں ایک بار", "صبح + شام", "صبح + دوپہر + شام", "صبح + دوپہر + شام + رات" });
+            FrequencyCb.Location = new Point(24, 176);
+            FrequencyCb.Name = "FrequencyCb";
+            FrequencyCb.Size = new Size(182, 23);
+            FrequencyCb.TabIndex = 21;
+            FrequencyCb.Text = "Frequency";
+            // 
+            // DaysCb
+            // 
+            DaysCb.FormattingEnabled = true;
+            DaysCb.Items.AddRange(new object[] { "1 Day", "2 Days", "3 Days", "4 Days", "5 Days", "6 Days", "7 Days", "1 Week", "2 Weeks", "3 Weeks", "4 Weeks", "1 Month", "3 Months" });
+            DaysCb.Location = new Point(227, 176);
+            DaysCb.Name = "DaysCb";
+            DaysCb.Size = new Size(182, 23);
+            DaysCb.TabIndex = 22;
+            DaysCb.Text = "Days";
+            // 
+            // InstructionCb
+            // 
+            InstructionCb.FormattingEnabled = true;
+            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "صبح ناشتے سے پہلے اور رات کھانے سے پہلے", " کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
+            InstructionCb.Location = new Point(431, 176);
+            InstructionCb.Name = "InstructionCb";
+            InstructionCb.Size = new Size(166, 23);
+            InstructionCb.TabIndex = 23;
+            InstructionCb.Text = "Instruction";
             // 
             // MedicineForm
             // 
@@ -236,6 +291,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(945, 597);
+            Controls.Add(InstructionCb);
+            Controls.Add(DaysCb);
+            Controls.Add(FrequencyCb);
+            Controls.Add(RouteCb);
+            Controls.Add(DoseCb);
             Controls.Add(label3);
             Controls.Add(MedicineGV);
             Controls.Add(MedicineName);
@@ -271,5 +331,10 @@
         private TextBox MedicineName;
         private Guna.UI2.WinForms.Guna2DataGridView MedicineGV;
         private Label label3;
+        private ComboBox DoseCb;
+        private ComboBox RouteCb;
+        private ComboBox FrequencyCb;
+        private ComboBox DaysCb;
+        private ComboBox InstructionCb;
     }
 }

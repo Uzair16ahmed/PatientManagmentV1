@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagnosisForm));
             panel1 = new Panel();
             label5 = new Label();
@@ -59,14 +59,12 @@
             printPreviewDialog1 = new PrintPreviewDialog();
             PatGender = new TextBox();
             Assessment = new TextBox();
-            MedSchedule = new ComboBox();
-            MedDose = new TextBox();
-            MedIntake = new ComboBox();
             medComboBox = new CheckedListBox();
             label6 = new Label();
             PatAge = new TextBox();
             LabName = new TextBox();
             ExaminationCb = new ComboBox();
+            Examinationlbl = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DiagnosisGV).BeginInit();
             diagsummary.SuspendLayout();
@@ -226,26 +224,26 @@
             // 
             // DiagnosisGV
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             DiagnosisGV.ColumnHeadersHeight = 25;
             DiagnosisGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle6;
             DiagnosisGV.GridColor = Color.FromArgb(231, 229, 255);
             DiagnosisGV.Location = new Point(12, 488);
             DiagnosisGV.Name = "DiagnosisGV";
@@ -290,6 +288,7 @@
             // 
             // diagsummary
             // 
+            diagsummary.Controls.Add(Examinationlbl);
             diagsummary.Controls.Add(label9);
             diagsummary.Controls.Add(Diagnosislbl);
             diagsummary.Controls.Add(Medicineslbl);
@@ -417,35 +416,6 @@
             Assessment.Size = new Size(182, 23);
             Assessment.TabIndex = 24;
             // 
-            // MedSchedule
-            // 
-            MedSchedule.FormattingEnabled = true;
-            MedSchedule.Items.AddRange(new object[] { "1 time a day", "2 time a day", "3 time a day" });
-            MedSchedule.Location = new Point(293, 344);
-            MedSchedule.Name = "MedSchedule";
-            MedSchedule.Size = new Size(121, 23);
-            MedSchedule.TabIndex = 27;
-            MedSchedule.Text = "Schedule";
-            // 
-            // MedDose
-            // 
-            MedDose.BackColor = Color.Gainsboro;
-            MedDose.Location = new Point(21, 344);
-            MedDose.Name = "MedDose";
-            MedDose.PlaceholderText = "Dose";
-            MedDose.Size = new Size(121, 23);
-            MedDose.TabIndex = 28;
-            // 
-            // MedIntake
-            // 
-            MedIntake.FormattingEnabled = true;
-            MedIntake.Items.AddRange(new object[] { "Oral", "Injection", "Drip" });
-            MedIntake.Location = new Point(159, 344);
-            MedIntake.Name = "MedIntake";
-            MedIntake.Size = new Size(121, 23);
-            MedIntake.TabIndex = 30;
-            MedIntake.Text = "Intake";
-            // 
             // medComboBox
             // 
             medComboBox.ColumnWidth = 8;
@@ -497,6 +467,17 @@
             ExaminationCb.Text = "ExaminationID";
             ExaminationCb.SelectionChangeCommitted += ExaminationCb_SelectionChangeCommitted;
             // 
+            // Examinationlbl
+            // 
+            Examinationlbl.AutoSize = true;
+            Examinationlbl.Font = new Font("Calibri", 14.25F);
+            Examinationlbl.ForeColor = Color.Black;
+            Examinationlbl.Location = new Point(51, 251);
+            Examinationlbl.Name = "Examinationlbl";
+            Examinationlbl.Size = new Size(105, 23);
+            Examinationlbl.TabIndex = 9;
+            Examinationlbl.Text = "Examination";
+            // 
             // DiagnosisForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -507,9 +488,6 @@
             Controls.Add(PatAge);
             Controls.Add(label6);
             Controls.Add(medComboBox);
-            Controls.Add(MedIntake);
-            Controls.Add(MedDose);
-            Controls.Add(MedSchedule);
             Controls.Add(Assessment);
             Controls.Add(PatGender);
             Controls.Add(button5);
@@ -570,13 +548,11 @@
         private Label label5;
         private TextBox PatGender;
         private TextBox Assessment;
-        private ComboBox MedSchedule;
-        private TextBox MedDose;
-        private ComboBox MedIntake;
         private CheckedListBox medComboBox;
         private Label label6;
         private TextBox PatAge;
         private TextBox LabName;
         private ComboBox ExaminationCb;
+        private Label Examinationlbl;
     }
 }

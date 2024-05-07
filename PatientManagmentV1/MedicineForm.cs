@@ -24,6 +24,11 @@ namespace PatientManagmentV1
         {
             MedId.Text = "";
             MedicineName.Text = "";
+            DoseCb.Text = "Dose";
+            RouteCb.Text = "Route";
+            FrequencyCb.Text = "Frequency";
+            DaysCb.Text = "Days";
+            InstructionCb.Text = "Instruction";
         }
 
         void Populate()
@@ -52,7 +57,10 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MedId.Text == "" || MedicineName.Text == "")
+            if (MedId.Text == "" || MedicineName.Text == "" ||
+                DoseCb.SelectedItem == null || RouteCb.SelectedItem == null ||
+                FrequencyCb.SelectedItem == null || DaysCb.SelectedItem == null ||
+                InstructionCb.SelectedItem == null)
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -62,13 +70,22 @@ namespace PatientManagmentV1
                 try
                 {
                     Con.Open();
-                    string query = "INSERT INTO MedicineTbl (MedId, MedicineName) VALUES (@MedId, @MedicineName)";
+                    string query = @"
+                        INSERT INTO MedicineTbl 
+                        (MedId, MedicineName, Dose, Route, Frequency, Days, Instruction) 
+                        VALUES 
+                        (@MedId, @MedicineName, @Dose, @Route, @Frequency, @Days, @Instruction)";
 
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
                         // Adding parameters to prevent SQL Injection
                         cmd.Parameters.AddWithValue("@MedId", MedId.Text);  // Convert to integer if MedId is a numeric field
                         cmd.Parameters.AddWithValue("@MedicineName", MedicineName.Text);
+                        cmd.Parameters.AddWithValue("@Dose", DoseCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Route", RouteCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Frequency", FrequencyCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Days", DaysCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Instruction", InstructionCb.SelectedItem.ToString());
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Medicine Successfully Added");
@@ -94,7 +111,10 @@ namespace PatientManagmentV1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (MedId.Text == "" || MedicineName.Text == "")
+            if (MedId.Text == "" || MedicineName.Text == "" ||
+                DoseCb.SelectedItem == null || RouteCb.SelectedItem == null ||
+                FrequencyCb.SelectedItem == null || DaysCb.SelectedItem == null ||
+                InstructionCb.SelectedItem == null)
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -104,13 +124,27 @@ namespace PatientManagmentV1
                 try
                 {
                     Con.Open();
-                    string query = "UPDATE MedicineTbl SET MedicineName = @MedicineName WHERE MedId = @MedId";
+                    string query = @"
+                        UPDATE MedicineTbl 
+                        SET 
+                            MedicineName = @MedicineName, 
+                            Dose = @Dose, 
+                            Route = @Route, 
+                            Frequency = @Frequency, 
+                            Days = @Days, 
+                            Instruction = @Instruction 
+                        WHERE MedId = @MedId";
 
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
                         // Add parameters to ensure safe query execution
                         cmd.Parameters.AddWithValue("@MedicineName", MedicineName.Text);
                         cmd.Parameters.AddWithValue("@MedId", MedId.Text); // Assuming MedId is a string, convert to int if necessary
+                        cmd.Parameters.AddWithValue("@Dose", DoseCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Route", RouteCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Frequency", FrequencyCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Days", DaysCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@Instruction", InstructionCb.SelectedItem.ToString());
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Medicine Successfully Updated");
@@ -191,6 +225,11 @@ namespace PatientManagmentV1
         {
             MedId.Text = MedicineGV.SelectedRows[0].Cells[0].Value.ToString();
             MedicineName.Text = MedicineGV.SelectedRows[0].Cells[1].Value.ToString();
+            DoseCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[2].Value.ToString();
+            RouteCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[3].Value.ToString();
+            FrequencyCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[4].Value.ToString();
+            DaysCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[5].Value.ToString();
+            InstructionCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[6].Value.ToString();
         }
     }
 }
