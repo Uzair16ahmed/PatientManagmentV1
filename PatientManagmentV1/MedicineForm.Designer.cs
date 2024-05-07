@@ -104,7 +104,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(146, 504);
+            button4.Location = new Point(142, 329);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
             button4.TabIndex = 13;
@@ -118,7 +118,7 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(260, 433);
+            button3.Location = new Point(256, 258);
             button3.Name = "button3";
             button3.Size = new Size(94, 46);
             button3.TabIndex = 12;
@@ -132,7 +132,7 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(147, 433);
+            button2.Location = new Point(143, 258);
             button2.Name = "button2";
             button2.Size = new Size(93, 46);
             button2.TabIndex = 11;
@@ -146,7 +146,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(36, 433);
+            button1.Location = new Point(32, 258);
             button1.Name = "button1";
             button1.Size = new Size(92, 46);
             button1.TabIndex = 10;
@@ -166,7 +166,7 @@
             // MedicineName
             // 
             MedicineName.BackColor = Color.Gainsboro;
-            MedicineName.Location = new Point(24, 163);
+            MedicineName.Location = new Point(227, 123);
             MedicineName.Name = "MedicineName";
             MedicineName.PlaceholderText = "Medicine Name";
             MedicineName.Size = new Size(182, 23);
@@ -195,10 +195,10 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
             MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.Location = new Point(427, 163);
+            MedicineGV.Location = new Point(60, 416);
             MedicineGV.Name = "MedicineGV";
             MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(493, 345);
+            MedicineGV.Size = new Size(782, 148);
             MedicineGV.TabIndex = 17;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -229,7 +229,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(574, 110);
+            label3.Location = new Point(362, 366);
             label3.Name = "label3";
             label3.Size = new Size(205, 36);
             label3.TabIndex = 18;
@@ -238,41 +238,41 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(24, 212);
+            comboBox1.Location = new Point(431, 123);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
+            comboBox1.Size = new Size(166, 23);
             comboBox1.TabIndex = 19;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(167, 212);
+            comboBox2.Location = new Point(616, 123);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
+            comboBox2.Size = new Size(167, 23);
             comboBox2.TabIndex = 20;
             // 
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(24, 257);
+            comboBox3.Location = new Point(24, 176);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
+            comboBox3.Size = new Size(182, 23);
             comboBox3.TabIndex = 21;
             // 
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(167, 257);
+            comboBox4.Location = new Point(227, 176);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(121, 23);
+            comboBox4.Size = new Size(182, 23);
             comboBox4.TabIndex = 22;
             // 
             // comboBox5
             // 
             comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(24, 304);
+            comboBox5.Location = new Point(431, 176);
             comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(121, 23);
+            comboBox5.Size = new Size(166, 23);
             comboBox5.TabIndex = 23;
             // 
             // MedicineForm
