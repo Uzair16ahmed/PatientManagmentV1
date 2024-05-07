@@ -17,36 +17,18 @@ namespace PatientManagmentV1
     {
         readonly SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\PatientManagementSystemV1.mdf;Integrated Security=True;Connect Timeout=30");
 
+        public class MedicineDetails
+        {
+            public string? Name { get; set; }
+            public string? Dose { get; set; }
+            public string? Route { get; set; }
+            public string? Frequency { get; set; }
+            public string? Days { get; set; }
+            public string? Instruction { get; set; }
+        }
         public DiagnosisForm()
         {
             InitializeComponent();
-        }
-
-        private void PopulateMedicines()
-        {
-            string query = "SELECT MedicineName FROM MedicineTbl";
-            SqlCommand cmd = new SqlCommand(query, Con);
-            Con.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            // Assuming medComboBox is your multi-select combobox or CheckedListBox
-            medComboBox.Items.Clear();
-            while (reader.Read())
-            {
-                medComboBox.Items.Add(reader["MedicineName"].ToString());
-            }
-            reader.Close();
-            Con.Close();
-        }
-
-        private List<string> GetSelectedMedicines()
-        {
-            List<string> selectedMeds = new List<string>();
-            foreach (object itemChecked in medComboBox.CheckedItems)
-            {
-                selectedMeds.Add(itemChecked.ToString());
-            }
-            return selectedMeds;
         }
 
         void PopulateCombo()
@@ -91,6 +73,33 @@ namespace PatientManagmentV1
             {
 
             }
+        }
+
+        private void PopulateMedicines()
+        {
+            string query = "SELECT MedicineName FROM MedicineTbl";
+            SqlCommand cmd = new SqlCommand(query, Con);
+            Con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            // Assuming medComboBox is your multi-select combobox or CheckedListBox
+            medComboBox.Items.Clear();
+            while (reader.Read())
+            {
+                medComboBox.Items.Add(reader["MedicineName"].ToString());
+            }
+            reader.Close();
+            Con.Close();
+        }
+
+        private List<string> GetSelectedMedicines()
+        {
+            List<string> selectedMeds = new List<string>();
+            foreach (object itemChecked in medComboBox.CheckedItems)
+            {
+                selectedMeds.Add(itemChecked.ToString());
+            }
+            return selectedMeds;
         }
 
         private void ClearMedicineSelections()
@@ -139,9 +148,7 @@ namespace PatientManagmentV1
             Symptoms.Text = "";
             Diagnosis.Text = "";
             Assessment.Text = "";
-            MedDose.Text = "";
-            MedIntake.Text = "Intake";
-            MedSchedule.Text = "Schedule";
+            LabName.Text = "";
         }
 
         void FetchPatientName()
@@ -295,22 +302,27 @@ namespace PatientManagmentV1
             Symptoms.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
             Diagnosis.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
             Assessment.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
-            MedDose.Text = DiagnosisGV.SelectedRows[0].Cells[10].Value.ToString();
-            MedIntake.Text = DiagnosisGV.SelectedRows[0].Cells[11].Value.ToString();
-            MedSchedule.Text = DiagnosisGV.SelectedRows[0].Cells[12].Value.ToString();
-            LabName.Text = DiagnosisGV.SelectedRows[0].Cells[13].Value.ToString();
+            LabName.Text = DiagnosisGV.SelectedRows[0].Cells[11].Value.ToString();
             PatientNamelbl.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
             Symptomslbl.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
             Diagnosislbl.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
-            Medicineslbl.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
+            Examinationlbl.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
+            Medicineslbl.Text = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             List<string> selectedMeds = GetSelectedMedicines();
-            string medNames = String.Join(", ", selectedMeds); // Combine all selected medicine names with a comma
 
-            if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || Assessment.Text == "" || MedDose.Text == "" || MedIntake.Text == "" || MedSchedule.Text == "")
+            if (selectedMeds.Count == 0)
+            {
+                MessageBox.Show("Please select at least one medicine.");
+                return;
+            }
+
+            string medNames = String.Join(", ", selectedMeds); // Combine all selected medicine names with a comma
+            
+            if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || Assessment.Text == "")
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -319,7 +331,23 @@ namespace PatientManagmentV1
                 try
                 {
                     Con.Open();
-                    string query = "INSERT INTO DiagnosisTbl (DiagId, PatId, PatName, PatGender, PatAge, ExamId, Symptoms, Diagnosis, Assessment, Medicines, MedDose, MedIntake, MedSchedule, LabName) VALUES (@DiagId, @PatId, @PatName, @PatGender,@PatAge, @ExamId, @Symptoms, @Diagnosis, @Assessment, @Medicines, @MedDose, @MedIntake, @MedSchedule, @LabName)";
+                    // Fetch additional medicine data
+                    List<string> medDetails = new List<string>();
+                    foreach (var med in selectedMeds)
+                    {
+                        string medQuery = "SELECT Dose, Route, Frequency, Days, Instruction FROM MedicineTbl WHERE MedicineName = @MedName";
+                        SqlCommand medCmd = new SqlCommand(medQuery, Con);
+                        medCmd.Parameters.AddWithValue("@MedName", med);
+                        SqlDataReader medReader = medCmd.ExecuteReader();
+                        while (medReader.Read())
+                        {
+                            string details = $"{med} - Dose: {medReader["Dose"]}, Route: {medReader["Route"]}, Frequency: {medReader["Frequency"]}, Days: {medReader["Days"]}, Instruction: {medReader["Instruction"]}";
+                            medDetails.Add(details);
+                        }
+                        medReader.Close();
+                    }
+
+                    string query = "INSERT INTO DiagnosisTbl (DiagId, PatId, PatName, PatGender, PatAge, ExamId, Symptoms, Diagnosis, Assessment, Medicines, MedDetails, LabName) VALUES (@DiagId, @PatId, @PatName, @PatGender, @PatAge, @ExamId, @Symptoms, @Diagnosis, @Assessment, @Medicines, @MedDetails, @LabName)";
                     SqlCommand cmd = new SqlCommand(query, Con);
 
                     // Adding parameters to avoid SQL Injection
@@ -333,9 +361,7 @@ namespace PatientManagmentV1
                     cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                     cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
                     cmd.Parameters.AddWithValue("@Medicines", medNames);
-                    cmd.Parameters.AddWithValue("@MedDose", MedDose.Text);
-                    cmd.Parameters.AddWithValue("@MedIntake", MedIntake.Text);
-                    cmd.Parameters.AddWithValue("@MedSchedule", MedSchedule.Text);
+                    cmd.Parameters.AddWithValue("@MedDetails", String.Join("; ", medDetails));
                     cmd.Parameters.AddWithValue("@LabName", LabName.Text);
 
                     cmd.ExecuteNonQuery();
@@ -412,13 +438,36 @@ namespace PatientManagmentV1
         private void button2_Click(object sender, EventArgs e)
         {
             List<string> selectedMeds = GetSelectedMedicines();
-            string medNames = String.Join(", ", selectedMeds);
+            if (selectedMeds.Count == 0)
+            {
+                MessageBox.Show("Please select at least one medicine.");
+                return;
+            }
+
+            string medNames = String.Join(", ", selectedMeds); // Combine all selected medicine names with a comma
 
             try
             {
                 Con.Open();
+
+                // Fetch additional medicine data
+                List<string> medDetails = new List<string>();
+                foreach (var med in selectedMeds)
+                {
+                    string medQuery = "SELECT Dose, Route, Frequency, Days, Instruction FROM MedicineTbl WHERE MedicineName = @MedName";
+                    SqlCommand medCmd = new SqlCommand(medQuery, Con);
+                    medCmd.Parameters.AddWithValue("@MedName", med);
+                    SqlDataReader medReader = medCmd.ExecuteReader();
+                    while (medReader.Read())
+                    {
+                        string details = $"{med} - Dose: {medReader["Dose"]}, Route: {medReader["Route"]}, Frequency: {medReader["Frequency"]}, Days: {medReader["Days"]}, Instruction: {medReader["Instruction"]}";
+                        medDetails.Add(details);
+                    }
+                    medReader.Close();
+                }
+
                 // Update SQL query to include all necessary columns
-                string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, ExamId = @ExamId, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDose = @MedDose, MedIntake = @MedIntake, MedSchedule = @MedSchedule, LabName = @LabName WHERE DiagId = @DiagId";
+                string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, ExamId = @ExamId, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDetails = @MedDetails, LabName = @LabName WHERE DiagId = @DiagId";
                 SqlCommand cmd = new SqlCommand(query, Con);
 
                 // Add parameters to SqlCommand object
@@ -432,9 +481,7 @@ namespace PatientManagmentV1
                 cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                 cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
                 cmd.Parameters.AddWithValue("@Medicines", medNames);
-                cmd.Parameters.AddWithValue("@MedDose", MedDose.Text);
-                cmd.Parameters.AddWithValue("@MedIntake", MedIntake.Text);
-                cmd.Parameters.AddWithValue("@MedSchedule", MedSchedule.Text);
+                cmd.Parameters.AddWithValue("@MedDetails", String.Join("; ", medDetails));
                 cmd.Parameters.AddWithValue("@LabName", LabName.Text);
 
                 // Execute the command
@@ -490,10 +537,32 @@ namespace PatientManagmentV1
             }
         }
 
+        private string FetchMedDetails(int diagId)
+        {
+                string medDetails = "";
+                string query = "SELECT MedDetails FROM DiagnosisTbl WHERE DiagId = @DiagId";
+                Con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, Con))
+                {
+                    cmd.Parameters.AddWithValue("@DiagId", diagId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        medDetails = reader["MedDetails"].ToString();
+                    }
+                    reader.Close();
+                Con.Close();
+                }
+            return medDetails;
+        }
+
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             List<string> selectedMeds = GetSelectedMedicines();
             string medNames = String.Join(", ", selectedMeds);
+
+            string medDetails = FetchMedDetails(int.Parse(DiagId.Text));
+            string[] medArray = medDetails.Split(';');
 
             string formattedDate = GetFormattedCreationDate(DiagnosisGV);
 
@@ -557,15 +626,22 @@ namespace PatientManagmentV1
             graphic.DrawString("Medications", headerFont, Brushes.Black, startX, startY + offset);
             offset = offset + (int)fontHeight + 20;
 
-            // Example Medication Prescriptions
-            graphic.DrawString($"Medicine: {medNames}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Dose: {MedDose.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Intake: {MedIntake.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Schedule: {MedSchedule.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            foreach (string med in medArray)
+            {
+                string[] parts = med.Trim().Split('-');
+                string medicineName = parts[0].Trim();
+                string[] details = parts[1].Trim().Split(',');
 
+                graphic.DrawString($"Medicine: {medicineName}", font, new SolidBrush(Color.Black), startX, startY + offset);
+                offset += (int)fontHeight + 5;
+
+                foreach (string detail in details)
+                {
+                    graphic.DrawString(detail.Trim(), font, new SolidBrush(Color.Black), startX, startY + offset);
+                    offset += (int)fontHeight + 5;
+                }
+            }
+   
 
             // Increment the offset for a new section
             offset = offset + (int)fontHeight + 30;
