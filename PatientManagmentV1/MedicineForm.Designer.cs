@@ -43,11 +43,11 @@
             MedicineName = new TextBox();
             MedicineGV = new Guna.UI2.WinForms.Guna2DataGridView();
             label3 = new Label();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
-            comboBox5 = new ComboBox();
+            DoseCb = new ComboBox();
+            RouteCb = new ComboBox();
+            FrequencyCb = new ComboBox();
+            DaysCb = new ComboBox();
+            InstructionCb = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MedicineGV).BeginInit();
             SuspendLayout();
@@ -195,10 +195,10 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
             MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.Location = new Point(60, 416);
+            MedicineGV.Location = new Point(32, 416);
             MedicineGV.Name = "MedicineGV";
             MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(782, 148);
+            MedicineGV.Size = new Size(871, 148);
             MedicineGV.TabIndex = 17;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -235,45 +235,55 @@
             label3.TabIndex = 18;
             label3.Text = "MEDICINES LIST";
             // 
-            // comboBox1
+            // DoseCb
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(431, 123);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(166, 23);
-            comboBox1.TabIndex = 19;
+            DoseCb.FormattingEnabled = true;
+            DoseCb.Items.AddRange(new object[] { "1 گولی", "2 گولی", "3 گولی", "4 گولی", "5 گولی", "6 گولی", "7 گولی", "8 گولی", "9 گولی", "10 گولی", "11 گولی", "12 گولی" });
+            DoseCb.Location = new Point(431, 123);
+            DoseCb.Name = "DoseCb";
+            DoseCb.Size = new Size(166, 23);
+            DoseCb.TabIndex = 19;
+            DoseCb.Text = "Dose";
             // 
-            // comboBox2
+            // RouteCb
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(616, 123);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(167, 23);
-            comboBox2.TabIndex = 20;
+            RouteCb.FormattingEnabled = true;
+            RouteCb.Items.AddRange(new object[] { "PO ( Oral )", "IV ( Into the Vien )", "IM ( Into the Muscle )", "SC ( Between Skin and Muscle )", "PR", "PV ( Into the Vagina)", "Inhale", "Sublingual ( Beneath the Tongue )", "Topical ( Effected Place )", "As directed" });
+            RouteCb.Location = new Point(616, 123);
+            RouteCb.Name = "RouteCb";
+            RouteCb.Size = new Size(167, 23);
+            RouteCb.TabIndex = 20;
+            RouteCb.Text = "Route";
             // 
-            // comboBox3
+            // FrequencyCb
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(24, 176);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(182, 23);
-            comboBox3.TabIndex = 21;
+            FrequencyCb.FormattingEnabled = true;
+            FrequencyCb.Items.AddRange(new object[] { "صبح میں ایک بار", "دن میں ایک بار", "صبح + شام", "صبح + دوپہر + شام", "صبح + دوپہر + شام + رات" });
+            FrequencyCb.Location = new Point(24, 176);
+            FrequencyCb.Name = "FrequencyCb";
+            FrequencyCb.Size = new Size(182, 23);
+            FrequencyCb.TabIndex = 21;
+            FrequencyCb.Text = "Frequency";
             // 
-            // comboBox4
+            // DaysCb
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(227, 176);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(182, 23);
-            comboBox4.TabIndex = 22;
+            DaysCb.FormattingEnabled = true;
+            DaysCb.Items.AddRange(new object[] { "1 Day", "2 Days", "3 Days", "4 Days", "5 Days", "6 Days", "7 Days", "1 Week", "2 Weeks", "3 Weeks", "4 Weeks", "1 Month", "3 Months" });
+            DaysCb.Location = new Point(227, 176);
+            DaysCb.Name = "DaysCb";
+            DaysCb.Size = new Size(182, 23);
+            DaysCb.TabIndex = 22;
+            DaysCb.Text = "Days";
             // 
-            // comboBox5
+            // InstructionCb
             // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(431, 176);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(166, 23);
-            comboBox5.TabIndex = 23;
+            InstructionCb.FormattingEnabled = true;
+            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "صبح ناشتے سے پہلے اور رات کھانے سے پہلے", " کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
+            InstructionCb.Location = new Point(431, 176);
+            InstructionCb.Name = "InstructionCb";
+            InstructionCb.Size = new Size(166, 23);
+            InstructionCb.TabIndex = 23;
+            InstructionCb.Text = "Instruction";
             // 
             // MedicineForm
             // 
@@ -281,11 +291,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(945, 597);
-            Controls.Add(comboBox5);
-            Controls.Add(comboBox4);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(InstructionCb);
+            Controls.Add(DaysCb);
+            Controls.Add(FrequencyCb);
+            Controls.Add(RouteCb);
+            Controls.Add(DoseCb);
             Controls.Add(label3);
             Controls.Add(MedicineGV);
             Controls.Add(MedicineName);
@@ -321,10 +331,10 @@
         private TextBox MedicineName;
         private Guna.UI2.WinForms.Guna2DataGridView MedicineGV;
         private Label label3;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
+        private ComboBox DoseCb;
+        private ComboBox RouteCb;
+        private ComboBox FrequencyCb;
+        private ComboBox DaysCb;
+        private ComboBox InstructionCb;
     }
 }
