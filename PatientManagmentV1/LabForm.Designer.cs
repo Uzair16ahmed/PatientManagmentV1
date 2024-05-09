@@ -151,7 +151,7 @@
             // 
             // LabName
             // 
-            LabName.BackColor = Color.Gainsboro;
+            LabName.BackColor = Color.White;
             LabName.Location = new Point(64, 231);
             LabName.Name = "LabName";
             LabName.PlaceholderText = "Lab Name";
@@ -160,7 +160,7 @@
             // 
             // LabId
             // 
-            LabId.BackColor = Color.Gainsboro;
+            LabId.BackColor = Color.White;
             LabId.Location = new Point(64, 174);
             LabId.Name = "LabId";
             LabId.PlaceholderText = "LabID";
