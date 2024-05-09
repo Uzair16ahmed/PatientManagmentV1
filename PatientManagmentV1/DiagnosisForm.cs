@@ -1,8 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -31,27 +33,27 @@ namespace PatientManagmentV1
             InitializeComponent();
         }
 
-        void PopulateCombo()
-        {
-            string sql = "select * from PatientTbl";
-            SqlCommand cmd = new SqlCommand(sql, Con);
-            SqlDataReader rdr;
-            try
-            {
-                Con.Open();
-                DataTable dt = new DataTable();
-                dt.Columns.Add("PatId", typeof(int));
-                rdr = cmd.ExecuteReader();
-                dt.Load(rdr);
-                PatientIdCb.ValueMember = "PatId";
-                PatientIdCb.DataSource = dt;
-                Con.Close();
-            }
-            catch
-            {
+        //void PopulateCombo()
+        //{
+        //    string sql = "select * from PatientTbl";
+        //    SqlCommand cmd = new SqlCommand(sql, Con);
+        //    SqlDataReader rdr;
+        //    try
+        //    {
+        //        Con.Open();
+        //        DataTable dt = new DataTable();
+        //        dt.Columns.Add("PatId", typeof(int));
+        //        rdr = cmd.ExecuteReader();
+        //        dt.Load(rdr);
+        //        PatientIdCb.ValueMember = "PatId";
+        //        PatientIdCb.DataSource = dt;
+        //        Con.Close();
+        //    }
+        //    catch
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         void PopulateExamCombo()
         {
@@ -110,7 +112,12 @@ namespace PatientManagmentV1
             }
         }
 
-        private void PreselectMedicinesInList()
+        private Guna.UI2.WinForms.Guna2DataGridView GetDiagnosisGV()
+        {
+            return DiagnosisGV;
+        }
+
+        private void PreselectMedicinesInList(Guna.UI2.WinForms.Guna2DataGridView diagnosisGV)
         {
             // Clear any existing selections first
             ClearMedicineSelections();
@@ -118,7 +125,7 @@ namespace PatientManagmentV1
             // Check if any row is selected in the DataGridView
             if (DiagnosisGV.SelectedRows.Count > 0)
             {
-                string medicineNames = DiagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
+                string medicineNames = diagnosisGV.SelectedRows[0].Cells[9].Value.ToString();
                 string[] medicines = medicineNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Trim spaces and preselect the matching items in the CheckedListBox
@@ -142,8 +149,10 @@ namespace PatientManagmentV1
         void Clear()
         {
             DiagId.Text = "";
+            PatId.Text = "";
+            ExaminationCb.Text = "";
             PatientTb.Text = "";
-            PatGender.Text = "";
+            PatGender.Text = "Gender";
             PatAge.Text = "";
             Symptoms.Text = "";
             Diagnosis.Text = "";
@@ -151,59 +160,59 @@ namespace PatientManagmentV1
             LabName.Text = "";
         }
 
-        void FetchPatientName()
-        {
-            if (PatientIdCb.SelectedValue == null)
-            {
-                MessageBox.Show("Please select a valid patient ID.");
-                return;
-            }
+        //void FetchPatientName()
+        //{
+        //    if (PatientIdCb.SelectedValue == null)
+        //    {
+        //        MessageBox.Show("Please select a valid patient ID.");
+        //        return;
+        //    }
 
-            try
-            {
-                Con.Open();
-                string sql = "SELECT * FROM PatientTbl WHERE PatId = @PatId";
-                using (SqlCommand cmd = new SqlCommand(sql, Con))
-                {
-                    // Safely add the patient ID as a parameter to avoid SQL injection
-                    cmd.Parameters.AddWithValue("@PatId", PatientIdCb.SelectedValue.ToString());
+        //    try
+        //    {
+        //        Con.Open();
+        //        string sql = "SELECT * FROM PatientTbl WHERE PatId = @PatId";
+        //        using (SqlCommand cmd = new SqlCommand(sql, Con))
+        //        {
+        //            // Safely add the patient ID as a parameter to avoid SQL injection
+        //            cmd.Parameters.AddWithValue("@PatId", PatientIdCb.SelectedValue.ToString());
 
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
+        //            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+        //            {
+        //                DataTable dt = new DataTable();
+        //                da.Fill(dt);
 
-                        if (dt.Rows.Count > 0)
-                        {
-                            DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
-                            PatientTb.Text = dr["PatName"].ToString();
-                            PatGender.Text = dr["PatGender"].ToString();
-                            PatAge.Text = dr["PatAge"].ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No patient found with the specified ID.");
-                            // Optionally clear any previous data displayed
-                            PatientTb.Text = "";
-                            PatGender.Text = "";
-                            PatAge.Text = "";
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-            finally
-            {
-                // Connection will be closed by the using statement
-                if (Con.State == ConnectionState.Open)
-                {
-                    Con.Close();
-                }
-            }
-        }
+        //                if (dt.Rows.Count > 0)
+        //                {
+        //                    DataRow dr = dt.Rows[0];  // Assuming you expect only one row since IDs should be unique
+        //                    PatientTb.Text = dr["PatName"].ToString();
+        //                    PatGender.Text = dr["PatGender"].ToString();
+        //                    PatAge.Text = dr["PatAge"].ToString();
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show("No patient found with the specified ID.");
+        //                    // Optionally clear any previous data displayed
+        //                    PatientTb.Text = "";
+        //                    PatGender.Text = "";
+        //                    PatAge.Text = "";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("An error occurred: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        // Connection will be closed by the using statement
+        //        if (Con.State == ConnectionState.Open)
+        //        {
+        //            Con.Close();
+        //        }
+        //    }
+        //}
 
         void FetchExamination()
         {
@@ -282,7 +291,7 @@ namespace PatientManagmentV1
 
         private void DiagnosisForm_Load(object sender, EventArgs e)
         {
-            PopulateCombo();
+            //PopulateCombo();
             PopulateExamCombo();
             PopulateMedicines();
             Populate();
@@ -292,13 +301,13 @@ namespace PatientManagmentV1
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            PreselectMedicinesInList();
+            PreselectMedicinesInList(GetDiagnosisGV());
             DiagId.Text = DiagnosisGV.SelectedRows[0].Cells[0].Value.ToString();
-            PatientIdCb.SelectedValue = DiagnosisGV.SelectedRows[0].Cells[1].Value.ToString();
+            PatId.Text = DiagnosisGV.SelectedRows[0].Cells[1].Value.ToString();
             PatientTb.Text = DiagnosisGV.SelectedRows[0].Cells[2].Value.ToString();
             PatGender.Text = DiagnosisGV.SelectedRows[0].Cells[3].Value.ToString();
             PatAge.Text = DiagnosisGV.SelectedRows[0].Cells[4].Value.ToString();
-            ExaminationCb.SelectedValue = DiagnosisGV.SelectedRows[0].Cells[5].Value.ToString();
+            ExaminationCb.Text = DiagnosisGV.SelectedRows[0].Cells[5].Value.ToString();
             Symptoms.Text = DiagnosisGV.SelectedRows[0].Cells[6].Value.ToString();
             Diagnosis.Text = DiagnosisGV.SelectedRows[0].Cells[7].Value.ToString();
             Assessment.Text = DiagnosisGV.SelectedRows[0].Cells[8].Value.ToString();
@@ -321,8 +330,8 @@ namespace PatientManagmentV1
             }
 
             string medNames = String.Join(", ", selectedMeds); // Combine all selected medicine names with a comma
-            
-            if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || Assessment.Text == "")
+
+            if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatId.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || PatAge.Text == "" || Assessment.Text == "")
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -352,11 +361,11 @@ namespace PatientManagmentV1
 
                     // Adding parameters to avoid SQL Injection
                     cmd.Parameters.AddWithValue("@DiagId", int.Parse(DiagId.Text));
-                    cmd.Parameters.AddWithValue("@PatId", int.Parse(PatientIdCb.SelectedValue.ToString())); // Assuming PatientIdCb is a ComboBox
+                    cmd.Parameters.AddWithValue("@PatId", int.Parse(PatId.Text)); // Assuming PatientIdCb is a ComboBox
                     cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
-                    cmd.Parameters.AddWithValue("@PatGender", PatGender.Text);
+                    cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem);
                     cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
-                    cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
+                    cmd.Parameters.AddWithValue("@ExamId", ExaminationCb.SelectedItem); // Assuming ExaminationCb is a ComboBox
                     cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                     cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                     cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
@@ -472,9 +481,9 @@ namespace PatientManagmentV1
 
                 // Add parameters to SqlCommand object
                 cmd.Parameters.AddWithValue("@DiagId", int.Parse(DiagId.Text));
-                cmd.Parameters.AddWithValue("@PatId", int.Parse(PatientIdCb.SelectedValue.ToString()));
+                cmd.Parameters.AddWithValue("@PatId", int.Parse(PatId.Text));
                 cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
-                cmd.Parameters.AddWithValue("@PatGender", PatGender.Text);
+                cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem); ;
                 cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
                 cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
                 cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
@@ -507,10 +516,10 @@ namespace PatientManagmentV1
             ClearMedicineSelections();
         }
 
-        private void PatientIdCb_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            FetchPatientName();
-        }
+        //private void PatientIdCb_SelectionChangeCommitted(object sender, EventArgs e)
+        //{
+        //    FetchPatientName();
+        //}
 
         private string GetFormattedCreationDate(DataGridView dataGridView)
         {
@@ -539,22 +548,23 @@ namespace PatientManagmentV1
 
         private string FetchMedDetails(int diagId)
         {
-                string medDetails = "";
-                string query = "SELECT MedDetails FROM DiagnosisTbl WHERE DiagId = @DiagId";
-                Con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, Con))
+            string medDetails = "";
+            string query = "SELECT MedDetails FROM DiagnosisTbl WHERE DiagId = @DiagId";
+            Con.Open();
+            using (SqlCommand cmd = new SqlCommand(query, Con))
+            {
+                cmd.Parameters.AddWithValue("@DiagId", diagId);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
-                    cmd.Parameters.AddWithValue("@DiagId", diagId);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        medDetails = reader["MedDetails"].ToString();
-                    }
-                    reader.Close();
-                Con.Close();
+                    medDetails = reader["MedDetails"].ToString();
                 }
+                reader.Close();
+                Con.Close();
+            }
             return medDetails;
         }
+
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -566,92 +576,275 @@ namespace PatientManagmentV1
 
             string formattedDate = GetFormattedCreationDate(DiagnosisGV);
 
-            //e.Graphics.DrawString(label4.Text + "\n\n\n\n\n\n\n\n\n\n", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(230));
-            e.Graphics?.DrawString("Patient Report", new Font("Century Gothic", 25, FontStyle.Bold), Brushes.Red, new Point(280));
+            string logoPath = "C:\\Users\\USER\\source\\repos\\PatientManagmentV1\\PatientManagmentV1\\Logo.jpg"; // Update this to your actual logo path
+            Image logo = Image.FromFile(logoPath);
+
+            // Determine the logo position and size
+            int logoX = 350; // X-coordinate for the logo
+            int logoY = 20; // Y-coordinate for the logo
+            //int logoWidth = 200; // Adjust as needed
+            //int logoHeight = 100; // Adjust as needed
+            int logoDiameter = 140;
 
             Graphics graphic = e.Graphics;
             Font font = new("Courier New", 12);  // Choose appropriate font
+            Font fontbold = new("Courier New", 12, FontStyle.Bold);  // Choose appropriate font
             float fontHeight = font.GetHeight();
             Font headerFont = new("Arial", 16, FontStyle.Bold);
-            int startX = 40;
-            int startY = 40;
-            int offset = 40;
+            int startX = 20;
+            int startY = 90;
+            int offset = 80;
 
-            // Draw headers
-            graphic.DrawString("Doctor Information", headerFont, Brushes.Black, startX, startY + 20);
-            offset = offset + (int)fontHeight + 5;  // Adjust space between lines
+            //// Draw the logo
+            //graphic?.DrawImage(logo, new Rectangle(logoX, logoY, logoWidth, logoHeight));
 
-            graphic.DrawString("Name: Doctor Zubair", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString("Specialization: Specialist", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString("Information: info", font, new SolidBrush(Color.Black), startX, startY + offset);
+            // Draw the logo in a circular shape
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddEllipse(logoX, logoY, logoDiameter, logoDiameter);
+            Region region = new Region(path);
+            graphic.SetClip(region, System.Drawing.Drawing2D.CombineMode.Replace);
+            graphic.DrawImage(logo, new Rectangle(logoX, logoY, logoDiameter, logoDiameter));
+            graphic.ResetClip(); // Reset the clipping region
 
-            offset = offset + (int)fontHeight + 30;  // Increase offset for new section
-            graphic.DrawString("Patient Information", headerFont, Brushes.Black, startX, startY + offset);
-            offset = offset + (int)fontHeight + 20;
+            // Adjust offset to account for the logo space
+            offset = logoY + logoDiameter + 30;
 
-            graphic.DrawString($"Patient Id: {PatientIdCb.SelectedValue?.ToString()}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Name: {PatientTb.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Age: {PatAge.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Gender: {PatGender.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
+            graphic.DrawString("Patient Report", headerFont, Brushes.Black, new Point(350, offset));
+            offset += (int)fontHeight -50;
+
+            // Draw the Doctor Information box
+            int doctorBoxWidth = 760;
+            int doctorBoxHeight = (int)(fontHeight * 4) + 13; // Adjust the height based on the content
+            int doctorBoxStartX = startX;
+            int doctorBoxStartY = startY + offset;
+
+            // Draw the rectangle
+            graphic.FillRectangle(Brushes.Gray, doctorBoxStartX, doctorBoxStartY, doctorBoxWidth, 25);
+            graphic.DrawRectangle(Pens.Black, new Rectangle(doctorBoxStartX, doctorBoxStartY, doctorBoxWidth, doctorBoxHeight));
+
+            // Draw the Doctor Information title inside the box
+            graphic.DrawString("Doctor Information", headerFont, Brushes.White, new PointF(doctorBoxStartX + 5, doctorBoxStartY + 2));
+
+            // Adjust offset for the content inside the box
+            int contentOffsetY = doctorBoxStartY + 30;
+
+            graphic.DrawString("Name:", fontbold, Brushes.Black, doctorBoxStartX + 10, contentOffsetY);
+            graphic.DrawString("Dr. ZUBAIR AHMED", font, Brushes.Black, doctorBoxStartX + 70, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Specialization:", fontbold, Brushes.Black, doctorBoxStartX + 10, contentOffsetY);
+            graphic.DrawString("MBBS , FCPS(consultant General and Laproscopic surgeon", font, Brushes.Black, doctorBoxStartX + 170, contentOffsetY);
+            // Update the offset after the doctor information box
+            offset = doctorBoxStartY -10;  //offset = offset + (int)fontHeight + 5;
+            //graphic.DrawString("Information: info", font, new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset += (int)fontHeight;
+
+            // Draw the Patient Information box
+            int patientBoxWidth = 760;
+            int patientBoxHeight = (int)(fontHeight * 5) + 50; // Adjust the height based on the content
+            int patientBoxStartX = startX;
+            int patientBoxStartY = startY + offset;
+
+            // Draw the rectangle
+            graphic.FillRectangle(Brushes.Gray, patientBoxStartX, patientBoxStartY, patientBoxWidth, 25);
+            graphic.DrawRectangle(Pens.Black, new Rectangle(patientBoxStartX, patientBoxStartY, patientBoxWidth, patientBoxHeight));
+
+            // Draw the Patient Information title inside the box
+            graphic.DrawString("Patient Information", headerFont, Brushes.White, new PointF(patientBoxStartX + 5, patientBoxStartY + 2));
+
+            // Adjust offset for the content inside the box
+            contentOffsetY = patientBoxStartY + 30;
+
+            graphic.DrawString("Patient Id:", fontbold, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{PatId.Text}", font, Brushes.Black, patientBoxStartX + 125, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Name:", fontbold, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{PatientTb.Text}", font, Brushes.Black, patientBoxStartX + 70, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Age:", fontbold, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{PatAge.Text}", font, Brushes.Black, patientBoxStartX + 60, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Gender:", fontbold, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{PatGender.Text}", font, Brushes.Black, patientBoxStartX + 85, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
 
             // Check if we actually got a date
             if (!string.IsNullOrEmpty(formattedDate))
             {
-                graphic.DrawString($"Diagnosis Date-time: {formattedDate}", font, new SolidBrush(Color.Black), startX, startY + offset);
+                graphic.DrawString("Diagnosis Date-time:", fontbold, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
+                graphic.DrawString($"{formattedDate}", font, Brushes.Black, patientBoxStartX + 220, contentOffsetY);
             }
             else
             {
-                graphic.DrawString("No valid date available.", font, new SolidBrush(Color.Black), startX, startY + offset);
+                graphic.DrawString("No valid date available.", font, Brushes.Black, patientBoxStartX + 10, contentOffsetY);
             }
+            // Update the offset after the patient information box
+            offset = patientBoxStartY + 65;
 
-            // Increment the offset for a new section
-            offset = offset + (int)fontHeight + 30;
-            graphic.DrawString("Diagnosis", headerFont, Brushes.Black, startX, startY + offset);
-            offset = offset + (int)fontHeight + 20;
+            int diagnosisBoxWidth = 760;
+            int diagnosisBoxHeight = (int)(fontHeight * 4) + 50; // Adjust the height based on the content
+            int diagBoxStartX = startX;
+            int diagBoxStartY = startY + offset;
 
-            graphic.DrawString($"Doctor Diagnosis: {Diagnosis.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Patient Symptons: {Symptoms.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            offset = offset + (int)fontHeight + 5;
-            graphic.DrawString($"Doctor Examination: {Assessment.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
+            // Draw the rectangle
+            graphic.FillRectangle(Brushes.Gray, diagBoxStartX, diagBoxStartY, diagnosisBoxWidth, 25);
+            graphic.DrawRectangle(Pens.Black, new Rectangle(diagBoxStartX, diagBoxStartY, diagnosisBoxWidth, diagnosisBoxHeight));
 
-            // Increment the offset for a new section
-            offset = offset + (int)fontHeight + 30;
-            graphic.DrawString("Medications", headerFont, Brushes.Black, startX, startY + offset);
-            offset = offset + (int)fontHeight + 20;
+            // Draw the Diagnosis Information title inside the box
+            graphic.DrawString("Diagnosis", headerFont, Brushes.White, new PointF(diagBoxStartX + 5, diagBoxStartY + 2));
+
+            // Adjust offset for the content inside the box
+            contentOffsetY = diagBoxStartY + 30;
+
+            graphic.DrawString("Doctor Diagnosis:", fontbold, Brushes.Black, diagBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{Diagnosis.Text}", font, Brushes.Black, diagBoxStartX + 190, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Patient Symptoms:", fontbold, Brushes.Black, diagBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{Symptoms.Text}", font, Brushes.Black, diagBoxStartX + 190, contentOffsetY);
+            contentOffsetY += (int)fontHeight + 5;
+
+            graphic.DrawString("Doctor Examination:", fontbold, Brushes.Black, diagBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{Assessment.Text}", font, Brushes.Black, diagBoxStartX + 210, contentOffsetY);
+
+            // Update the offset after the diagnosis information box
+            offset = diagBoxStartY + 45;
+
+            // Draw the Medications box
+            int medicationsBoxWidth = 815;
+            int medicationsBoxHeight = (int)(fontHeight * 6) + 80; // Adjust the height based on the content
+            int medBoxStartX = startX;
+            int medBoxStartY = startY + offset;
+
+            // Draw the rectangle
+            graphic.FillRectangle(Brushes.Gray, medBoxStartX, medBoxStartY, medicationsBoxWidth, 25);
+            graphic.DrawRectangle(Pens.Black, new Rectangle(medBoxStartX, medBoxStartY, medicationsBoxWidth, medicationsBoxHeight));
+
+            // Draw the Medications title inside the box
+            graphic.DrawString("Medications", headerFont, Brushes.White, new PointF(medBoxStartX + 5, medBoxStartY + 2));
+
+            // Adjust offset for the content inside the box
+            contentOffsetY = medBoxStartY + 30;
+
+            // Table Column Headers
+            int col1X = medBoxStartX + 10;  // Medicine Name
+            int col2X = medBoxStartX + 145; // Dose
+            int col3X = medBoxStartX + 222; // Intake
+            int col4X = medBoxStartX + 332; // Schedule
+            int col5X = medBoxStartX + 508; // DAYS
+            int col6X = medBoxStartX + 591; // Instruction
+
+            graphic.DrawString("Medicine", fontbold, Brushes.Black, col1X, contentOffsetY);
+            graphic.DrawString("Dose", fontbold, Brushes.Black, col2X, contentOffsetY);
+            graphic.DrawString("Route", fontbold, Brushes.Black, col3X, contentOffsetY);
+            graphic.DrawString("Frequency", fontbold, Brushes.Black, col4X, contentOffsetY);
+            graphic.DrawString("Days", fontbold, Brushes.Black, col5X, contentOffsetY);
+            graphic.DrawString("Instruction", fontbold, Brushes.Black, col6X, contentOffsetY);
+
+            contentOffsetY += (int)fontHeight + 5;
+
+            // Loop through each medication and draw the details
 
             foreach (string med in medArray)
             {
                 string[] parts = med.Trim().Split('-');
                 string medicineName = parts[0].Trim();
-                string[] details = parts[1].Trim().Split(',');
+                string[] details = parts.Length > 1 ? parts[1].Trim().Split(',') : new string[] { };
 
-                graphic.DrawString($"Medicine: {medicineName}", font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset += (int)fontHeight + 5;
+                string dose = details.Length > 0 ? details[0].Split(':')[1].Trim() : "N/A";
+                string intake = details.Length > 1 ? details[1].Split(':')[1].Trim() : "N/A";
+                string schedule = details.Length > 2 ? details[2].Split(':')[1].Trim() : "N/A";
+                string days = details.Length > 3 ? details[3].Split(':')[1].Trim() : "N/A";
+                string instruction = details.Length > 4 ? details[4].Split(':')[1].Trim() : "N/A";
 
-                foreach (string detail in details)
-                {
-                    graphic.DrawString(detail.Trim(), font, new SolidBrush(Color.Black), startX, startY + offset);
-                    offset += (int)fontHeight + 5;
-                }
+                graphic.DrawString(medicineName, font, Brushes.Black, col1X, contentOffsetY);
+                graphic.DrawString(dose, font, Brushes.Black, col2X, contentOffsetY);
+                graphic.DrawString(intake, font, Brushes.Black, col3X, contentOffsetY);
+                graphic.DrawString(schedule, font, Brushes.Black, col4X, contentOffsetY);
+                graphic.DrawString(days, font, Brushes.Black, col5X, contentOffsetY);
+                graphic.DrawString(instruction, new("Courier New", 11), Brushes.Black, col6X, contentOffsetY);
+
+                contentOffsetY += (int)fontHeight + 5;
             }
-   
+            //int medBoxStartX = startX;
+            //int medBoxStartY = startY + offset;
 
-            // Increment the offset for a new section
-            offset = offset + (int)fontHeight + 30;
-            graphic.DrawString("Lab Recommended", headerFont, Brushes.Black, startX, startY + offset);
-            offset = offset + (int)fontHeight + 20;
+            //// Draw the rectangle
+            //graphic.FillRectangle(Brushes.Gray, medBoxStartX, medBoxStartY, medicationsBoxWidth, 25);
+            //graphic.DrawRectangle(Pens.Black, new Rectangle(medBoxStartX, medBoxStartY, medicationsBoxWidth, medicationsBoxHeight));
 
-            // Continuing Lab results
-            graphic.DrawString($"Lab Name: {LabName.Text}", font, new SolidBrush(Color.Black), startX, startY + offset);
-            //offset = offset + (int)fontHeight + 5;
-            //graphic.DrawString("Hemoglobin: 13.8 g/dL", font, new SolidBrush(Color.Black), startX, startY + offset);
+            //// Draw the Medications title inside the box
+            //graphic.DrawString("Medications", headerFont, Brushes.White, new PointF(medBoxStartX + 5, medBoxStartY + 2));
+
+            //// Adjust offset for the content inside the box
+            //contentOffsetY = medBoxStartY + 30;
+
+            //// Table Column Headers
+            //int col1X = medBoxStartX + 10;  // Medicine Name
+            //int col2X = medBoxStartX + 150; // Dose
+            //int col3X = medBoxStartX + 250; // Intake
+            //int col4X = medBoxStartX + 400; // Schedule
+
+            //graphic.DrawString("Medicine", fontbold, Brushes.Black, col1X, contentOffsetY);
+            //graphic.DrawString("Dose", fontbold, Brushes.Black, col2X, contentOffsetY);
+            //graphic.DrawString("Intake", fontbold, Brushes.Black, col3X, contentOffsetY);
+            //graphic.DrawString("Schedule", fontbold, Brushes.Black, col4X, contentOffsetY);
+
+            //contentOffsetY += (int)fontHeight + 5;
+
+            //StringFormat sf = new StringFormat();
+            //sf.Alignment = StringAlignment.Near;
+            //sf.LineAlignment = StringAlignment.Near;
+
+            //foreach (string med in medArray)
+            //{
+            //    string[] parts = med.Trim().Split('-');
+            //    string medicineName = parts[0].Trim();
+            //    string[] details = parts.Length > 1 ? parts[1].Trim().Split(',') : new string[] { };
+
+            //    string dose = details.Length > 0 ? details[0].Split(':')[1].Trim() : "N/A";
+            //    string intake = details.Length > 1 ? details[1].Split(':')[1].Trim() : "N/A";
+            //    string schedule = details.Length > 2 ? details[2].Split(':')[1].Trim() : "N/A";
+            //    string days = details.Length > 2 ? details[3].Split(':')[1].Trim() : "N/A";
+            //    string instruction = details.Length > 2 ? details[4].Split(':')[1].Trim() : "N/A";
+
+            //    graphic.DrawString(medicineName, font, Brushes.Black, col1X, contentOffsetY);
+            //    graphic.DrawString(dose, font, Brushes.Black, col2X, contentOffsetY);
+            //    graphic.DrawString(intake, font, Brushes.Black, col3X, contentOffsetY);
+            //    graphic.DrawString(schedule, font, Brushes.Black, col4X, contentOffsetY);
+
+            //    // Instruction with text wrapping
+            //    RectangleF instructionRect = new RectangleF(medBoxStartX + 10, contentOffsetY + (int)fontHeight + 5, 700, fontHeight * 2);
+            //    graphic.DrawString(instruction, font, Brushes.Black, instructionRect, sf);
+
+            //    contentOffsetY += (int)fontHeight + 5;
+            //}
+
+
+            // Update the offset after the medications information box
+            offset = medBoxStartY + 115;
+            // Draw the Lab Recommendations box
+            int labBoxWidth = 760;
+            int labBoxHeight = (int)(fontHeight * 2) + 30; // Adjust the height based on the content
+            int labBoxStartX = startX;
+            int labBoxStartY = startY + offset;
+
+            // Draw the rectangle
+            graphic.FillRectangle(Brushes.Gray, labBoxStartX, labBoxStartY, labBoxWidth, 25);
+            graphic.DrawRectangle(Pens.Black, new Rectangle(labBoxStartX, labBoxStartY, labBoxWidth, labBoxHeight));
+
+            // Draw the Lab Recommendations title inside the box
+            graphic.DrawString("Lab Recommendations", headerFont, Brushes.White, new PointF(labBoxStartX + 5, labBoxStartY + 2));
+
+            // Adjust offset for the content inside the box
+            contentOffsetY = labBoxStartY + 30;
+
+            graphic.DrawString("Lab Name:", fontbold, Brushes.Black, labBoxStartX + 10, contentOffsetY);
+            graphic.DrawString($"{LabName.Text}", font, Brushes.Black, labBoxStartX + 110, contentOffsetY);
 
             // Check to see if another PrintPage event should be raised
             e.HasMorePages = false;
