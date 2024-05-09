@@ -117,7 +117,7 @@ namespace PatientManagmentV1
                             // Use proper type conversions to ensure data integrity
                             cmd.Parameters.AddWithValue("@DocId", DocId.Text); // Convert to integer if DocId is an integer column
                             cmd.Parameters.AddWithValue("@DocName", DocName.Text);
-                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem.ToString());
+                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem);
                             cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
 
                             cmd.ExecuteNonQuery();
