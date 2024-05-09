@@ -88,6 +88,7 @@ namespace PatientManagmentV1
                             }
                         }
                     }
+                    Con.Close();
                 } // The connection is automatically closed here due to the 'using' block
             }
 
