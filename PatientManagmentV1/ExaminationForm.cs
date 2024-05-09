@@ -90,7 +90,7 @@ namespace PatientManagmentV1
                         cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                         cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                         cmd.Parameters.AddWithValue("@Examination", Examination.Text);
-                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue.ToString());
+                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedItem);
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Examination record successfully added");
@@ -139,7 +139,7 @@ namespace PatientManagmentV1
                         cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                         cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                         cmd.Parameters.AddWithValue("@Examination", Examination.Text);
-                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue.ToString());
+                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedItem);
                         cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExamId.Text)); // Convert to int if ExamId is an integer field
 
                         cmd.ExecuteNonQuery();
