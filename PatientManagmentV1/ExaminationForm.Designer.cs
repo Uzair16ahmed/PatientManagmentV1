@@ -119,7 +119,7 @@
             // 
             // Examination
             // 
-            Examination.BackColor = Color.Gainsboro;
+            Examination.BackColor = Color.White;
             Examination.Location = new Point(25, 278);
             Examination.Name = "Examination";
             Examination.PlaceholderText = "Examination";
@@ -128,7 +128,7 @@
             // 
             // Diagnosis
             // 
-            Diagnosis.BackColor = Color.Gainsboro;
+            Diagnosis.BackColor = Color.White;
             Diagnosis.Location = new Point(25, 195);
             Diagnosis.Name = "Diagnosis";
             Diagnosis.PlaceholderText = "Diagnosis";
@@ -137,7 +137,7 @@
             // 
             // Symptoms
             // 
-            Symptoms.BackColor = Color.Gainsboro;
+            Symptoms.BackColor = Color.White;
             Symptoms.Location = new Point(25, 234);
             Symptoms.Name = "Symptoms";
             Symptoms.PlaceholderText = "Symptoms";
@@ -146,7 +146,7 @@
             // 
             // ExamId
             // 
-            ExamId.BackColor = Color.Gainsboro;
+            ExamId.BackColor = Color.White;
             ExamId.Location = new Point(25, 157);
             ExamId.Name = "ExamId";
             ExamId.PlaceholderText = "ExaminationID";
