@@ -96,7 +96,7 @@
             // 
             // DocId
             // 
-            DocId.BackColor = Color.Gainsboro;
+            DocId.BackColor = Color.White;
             DocId.Location = new Point(44, 172);
             DocId.Name = "DocId";
             DocId.PlaceholderText = "DoctorID";
@@ -105,7 +105,7 @@
             // 
             // DocName
             // 
-            DocName.BackColor = Color.Gainsboro;
+            DocName.BackColor = Color.White;
             DocName.Location = new Point(44, 222);
             DocName.Name = "DocName";
             DocName.PlaceholderText = "DoctorName";
@@ -115,7 +115,7 @@
             // 
             // DocPass
             // 
-            DocPass.BackColor = Color.Gainsboro;
+            DocPass.BackColor = Color.White;
             DocPass.Location = new Point(44, 321);
             DocPass.Name = "DocPass";
             DocPass.PlaceholderText = "Password";
