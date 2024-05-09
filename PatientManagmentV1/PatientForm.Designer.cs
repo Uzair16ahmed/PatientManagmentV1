@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            label5 = new Label();
             label2 = new Label();
             label1 = new Label();
             PatId = new TextBox();
@@ -48,7 +49,6 @@
             button1 = new Button();
             label3 = new Label();
             PatientGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PatientGV).BeginInit();
             SuspendLayout();
@@ -64,6 +64,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1056, 96);
             panel1.TabIndex = 1;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(1018, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 29);
+            label5.TabIndex = 10;
+            label5.Text = "X";
+            label5.Click += label5_Click;
             // 
             // label2
             // 
@@ -90,7 +102,7 @@
             // 
             // PatId
             // 
-            PatId.BackColor = Color.Gainsboro;
+            PatId.BackColor = Color.White;
             PatId.Location = new Point(36, 128);
             PatId.Name = "PatId";
             PatId.PlaceholderText = "PatientID";
@@ -99,7 +111,7 @@
             // 
             // PatName
             // 
-            PatName.BackColor = Color.Gainsboro;
+            PatName.BackColor = Color.White;
             PatName.Location = new Point(36, 170);
             PatName.Name = "PatName";
             PatName.PlaceholderText = "PatientName";
@@ -108,7 +120,7 @@
             // 
             // PatAddress
             // 
-            PatAddress.BackColor = Color.Gainsboro;
+            PatAddress.BackColor = Color.White;
             PatAddress.Location = new Point(36, 209);
             PatAddress.Name = "PatAddress";
             PatAddress.PlaceholderText = "PatientAddress";
@@ -117,7 +129,7 @@
             // 
             // PatPhone
             // 
-            PatPhone.BackColor = Color.Gainsboro;
+            PatPhone.BackColor = Color.White;
             PatPhone.Location = new Point(36, 252);
             PatPhone.Name = "PatPhone";
             PatPhone.PlaceholderText = "PatientPhone";
@@ -126,7 +138,7 @@
             // 
             // PatAge
             // 
-            PatAge.BackColor = Color.Gainsboro;
+            PatAge.BackColor = Color.White;
             PatAge.Location = new Point(36, 293);
             PatAge.Name = "PatAge";
             PatAge.PlaceholderText = "PatientAge";
@@ -156,7 +168,7 @@
             // 
             // PatDisease
             // 
-            PatDisease.BackColor = Color.Gainsboro;
+            PatDisease.BackColor = Color.White;
             PatDisease.Location = new Point(36, 412);
             PatDisease.Name = "PatDisease";
             PatDisease.PlaceholderText = "MajorDisease";
@@ -281,18 +293,6 @@
             PatientGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             PatientGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             PatientGV.CellContentClick += DoctorGV_CellContentClick;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(1018, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(26, 29);
-            label5.TabIndex = 10;
-            label5.Text = "X";
-            label5.Click += label5_Click;
             // 
             // PatientForm
             // 
