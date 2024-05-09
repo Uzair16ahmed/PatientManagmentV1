@@ -28,16 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagnosisForm));
             panel1 = new Panel();
             label5 = new Label();
             label2 = new Label();
             label1 = new Label();
             DiagId = new TextBox();
-            PatientIdCb = new ComboBox();
             PatientTb = new TextBox();
             Symptoms = new TextBox();
             Diagnosis = new TextBox();
@@ -48,6 +47,7 @@
             DiagnosisGV = new Guna.UI2.WinForms.Guna2DataGridView();
             label3 = new Label();
             diagsummary = new Panel();
+            Examinationlbl = new Label();
             label9 = new Label();
             Diagnosislbl = new Label();
             Medicineslbl = new Label();
@@ -57,14 +57,14 @@
             button5 = new Button();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             printPreviewDialog1 = new PrintPreviewDialog();
-            PatGender = new TextBox();
             Assessment = new TextBox();
             medComboBox = new CheckedListBox();
             label6 = new Label();
             PatAge = new TextBox();
             LabName = new TextBox();
             ExaminationCb = new ComboBox();
-            Examinationlbl = new Label();
+            PatId = new TextBox();
+            PatGender = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DiagnosisGV).BeginInit();
             diagsummary.SuspendLayout();
@@ -118,28 +118,16 @@
             // 
             // DiagId
             // 
-            DiagId.BackColor = Color.Gainsboro;
+            DiagId.BackColor = Color.White;
             DiagId.Location = new Point(21, 96);
             DiagId.Name = "DiagId";
             DiagId.PlaceholderText = "DiagnosisID";
             DiagId.Size = new Size(182, 23);
             DiagId.TabIndex = 3;
             // 
-            // PatientIdCb
-            // 
-            PatientIdCb.FormattingEnabled = true;
-            PatientIdCb.Location = new Point(21, 128);
-            PatientIdCb.Name = "PatientIdCb";
-            PatientIdCb.Size = new Size(182, 23);
-            PatientIdCb.TabIndex = 8;
-            PatientIdCb.Text = "PatientID";
-            PatientIdCb.SelectionChangeCommitted += PatientIdCb_SelectionChangeCommitted;
-            // 
             // PatientTb
             // 
-            PatientTb.BackColor = Color.Gainsboro;
-            PatientTb.Cursor = Cursors.No;
-            PatientTb.Enabled = false;
+            PatientTb.BackColor = Color.White;
             PatientTb.Location = new Point(21, 165);
             PatientTb.Name = "PatientTb";
             PatientTb.PlaceholderText = "PatientName";
@@ -224,26 +212,26 @@
             // 
             // DiagnosisGV
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            DiagnosisGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            DiagnosisGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             DiagnosisGV.ColumnHeadersHeight = 25;
             DiagnosisGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            DiagnosisGV.DefaultCellStyle = dataGridViewCellStyle3;
             DiagnosisGV.GridColor = Color.FromArgb(231, 229, 255);
             DiagnosisGV.Location = new Point(12, 488);
             DiagnosisGV.Name = "DiagnosisGV";
@@ -299,6 +287,17 @@
             diagsummary.Name = "diagsummary";
             diagsummary.Size = new Size(497, 294);
             diagsummary.TabIndex = 21;
+            // 
+            // Examinationlbl
+            // 
+            Examinationlbl.AutoSize = true;
+            Examinationlbl.Font = new Font("Calibri", 14.25F);
+            Examinationlbl.ForeColor = Color.Black;
+            Examinationlbl.Location = new Point(51, 251);
+            Examinationlbl.Name = "Examinationlbl";
+            Examinationlbl.Size = new Size(105, 23);
+            Examinationlbl.TabIndex = 9;
+            Examinationlbl.Text = "Examination";
             // 
             // label9
             // 
@@ -395,17 +394,6 @@
             printPreviewDialog1.Name = "printPreviewDialog1";
             printPreviewDialog1.Visible = false;
             // 
-            // PatGender
-            // 
-            PatGender.BackColor = Color.Gainsboro;
-            PatGender.Cursor = Cursors.No;
-            PatGender.Enabled = false;
-            PatGender.Location = new Point(21, 205);
-            PatGender.Name = "PatGender";
-            PatGender.PlaceholderText = "PatientGender";
-            PatGender.Size = new Size(182, 23);
-            PatGender.TabIndex = 23;
-            // 
             // Assessment
             // 
             Assessment.BackColor = Color.Gainsboro;
@@ -438,9 +426,7 @@
             // 
             // PatAge
             // 
-            PatAge.BackColor = Color.Gainsboro;
-            PatAge.Cursor = Cursors.No;
-            PatAge.Enabled = false;
+            PatAge.BackColor = Color.White;
             PatAge.Location = new Point(21, 245);
             PatAge.Name = "PatAge";
             PatAge.PlaceholderText = "PatientAge";
@@ -467,29 +453,39 @@
             ExaminationCb.Text = "ExaminationID";
             ExaminationCb.SelectionChangeCommitted += ExaminationCb_SelectionChangeCommitted;
             // 
-            // Examinationlbl
+            // PatId
             // 
-            Examinationlbl.AutoSize = true;
-            Examinationlbl.Font = new Font("Calibri", 14.25F);
-            Examinationlbl.ForeColor = Color.Black;
-            Examinationlbl.Location = new Point(51, 251);
-            Examinationlbl.Name = "Examinationlbl";
-            Examinationlbl.Size = new Size(105, 23);
-            Examinationlbl.TabIndex = 9;
-            Examinationlbl.Text = "Examination";
+            PatId.BackColor = Color.White;
+            PatId.Location = new Point(21, 128);
+            PatId.Name = "PatId";
+            PatId.PlaceholderText = "PatientID";
+            PatId.Size = new Size(182, 23);
+            PatId.TabIndex = 38;
+            // 
+            // PatGender
+            // 
+            PatGender.FormattingEnabled = true;
+            PatGender.Items.AddRange(new object[] { "Male", "Female" });
+            PatGender.Location = new Point(21, 205);
+            PatGender.Name = "PatGender";
+            PatGender.Size = new Size(182, 23);
+            PatGender.TabIndex = 39;
+            PatGender.Text = "PatientGender";
             // 
             // DiagnosisForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1083, 686);
+            Controls.Add(PatGender);
+            Controls.Add(PatId);
             Controls.Add(ExaminationCb);
             Controls.Add(LabName);
             Controls.Add(PatAge);
             Controls.Add(label6);
             Controls.Add(medComboBox);
             Controls.Add(Assessment);
-            Controls.Add(PatGender);
             Controls.Add(button5);
             Controls.Add(diagsummary);
             Controls.Add(label3);
@@ -501,7 +497,6 @@
             Controls.Add(Diagnosis);
             Controls.Add(Symptoms);
             Controls.Add(PatientTb);
-            Controls.Add(PatientIdCb);
             Controls.Add(DiagId);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -525,7 +520,6 @@
         private Label label2;
         private Label label1;
         private TextBox DiagId;
-        private ComboBox PatientIdCb;
         private TextBox PatientTb;
         private TextBox Symptoms;
         private TextBox Diagnosis;
@@ -546,7 +540,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PrintPreviewDialog printPreviewDialog1;
         private Label label5;
-        private TextBox PatGender;
         private TextBox Assessment;
         private CheckedListBox medComboBox;
         private Label label6;
@@ -554,5 +547,7 @@
         private TextBox LabName;
         private ComboBox ExaminationCb;
         private Label Examinationlbl;
+        private TextBox PatId;
+        private ComboBox PatGender;
     }
 }
