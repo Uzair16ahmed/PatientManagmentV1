@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label5 = new Label();
             label2 = new Label();
@@ -156,7 +156,7 @@
             // 
             // MedId
             // 
-            MedId.BackColor = Color.Gainsboro;
+            MedId.BackColor = Color.White;
             MedId.Location = new Point(24, 123);
             MedId.Name = "MedId";
             MedId.PlaceholderText = "MedicineID";
@@ -165,7 +165,7 @@
             // 
             // MedicineName
             // 
-            MedicineName.BackColor = Color.Gainsboro;
+            MedicineName.BackColor = Color.White;
             MedicineName.Location = new Point(227, 123);
             MedicineName.Name = "MedicineName";
             MedicineName.PlaceholderText = "Medicine Name";
@@ -174,31 +174,31 @@
             // 
             // MedicineGV
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            MedicineGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            MedicineGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.BackColor = Color.White;
+            MedicineGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            MedicineGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             MedicineGV.ColumnHeadersHeight = 30;
             MedicineGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            MedicineGV.DefaultCellStyle = dataGridViewCellStyle12;
             MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
-            MedicineGV.Location = new Point(32, 416);
+            MedicineGV.Location = new Point(12, 416);
             MedicineGV.Name = "MedicineGV";
             MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(871, 148);
+            MedicineGV.Size = new Size(921, 148);
             MedicineGV.TabIndex = 17;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -248,17 +248,17 @@
             // RouteCb
             // 
             RouteCb.FormattingEnabled = true;
-            RouteCb.Items.AddRange(new object[] { "PO ( Oral )", "IV ( Into the Vien )", "IM ( Into the Muscle )", "SC ( Between Skin and Muscle )", "PR", "PV ( Into the Vagina)", "Inhale", "Sublingual ( Beneath the Tongue )", "Topical ( Effected Place )", "As directed" });
+            RouteCb.Items.AddRange(new object[] { "PO", "IV ", "IM ", "SC ", "PR", "PV ", "Inhale", "Sublingual ", "Topical", "As directed" });
             RouteCb.Location = new Point(616, 123);
             RouteCb.Name = "RouteCb";
-            RouteCb.Size = new Size(167, 23);
+            RouteCb.Size = new Size(202, 23);
             RouteCb.TabIndex = 20;
             RouteCb.Text = "Route";
             // 
             // FrequencyCb
             // 
             FrequencyCb.FormattingEnabled = true;
-            FrequencyCb.Items.AddRange(new object[] { "صبح میں ایک بار", "دن میں ایک بار", "صبح + شام", "صبح + دوپہر + شام", "صبح + دوپہر + شام + رات" });
+            FrequencyCb.Items.AddRange(new object[] { "صبح میں ایک بار", "دن میں ایک بار", "صبح+شام", "صبح+دوپہر+شام", "صبح+دوپہر+شام+رات" });
             FrequencyCb.Location = new Point(24, 176);
             FrequencyCb.Name = "FrequencyCb";
             FrequencyCb.Size = new Size(182, 23);
@@ -268,7 +268,7 @@
             // DaysCb
             // 
             DaysCb.FormattingEnabled = true;
-            DaysCb.Items.AddRange(new object[] { "1 Day", "2 Days", "3 Days", "4 Days", "5 Days", "6 Days", "7 Days", "1 Week", "2 Weeks", "3 Weeks", "4 Weeks", "1 Month", "3 Months" });
+            DaysCb.Items.AddRange(new object[] { "1 Day", "2 Days", "3 Days", "4 Days", "5 Days", "6 Days", "7 Days", "1 Week", "2 Weeks", "3 Weeks", "4 Weeks", "1 Month", "3 Month" });
             DaysCb.Location = new Point(227, 176);
             DaysCb.Name = "DaysCb";
             DaysCb.Size = new Size(182, 23);
@@ -278,10 +278,10 @@
             // InstructionCb
             // 
             InstructionCb.FormattingEnabled = true;
-            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "صبح ناشتے سے پہلے اور رات کھانے سے پہلے", " کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
+            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "صبح ناشتے+رات کھانے سے پہلے", "کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
             InstructionCb.Location = new Point(431, 176);
             InstructionCb.Name = "InstructionCb";
-            InstructionCb.Size = new Size(166, 23);
+            InstructionCb.Size = new Size(192, 23);
             InstructionCb.TabIndex = 23;
             InstructionCb.Text = "Instruction";
             // 

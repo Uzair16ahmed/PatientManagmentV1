@@ -225,11 +225,11 @@ namespace PatientManagmentV1
         {
             MedId.Text = MedicineGV.SelectedRows[0].Cells[0].Value.ToString();
             MedicineName.Text = MedicineGV.SelectedRows[0].Cells[1].Value.ToString();
-            DoseCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[2].Value.ToString();
-            RouteCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[3].Value.ToString();
-            FrequencyCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[4].Value.ToString();
-            DaysCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[5].Value.ToString();
-            InstructionCb.SelectedItem = MedicineGV.SelectedRows[0].Cells[6].Value.ToString();
+            DoseCb.Text = MedicineGV.SelectedRows[0].Cells[2].Value.ToString();
+            RouteCb.Text = MedicineGV.SelectedRows[0].Cells[3].Value.ToString();
+            FrequencyCb.Text = MedicineGV.SelectedRows[0].Cells[4].Value.ToString();
+            DaysCb.Text = MedicineGV.SelectedRows[0].Cells[5].Value.ToString();
+            InstructionCb.Text = MedicineGV.SelectedRows[0].Cells[6].Value.ToString();
         }
     }
 }
