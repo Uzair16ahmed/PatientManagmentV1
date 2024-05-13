@@ -43,11 +43,11 @@ namespace PatientManagmentV1
         {
             if (DocId.Text == "")
             {
-                MessageBox.Show("Enter the Doctor ID");
+                MessageBox.Show("Enter the Doctor ID", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (DocName.Text == "" || RoleCb.SelectedItem == null || DocPass.Text == "")
             {
-                MessageBox.Show("Please fill in all fields");
+                MessageBox.Show("Please fill in all fields", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -102,7 +102,7 @@ namespace PatientManagmentV1
         {
             if (DocId.Text == "" || DocName.Text == "" || RoleCb.SelectedIndex == -1 || DocPass.Text == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -155,14 +155,15 @@ namespace PatientManagmentV1
         {
             if (DocId.Text == "")
             {
-                MessageBox.Show("Enter the Doctor Id");
+                MessageBox.Show("Enter the Doctor Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 // Check if the logged-in doctor is an Admin
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not allowed to delete data.");
+                    MessageBox.Show("You are not allowed to delete data.","Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 }
                 else
                 {
