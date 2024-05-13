@@ -333,7 +333,9 @@ namespace PatientManagmentV1
 
             if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatId.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || PatAge.Text == "" || Assessment.Text == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show("Please fill in all required fields before generating the report.", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
@@ -365,7 +367,7 @@ namespace PatientManagmentV1
                     cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
                     cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem);
                     cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
-                    cmd.Parameters.AddWithValue("@ExamId", ExaminationCb.SelectedItem); // Assuming ExaminationCb is a ComboBox
+                    cmd.Parameters.AddWithValue("@ExamId", ExaminationCb.SelectedValue); // Assuming ExaminationCb is a ComboBox
                     cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                     cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                     cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
@@ -400,14 +402,18 @@ namespace PatientManagmentV1
         {
             if (DiagId.Text == "")
             {
-                MessageBox.Show("Enter the Diagnosis Id");
+                //MessageBox.Show("Enter the Diagnosis Id");
+                MessageBox.Show("Enter the Diagnosis Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
                 // Check if the logged-in user's role allows for deletion
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete diagnosis records.");
+                    //MessageBox.Show("You are not authorized to delete diagnosis records.");
+                    MessageBox.Show("You are not authorized to delete diagnosis records.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 }
                 else
                 {
@@ -454,66 +460,75 @@ namespace PatientManagmentV1
             }
 
             string medNames = String.Join(", ", selectedMeds); // Combine all selected medicine names with a comma
-
-            try
+            
+            if (DiagId.Text == "" || medComboBox.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || PatId.Text == "" || PatientTb.Text == "" || PatGender.Text == "" || PatAge.Text == "" || Assessment.Text == "")
             {
-                Con.Open();
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show("Please fill in all required fields before generating the report.", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                // Fetch additional medicine data
-                List<string> medDetails = new List<string>();
-                foreach (var med in selectedMeds)
+            }
+            else
+            {
+                try
                 {
-                    string medQuery = "SELECT Dose, Route, Frequency, Days, Instruction FROM MedicineTbl WHERE MedicineName = @MedName";
-                    SqlCommand medCmd = new SqlCommand(medQuery, Con);
-                    medCmd.Parameters.AddWithValue("@MedName", med);
-                    SqlDataReader medReader = medCmd.ExecuteReader();
-                    while (medReader.Read())
+                    Con.Open();
+
+                    // Fetch additional medicine data
+                    List<string> medDetails = new List<string>();
+                    foreach (var med in selectedMeds)
                     {
-                        string details = $"{med} - Dose: {medReader["Dose"]}, Route: {medReader["Route"]}, Frequency: {medReader["Frequency"]}, Days: {medReader["Days"]}, Instruction: {medReader["Instruction"]}";
-                        medDetails.Add(details);
+                        string medQuery = "SELECT Dose, Route, Frequency, Days, Instruction FROM MedicineTbl WHERE MedicineName = @MedName";
+                        SqlCommand medCmd = new SqlCommand(medQuery, Con);
+                        medCmd.Parameters.AddWithValue("@MedName", med);
+                        SqlDataReader medReader = medCmd.ExecuteReader();
+                        while (medReader.Read())
+                        {
+                            string details = $"{med} - Dose: {medReader["Dose"]}, Route: {medReader["Route"]}, Frequency: {medReader["Frequency"]}, Days: {medReader["Days"]}, Instruction: {medReader["Instruction"]}";
+                            medDetails.Add(details);
+                        }
+                        medReader.Close();
                     }
-                    medReader.Close();
+
+                    // Update SQL query to include all necessary columns
+                    string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, ExamId = @ExamId, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDetails = @MedDetails, LabName = @LabName WHERE DiagId = @DiagId";
+                    SqlCommand cmd = new SqlCommand(query, Con);
+
+                    // Add parameters to SqlCommand object
+                    cmd.Parameters.AddWithValue("@DiagId", int.Parse(DiagId.Text));
+                    cmd.Parameters.AddWithValue("@PatId", int.Parse(PatId.Text));
+                    cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
+                    cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem); ;
+                    cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
+                    cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
+                    cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
+                    cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
+                    cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
+                    cmd.Parameters.AddWithValue("@Medicines", medNames);
+                    cmd.Parameters.AddWithValue("@MedDetails", String.Join("; ", medDetails));
+                    cmd.Parameters.AddWithValue("@LabName", LabName.Text);
+
+                    // Execute the command
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Diagnosis Successfully Updated");
                 }
-
-                // Update SQL query to include all necessary columns
-                string query = "UPDATE DiagnosisTbl SET PatId = @PatId, PatName = @PatName, PatGender = @PatGender, PatAge = @PatAge, ExamId = @ExamId, Symptoms = @Symptoms, Diagnosis = @Diagnosis, Assessment = @Assessment, Medicines = @Medicines, MedDetails = @MedDetails, LabName = @LabName WHERE DiagId = @DiagId";
-                SqlCommand cmd = new SqlCommand(query, Con);
-
-                // Add parameters to SqlCommand object
-                cmd.Parameters.AddWithValue("@DiagId", int.Parse(DiagId.Text));
-                cmd.Parameters.AddWithValue("@PatId", int.Parse(PatId.Text));
-                cmd.Parameters.AddWithValue("@PatName", PatientTb.Text);
-                cmd.Parameters.AddWithValue("@PatGender", PatGender.SelectedItem); ;
-                cmd.Parameters.AddWithValue("@PatAge", PatAge.Text);
-                cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExaminationCb.SelectedValue.ToString())); // Assuming ExaminationCb is a ComboBox
-                cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
-                cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
-                cmd.Parameters.AddWithValue("@Assessment", Assessment.Text);
-                cmd.Parameters.AddWithValue("@Medicines", medNames);
-                cmd.Parameters.AddWithValue("@MedDetails", String.Join("; ", medDetails));
-                cmd.Parameters.AddWithValue("@LabName", LabName.Text);
-
-                // Execute the command
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Diagnosis Successfully Updated");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-            finally
-            {
-                // Ensure the connection is always closed, even if an error occurs
-                if (Con.State == ConnectionState.Open)
+                catch (Exception ex)
                 {
-                    Con.Close();
+                    MessageBox.Show("An error occurred: " + ex.Message);
                 }
-            }
+                finally
+                {
+                    // Ensure the connection is always closed, even if an error occurs
+                    if (Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
 
-            // Assuming Populate() is a method to refresh or update the data displayed
-            Populate();
-            Clear();
-            ClearMedicineSelections();
+                // Assuming Populate() is a method to refresh or update the data displayed
+                Populate();
+                Clear();
+                ClearMedicineSelections();
+            }
         }
 
         //private void PatientIdCb_SelectionChangeCommitted(object sender, EventArgs e)
@@ -570,6 +585,15 @@ namespace PatientManagmentV1
         {
             List<string> selectedMeds = GetSelectedMedicines();
             string medNames = String.Join(", ", selectedMeds);
+            
+            if (string.IsNullOrWhiteSpace(medNames) || string.IsNullOrWhiteSpace(PatId.Text) ||
+               string.IsNullOrWhiteSpace(PatientTb.Text) || string.IsNullOrWhiteSpace(PatAge.Text) ||
+               string.IsNullOrWhiteSpace(PatGender.Text) || string.IsNullOrWhiteSpace(Diagnosis.Text))
+            {
+                MessageBox.Show("Please fill in all required fields before generating the report.", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;  // This will stop the printing process
+                return;
+            }
 
             string medDetails = FetchMedDetails(int.Parse(DiagId.Text));
             string[] medArray = medDetails.Split(';');
