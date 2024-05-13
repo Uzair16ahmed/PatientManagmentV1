@@ -54,7 +54,9 @@ namespace PatientManagmentV1
         {
             if (LabId.Text == "" || LabName.Text == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                //MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
@@ -94,7 +96,9 @@ namespace PatientManagmentV1
         {
             if (LabId.Text == "" || LabName.Text == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                //MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
@@ -133,14 +137,18 @@ namespace PatientManagmentV1
         {
             if (LabId.Text == "")
             {
-                MessageBox.Show("Enter the Lab Id");
+                //MessageBox.Show("Enter the Lab Id");
+                MessageBox.Show("Enter the Lab Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
                 // Check if the logged-in user's role is "Admin"
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete lab records.");
+                    //MessageBox.Show("You are not authorized to delete lab records.");
+                    MessageBox.Show("You are not authorized to delete lab records.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 }
                 else
                 {
