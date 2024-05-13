@@ -230,17 +230,17 @@
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Gainsboro;
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             ExaminationGV.DefaultCellStyle = dataGridViewCellStyle3;
             ExaminationGV.GridColor = Color.FromArgb(231, 229, 255);
-            ExaminationGV.Location = new Point(338, 157);
+            ExaminationGV.Location = new Point(432, 157);
             ExaminationGV.Name = "ExaminationGV";
             ExaminationGV.RowHeadersVisible = false;
-            ExaminationGV.Size = new Size(702, 394);
-            ExaminationGV.TabIndex = 5;
+            ExaminationGV.Size = new Size(596, 380);
+            ExaminationGV.TabIndex = 41;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.Font = null;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
@@ -262,11 +262,13 @@
             ExaminationGV.ThemeStyle.RowsStyle.Height = 25;
             ExaminationGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             ExaminationGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            ExaminationGV.CellContentClick += ExaminationGV_CellContentClick_1;
             // 
             // ExaminationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gainsboro;
             ClientSize = new Size(1052, 572);
             Controls.Add(ExaminationGV);
             Controls.Add(button4);

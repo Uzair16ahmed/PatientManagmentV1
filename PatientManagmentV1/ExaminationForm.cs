@@ -69,7 +69,7 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedItem == null)
+            if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -86,11 +86,11 @@ namespace PatientManagmentV1
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
                         // Add parameters to ensure safe query execution
-                        cmd.Parameters.AddWithValue("@ExamId", ExamId.Text);  // Convert to int if ExamId is an integer field
+                        cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExamId.Text));  // Convert to int if ExamId is an integer field
                         cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                         cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                         cmd.Parameters.AddWithValue("@Examination", Examination.Text);
-                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedItem);
+                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue); ;
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Examination record successfully added");
@@ -116,7 +116,7 @@ namespace PatientManagmentV1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedItem == null)
+            if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
             {
                 MessageBox.Show("No Empty Value Accepted");
             }
@@ -139,7 +139,7 @@ namespace PatientManagmentV1
                         cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                         cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                         cmd.Parameters.AddWithValue("@Examination", Examination.Text);
-                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedItem);
+                        cmd.Parameters.AddWithValue("@LabName", LabNameCb.SelectedValue);
                         cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExamId.Text)); // Convert to int if ExamId is an integer field
 
                         cmd.ExecuteNonQuery();
@@ -226,11 +226,16 @@ namespace PatientManagmentV1
 
         private void ExaminationGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+        }
+
+        private void ExaminationGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
             ExamId.Text = ExaminationGV.SelectedRows[0].Cells[0].Value.ToString();
             Diagnosis.Text = ExaminationGV.SelectedRows[0].Cells[1].Value.ToString();
             Symptoms.Text = ExaminationGV.SelectedRows[0].Cells[2].Value.ToString();
             Examination.Text = ExaminationGV.SelectedRows[0].Cells[3].Value.ToString();
-            LabNameCb.SelectedValue = ExaminationGV.SelectedRows[0].Cells[4].Value.ToString();
+            LabNameCb.Text = ExaminationGV.SelectedRows[0].Cells[4].Value.ToString();
 
         }
     }
