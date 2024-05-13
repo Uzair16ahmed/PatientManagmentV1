@@ -71,7 +71,7 @@ namespace PatientManagmentV1
         {
             if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -118,7 +118,7 @@ namespace PatientManagmentV1
         {
             if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -169,14 +169,14 @@ namespace PatientManagmentV1
 
             if (ExamId.Text == "")
             {
-                MessageBox.Show("Enter the Examination Id");
+                MessageBox.Show("Enter the Examination Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 // Check if the logged-in user's role allows for deletion
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete diagnosis records.");
+                    MessageBox.Show("You are not authorized to delete diagnosis records.","Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
