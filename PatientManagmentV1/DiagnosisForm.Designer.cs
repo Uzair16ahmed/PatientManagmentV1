@@ -411,7 +411,7 @@
             medComboBox.Location = new Point(21, 289);
             medComboBox.Margin = new Padding(12);
             medComboBox.Name = "medComboBox";
-            medComboBox.Size = new Size(182, 40);
+            medComboBox.Size = new Size(182, 58);
             medComboBox.Sorted = true;
             medComboBox.TabIndex = 32;
             // 
