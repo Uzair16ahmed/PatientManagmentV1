@@ -53,7 +53,7 @@ namespace PatientManagmentV1
         {
             if (PatId.Text == "" || PatName.Text == "" || PatAddress.Text == "" || PatPhone.Text == "" || PatAge.Text == "" || PatGender.SelectedItem == null || PatBlood.SelectedItem == null || PatDisease.Text == "")
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -104,7 +104,7 @@ namespace PatientManagmentV1
             if (PatId.Text == "" || PatName.Text == "" || PatAddress.Text == "" || PatPhone.Text == "" ||
                 PatAge.Text == "" || PatGender.SelectedItem == null || PatBlood.SelectedItem == null || PatDisease.Text == "")
             {
-                MessageBox.Show("Please fill in all fields.");
+                MessageBox.Show("Please fill in all fields.", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -158,14 +158,14 @@ namespace PatientManagmentV1
         {
             if (PatId.Text == "")
             {
-                MessageBox.Show("Enter the Patient Id");
+                MessageBox.Show("Enter the Patient Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 // Check if the logged-in user's role is "Admin"
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete patient records.");
+                    MessageBox.Show("You are not authorized to delete patient records.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
