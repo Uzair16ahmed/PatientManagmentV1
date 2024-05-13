@@ -240,7 +240,7 @@
             ExaminationGV.Name = "ExaminationGV";
             ExaminationGV.RowHeadersVisible = false;
             ExaminationGV.Size = new Size(702, 394);
-            ExaminationGV.TabIndex = 41;
+            ExaminationGV.TabIndex = 5;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.Font = null;
             ExaminationGV.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
