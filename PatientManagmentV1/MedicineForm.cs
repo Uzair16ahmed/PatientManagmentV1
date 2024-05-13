@@ -62,7 +62,7 @@ namespace PatientManagmentV1
                 FrequencyCb.SelectedItem == null || DaysCb.SelectedItem == null ||
                 InstructionCb.SelectedItem == null)
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -116,7 +116,7 @@ namespace PatientManagmentV1
                 FrequencyCb.SelectedItem == null || DaysCb.SelectedItem == null ||
                 InstructionCb.SelectedItem == null)
             {
-                MessageBox.Show("No Empty Value Accepted");
+                MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -172,14 +172,14 @@ namespace PatientManagmentV1
         {
             if (MedId.Text == "")
             {
-                MessageBox.Show("Enter the Medicine Id");
+                MessageBox.Show("Enter the Medicine Id", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 // Check if the logged-in user's role is "Admin"
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete medicines.");
+                    MessageBox.Show("You are not authorized to delete medicines.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
