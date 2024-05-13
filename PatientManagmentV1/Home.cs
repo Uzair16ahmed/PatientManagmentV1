@@ -38,9 +38,9 @@ namespace PatientManagmentV1
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            PatientForm patient = new PatientForm();
-            patient.Show();
-            this.Hide();
+            //PatientForm patient = new PatientForm();
+            //patient.Show();
+            //this.Hide();
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -69,6 +69,11 @@ namespace PatientManagmentV1
             ExaminationForm exam = new ExaminationForm();
             exam.Show();
             this.Hide();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
