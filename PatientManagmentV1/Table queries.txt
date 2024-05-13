@@ -1,0 +1,65 @@
+CREATE TABLE [dbo].[DiagnosisTbl] (
+    [DiagId]     INT            NOT NULL,
+    [PatId]      INT            NOT NULL,
+    [PatName]    NVARCHAR (MAX) NOT NULL,
+    [PatGender]  NVARCHAR (MAX) NOT NULL,
+    [PatAge]     NVARCHAR (MAX) NOT NULL,
+    [ExamId]     INT            NOT NULL,
+    [Symptoms]   NVARCHAR (MAX) NOT NULL,
+    [Diagnosis]  NVARCHAR (MAX) NOT NULL,
+    [Assessment] NVARCHAR (MAX) NOT NULL,
+    [Medicines]  NVARCHAR (MAX) NOT NULL,
+    [MedDetails] NVARCHAR (MAX) NOT NULL,
+    [LabName]    NVARCHAR (MAX) NOT NULL,
+    [Date]       DATETIME       DEFAULT (getdate()) NOT NULL,
+    PRIMARY KEY CLUSTERED ([DiagId] ASC)
+);
+
+
+CREATE TABLE [dbo].[DoctorTbl] (
+    [DocId]   INT           NOT NULL,
+    [DocName] NVARCHAR (50) NOT NULL,
+    [Role]    NVARCHAR (50) NOT NULL,
+    [DocPass] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([DocId] ASC)
+);
+
+CREATE TABLE [dbo].[ExaminationTbl] (
+    [ExamId]      INT           NOT NULL,
+    [Diagnosis]   NVARCHAR (50) NOT NULL,
+    [Symptoms]    NVARCHAR (50) NOT NULL,
+    [Examination] NVARCHAR (50) NOT NULL,
+    [LabName]     NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ExamId] ASC)
+);
+
+CREATE TABLE [dbo].[LabTbl] (
+    [LabId]   INT           NOT NULL,
+    [LabName] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([LabId] ASC)
+);
+
+
+CREATE TABLE [dbo].[MedicineTbl] (
+    [MedId]        INT           NOT NULL,
+    [MedicineName] NVARCHAR (50) NOT NULL,
+    [Dose]         NVARCHAR (50) NOT NULL,
+    [Route]        NVARCHAR (50) NOT NULL,
+    [Frequency]    NVARCHAR (50) NOT NULL,
+    [Days]         NVARCHAR (50) NOT NULL,
+    [Instruction]  NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([MedId] ASC)
+);
+
+CREATE TABLE [dbo].[PatientTbl] (
+    [PatId]      INT           NOT NULL,
+    [PatName]    NVARCHAR (50) NOT NULL,
+    [PatAddress] NVARCHAR (50) NOT NULL,
+    [PatPhone]   NVARCHAR (50) NOT NULL,
+    [PatAge]     INT           NOT NULL,
+    [PatGender]  NVARCHAR (10) NOT NULL,
+    [PatBlood]   NVARCHAR (50) NOT NULL,
+    [PatDisease] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PatId] ASC)
+);
+
