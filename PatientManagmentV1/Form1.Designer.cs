@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label5 = new Label();
             label1 = new Label();
             button1 = new Button();
             UsernameTb = new TextBox();
             PassTb = new TextBox();
             label2 = new Label();
-            label5 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,6 +48,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(396, 63);
             panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(367, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 29);
+            label5.TabIndex = 10;
+            label5.Text = "X";
+            label5.Click += label5_Click;
             // 
             // label1
             // 
@@ -108,18 +120,6 @@
             label2.Text = "Clear";
             label2.Click += label2_Click;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(367, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(26, 29);
-            label5.TabIndex = 10;
-            label5.Text = "X";
-            label5.Click += label5_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -136,6 +136,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Username";
+            Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

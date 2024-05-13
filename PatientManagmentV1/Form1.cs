@@ -54,49 +54,65 @@ namespace PatientManagmentV1
             //    Con.Close();
             //    /*  */
             //}
-            if (UsernameTb.Text == "" || PassTb.Text == "")
+            // Check for empty username or password fields
+            if (string.IsNullOrWhiteSpace(UsernameTb.Text) || string.IsNullOrWhiteSpace(PassTb.Text))
             {
-                MessageBox.Show("Enter a Username and Password");
+                MessageBox.Show("Please enter a username and password.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            try
             {
+                Con.Open();
+                string query = "SELECT DocId, DocName, Role FROM DoctorTbl WHERE DocName = @DocName AND DocPass = @DocPass COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                using (SqlCommand cmd = new SqlCommand(query, Con))
                 {
-                    Con.Open();
-                    string query = "SELECT DocId, DocName, Role FROM DoctorTbl WHERE DocName = @DocName AND DocPass = @DocPass";
+                    // Use parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@DocName", UsernameTb.Text.Trim());
+                    cmd.Parameters.AddWithValue("@DocPass", PassTb.Text); // Consider using hashed passwords in the future
 
-                    using (SqlCommand cmd = new SqlCommand(query, Con))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@DocName", UsernameTb.Text);
-                        cmd.Parameters.AddWithValue("@DocPass", PassTb.Text);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        if (reader.Read()) // If any row is returned
                         {
-                            if (reader.Read()) // If any row is returned
-                            {
-                                // Assuming you have the DoctorSession static class as discussed previously
-                                DoctorSession.DoctorId = reader.GetInt32(0); // Adjust the column index based on your query
-                                DoctorSession.DoctorName = reader.GetString(1);
-                                DoctorSession.Role = reader.GetString(2);
+                            // Assuming you have the DoctorSession static class as discussed previously
+                            DoctorSession.DoctorId = reader.GetInt32(0); // Adjust the column index based on your query
+                            DoctorSession.DoctorName = reader.GetString(1);
+                            DoctorSession.Role = reader.GetString(2);
 
-                                Home H = new Home();
-                                H.Show();
-                                this.Hide();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Wrong Username or Password");
-                            }
+                            Home H = new Home();
+                            H.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Wrong Username or Password. Please try again.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    Con.Close();
-                } // The connection is automatically closed here due to the 'using' block
+                }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while attempting to log in: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (Con.State == ConnectionState.Open)
+                {
+                    Con.Close();
+                }
+            }
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
