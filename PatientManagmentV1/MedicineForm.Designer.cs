@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label5 = new Label();
             label2 = new Label();
@@ -61,7 +61,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(945, 96);
+            panel1.Size = new Size(997, 96);
             panel1.TabIndex = 1;
             // 
             // label5
@@ -69,7 +69,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Calibri", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(907, 9);
+            label5.Location = new Point(959, 9);
             label5.Name = "label5";
             label5.Size = new Size(26, 29);
             label5.TabIndex = 10;
@@ -174,31 +174,31 @@
             // 
             // MedicineGV
             // 
-            dataGridViewCellStyle10.BackColor = Color.White;
-            MedicineGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            MedicineGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            MedicineGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            MedicineGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             MedicineGV.ColumnHeadersHeight = 30;
             MedicineGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            MedicineGV.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            MedicineGV.DefaultCellStyle = dataGridViewCellStyle3;
             MedicineGV.GridColor = Color.FromArgb(231, 229, 255);
             MedicineGV.Location = new Point(12, 416);
             MedicineGV.Name = "MedicineGV";
             MedicineGV.RowHeadersVisible = false;
-            MedicineGV.Size = new Size(921, 148);
+            MedicineGV.Size = new Size(973, 148);
             MedicineGV.TabIndex = 17;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             MedicineGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -229,7 +229,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(362, 366);
+            label3.Location = new Point(417, 365);
             label3.Name = "label3";
             label3.Size = new Size(205, 36);
             label3.TabIndex = 18;
@@ -241,7 +241,7 @@
             DoseCb.Items.AddRange(new object[] { "1 گولی", "2 گولی", "3 گولی", "4 گولی", "5 گولی", "6 گولی", "7 گولی", "8 گولی", "9 گولی", "10 گولی", "11 گولی", "12 گولی" });
             DoseCb.Location = new Point(431, 123);
             DoseCb.Name = "DoseCb";
-            DoseCb.Size = new Size(166, 23);
+            DoseCb.Size = new Size(192, 23);
             DoseCb.TabIndex = 19;
             DoseCb.Text = "Dose";
             // 
@@ -249,7 +249,7 @@
             // 
             RouteCb.FormattingEnabled = true;
             RouteCb.Items.AddRange(new object[] { "PO", "IV ", "IM ", "SC ", "PR", "PV ", "Inhale", "Sublingual ", "Topical", "As directed" });
-            RouteCb.Location = new Point(616, 123);
+            RouteCb.Location = new Point(641, 123);
             RouteCb.Name = "RouteCb";
             RouteCb.Size = new Size(202, 23);
             RouteCb.TabIndex = 20;
@@ -290,7 +290,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(945, 597);
+            ClientSize = new Size(997, 597);
             Controls.Add(InstructionCb);
             Controls.Add(DaysCb);
             Controls.Add(FrequencyCb);
