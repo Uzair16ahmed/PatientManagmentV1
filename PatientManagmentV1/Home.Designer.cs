@@ -254,7 +254,7 @@
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Home";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";

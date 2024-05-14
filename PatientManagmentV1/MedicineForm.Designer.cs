@@ -278,7 +278,7 @@
             // InstructionCb
             // 
             InstructionCb.FormattingEnabled = true;
-            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "صبح ناشتے+رات کھانے سے پہلے", "کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
+            InstructionCb.Items.AddRange(new object[] { "صبح ناشتے سے پہلے", "ناشتے+رات کھانے سے پہلے", "کھانے کے بعد", "کھانے سے پہلے", "کھانے کے درمیان", "رات کو سوتے وقت", "ماہواری کے 5 دن", "ہفتے میں ایک بار", "ہفتے میں دو بار", "دن میں ایک بار" });
             InstructionCb.Location = new Point(431, 176);
             InstructionCb.Name = "InstructionCb";
             InstructionCb.Size = new Size(192, 23);
