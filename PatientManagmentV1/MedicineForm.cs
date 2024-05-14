@@ -13,11 +13,13 @@ namespace PatientManagmentV1
 {
     public partial class MedicineForm : Form
     {
-        SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\PatientManagementSystemV1.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection Con;
 
         public MedicineForm()
         {
             InitializeComponent();
+            Con = DatabaseConnection.GetConnection();  // Initialize the connection
+
         }
 
         void Clear()

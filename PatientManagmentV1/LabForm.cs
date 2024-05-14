@@ -13,11 +13,13 @@ namespace PatientManagmentV1
 {
     public partial class LabForm : Form
     {
-        SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\PatientManagementSystemV1.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection Con;
 
         public LabForm()
         {
             InitializeComponent();
+            Con = DatabaseConnection.GetConnection();  // Initialize the connection
+
         }
 
         private void label5_Click(object sender, EventArgs e)
