@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 using Microsoft.Data.SqlClient;
 
 namespace PatientManagmentV1
@@ -17,8 +18,10 @@ namespace PatientManagmentV1
 
         public DoctorForm()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             Con = DatabaseConnection.GetConnection();  // Initialize the connection
+            DoctorGV.CellFormatting += DoctorGV_CellFormatting;
+
 
         }
 
@@ -44,7 +47,13 @@ namespace PatientManagmentV1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (DocId.Text == "")
+            // Check if the logged-in doctor is an Admin
+            if (DoctorSession.Role != "Admin")
+            {
+                MessageBox.Show("You are not allowed to Update data.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else if (DocId.Text == "")
             {
                 MessageBox.Show("Enter the Doctor ID", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -54,42 +63,42 @@ namespace PatientManagmentV1
             }
             else
             {
-                    try
+                try
+                {
+                    Con.Open();
+                    string query = "UPDATE DoctorTbl SET DocName = @DocName, Role = @Role, DocPass = @DocPass WHERE DocId = @DocId";
+
+                    SqlCommand cmd = new SqlCommand(query, Con);
+
                     {
-                        Con.Open();
-                        string query = "UPDATE DoctorTbl SET DocName = @DocName, Role = @Role, DocPass = @DocPass WHERE DocId = @DocId";
+                        cmd.Parameters.AddWithValue("@DocName", DocName.Text);
+                        cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
+                        cmd.Parameters.AddWithValue("@DocId", DocId.Text);
 
-                        SqlCommand cmd = new SqlCommand(query, Con);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Doctor Successfully Updated");
 
-                        {
-                            cmd.Parameters.AddWithValue("@DocName", DocName.Text);
-                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem.ToString());
-                            cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
-                            cmd.Parameters.AddWithValue("@DocId", DocId.Text);
-
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Doctor Successfully Updated");
-
-                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("An error occurred: " + ex.Message);
-                    }
-                    finally
-                    {
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
                     // Ensure the connection is always closed, even if an error occurs
                     if (Con.State == ConnectionState.Open)
-                        {
-                            Con.Close();
-                        }
-                    
+                    {
+                        Con.Close();
                     }
+
+                }
 
                 // Assuming Populate() is a method to refresh or update the data displayed
                 Populate();
                 Clear();
-            }   
+            }
 
         }
 
@@ -103,48 +112,48 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (DocId.Text == "" || DocName.Text == "" || RoleCb.SelectedIndex == -1 || DocPass.Text == "")
+            if (DocName.Text == "" || RoleCb.SelectedIndex == -1 || DocPass.Text == "")
             {
                 MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                    try
-                    {
-                        Con.Open();
-                        // Assuming DocId is an integer. Adjust the type if it is not.
-                        string query = "INSERT INTO DoctorTbl (DocId, DocName, Role, DocPass) VALUES (@DocId, @DocName, @Role, @DocPass)";
-                        SqlCommand cmd = new SqlCommand(query, Con);
-                        
-                        {
-                            // Use proper type conversions to ensure data integrity
-                            cmd.Parameters.AddWithValue("@DocId", DocId.Text); // Convert to integer if DocId is an integer column
-                            cmd.Parameters.AddWithValue("@DocName", DocName.Text);
-                            cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem);
-                            cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
+                try
+                {
+                    Con.Open();
+                    // Assuming DocId is an integer. Adjust the type if it is not.
+                    string query = "INSERT INTO DoctorTbl (DocName, Role, DocPass) VALUES (@DocName, @Role, @DocPass)";
+                    SqlCommand cmd = new SqlCommand(query, Con);
 
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Doctor Successfully Added");
-
-                        }
-                    }
-                    catch (Exception ex)
                     {
-                        MessageBox.Show("An error occurred: " + ex.Message);
-                    }
-                    finally
-                    {
-                        // Ensuring the connection is closed even if an error occurs
-                        if (Con.State == ConnectionState.Open)
-                        {
-                            Con.Close();
-                        }
-                    }
+                        // Use proper type conversions to ensure data integrity
+                        //cmd.Parameters.AddWithValue("@DocId", DocId.Text); // Convert to integer if DocId is an integer column
+                        cmd.Parameters.AddWithValue("@DocName", DocName.Text);
+                        cmd.Parameters.AddWithValue("@Role", RoleCb.SelectedItem);
+                        cmd.Parameters.AddWithValue("@DocPass", DocPass.Text);
 
-                    // Assuming Populate() is a method to update the UI with the latest data
-                    Populate();
-                    Clear();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Doctor Successfully Added");
+
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    // Ensuring the connection is closed even if an error occurs
+                    if (Con.State == ConnectionState.Open)
+                    {
+                        Con.Close();
+                    }
+                }
+
+                // Assuming Populate() is a method to update the UI with the latest data
+                Populate();
+                Clear();
+            }
         }
 
 
@@ -165,7 +174,7 @@ namespace PatientManagmentV1
                 // Check if the logged-in doctor is an Admin
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not allowed to delete data.","Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("You are not allowed to delete data.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
                 else
@@ -204,6 +213,26 @@ namespace PatientManagmentV1
         private void label5_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void DoctorGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Assuming 'guna2DataGridView1' is your DataGridView and 'passwordColumn' is the name of the password column
+            if (DoctorGV.Columns[e.ColumnIndex].Name == "DocPass" && e.Value != null)
+            {
+                // You can either mask the actual length of the password
+                e.Value = new string('*', e.Value.ToString().Length);
+
+                // Or use a fixed length, like 5 asterisks:
+                // e.Value = "*****";
+
+                e.FormattingApplied = true;  // Indicates that the formatting was handled
+            }
         }
     }
 }

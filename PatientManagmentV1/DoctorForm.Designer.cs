@@ -44,6 +44,7 @@
             button3 = new Button();
             button4 = new Button();
             RoleCb = new ComboBox();
+            button5 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DoctorGV).BeginInit();
             SuspendLayout();
@@ -97,6 +98,7 @@
             // DocId
             // 
             DocId.BackColor = Color.White;
+            DocId.Enabled = false;
             DocId.Location = new Point(44, 172);
             DocId.Name = "DocId";
             DocId.PlaceholderText = "DoctorID";
@@ -121,6 +123,7 @@
             DocPass.PlaceholderText = "Password";
             DocPass.Size = new Size(182, 23);
             DocPass.TabIndex = 4;
+            DocPass.UseSystemPasswordChar = true;
             // 
             // DoctorGV
             // 
@@ -172,6 +175,7 @@
             DoctorGV.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             DoctorGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             DoctorGV.CellContentClick += DoctorGV_CellContentClick;
+            DoctorGV.CellFormatting += DoctorGV_CellFormatting;
             // 
             // button1
             // 
@@ -221,7 +225,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(154, 470);
+            button4.Location = new Point(90, 469);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
             button4.TabIndex = 9;
@@ -239,12 +243,27 @@
             RoleCb.TabIndex = 10;
             RoleCb.Text = "Role";
             // 
+            // button5
+            // 
+            button5.BackColor = Color.DeepSkyBlue;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.Location = new Point(218, 469);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 46);
+            button5.TabIndex = 11;
+            button5.Text = "Clear";
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // DoctorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(945, 597);
+            Controls.Add(button5);
             Controls.Add(RoleCb);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -282,5 +301,6 @@
         private Button button4;
         private Label label5;
         private ComboBox RoleCb;
+        private Button button5;
     }
 }
