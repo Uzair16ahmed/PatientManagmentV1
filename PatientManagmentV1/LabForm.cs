@@ -54,7 +54,7 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (LabId.Text == "" || LabName.Text == "")
+            if (LabName.Text == "")
             {
                 //MessageBox.Show("No Empty Value Accepted");
                 MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -65,16 +65,17 @@ namespace PatientManagmentV1
                 try
                 {
                     Con.Open();
-                    string query = "INSERT INTO LabTbl (LabId, LabName) VALUES (@LabId, @LabName)";
+                    //string query = "INSERT INTO LabTbl (LabId, LabName) VALUES (@LabId, @LabName)";
+                    string query = "INSERT INTO LabTbl (LabName) VALUES (@LabName)";
 
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
-                        cmd.Parameters.AddWithValue("@LabId", LabId.Text);  // Assuming LabId is a text that can be directly used, convert to integer if it's numeric
+                        //cmd.Parameters.AddWithValue("@LabId", LabId.Text);  // Assuming LabId is a text that can be directly used, convert to integer if it's numeric
                         cmd.Parameters.AddWithValue("@LabName", LabName.Text);
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Lab Successfully Added");
-                            
+
                     }
                 }
                 catch (Exception ex)
@@ -83,7 +84,7 @@ namespace PatientManagmentV1
                 }
                 finally
                 {
-                    if(Con.State == ConnectionState.Open)
+                    if (Con.State == ConnectionState.Open)
                     {
                         Con.Close();
                     }
@@ -124,7 +125,7 @@ namespace PatientManagmentV1
                 }
                 finally
                 {
-                    if(Con.State == ConnectionState.Open)
+                    if (Con.State == ConnectionState.Open)
                     {
                         Con.Close();
                     }
@@ -132,7 +133,7 @@ namespace PatientManagmentV1
                 Populate();
                 Clear();
             }
-           
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -164,7 +165,7 @@ namespace PatientManagmentV1
 
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Lab Successfully Deleted");
-                            
+
                         }
                     }
                     catch (Exception ex)
@@ -172,7 +173,7 @@ namespace PatientManagmentV1
                         MessageBox.Show("An error occurred: " + ex.Message);
                     }
                     finally
-                    { 
+                    {
                         if (Con.State == ConnectionState.Open)
                         {
                             Con.Close();
@@ -197,6 +198,11 @@ namespace PatientManagmentV1
         {
             LabId.Text = LabGV.SelectedRows[0].Cells[0].Value.ToString();
             LabName.Text = LabGV.SelectedRows[0].Cells[1].Value.ToString();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

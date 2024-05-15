@@ -43,6 +43,7 @@
             LabId = new TextBox();
             LabGV = new Guna.UI2.WinForms.Guna2DataGridView();
             label3 = new Label();
+            button5 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)LabGV).BeginInit();
             SuspendLayout();
@@ -99,7 +100,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(165, 381);
+            button4.Location = new Point(107, 377);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
             button4.TabIndex = 17;
@@ -161,6 +162,7 @@
             // LabId
             // 
             LabId.BackColor = Color.White;
+            LabId.Enabled = false;
             LabId.Location = new Point(64, 174);
             LabId.Name = "LabId";
             LabId.PlaceholderText = "LabID";
@@ -230,11 +232,26 @@
             label3.TabIndex = 21;
             label3.Text = "LABS LIST";
             // 
+            // button5
+            // 
+            button5.BackColor = Color.DeepSkyBlue;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.Location = new Point(227, 377);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 46);
+            button5.TabIndex = 22;
+            button5.Text = "Clear";
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // LabForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(945, 597);
+            Controls.Add(button5);
             Controls.Add(label3);
             Controls.Add(LabGV);
             Controls.Add(LabName);
@@ -270,5 +287,6 @@
         private TextBox LabId;
         private Guna.UI2.WinForms.Guna2DataGridView LabGV;
         private Label label3;
+        private Button button5;
     }
 }
