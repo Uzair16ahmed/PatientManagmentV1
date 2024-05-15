@@ -48,6 +48,7 @@
             FrequencyCb = new ComboBox();
             DaysCb = new ComboBox();
             InstructionCb = new ComboBox();
+            button5 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MedicineGV).BeginInit();
             SuspendLayout();
@@ -104,7 +105,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(142, 329);
+            button4.Location = new Point(89, 322);
             button4.Name = "button4";
             button4.Size = new Size(94, 46);
             button4.TabIndex = 13;
@@ -157,6 +158,7 @@
             // MedId
             // 
             MedId.BackColor = Color.White;
+            MedId.Enabled = false;
             MedId.Location = new Point(24, 123);
             MedId.Name = "MedId";
             MedId.PlaceholderText = "MedicineID";
@@ -285,12 +287,27 @@
             InstructionCb.TabIndex = 23;
             InstructionCb.Text = "Instruction";
             // 
+            // button5
+            // 
+            button5.BackColor = Color.DeepSkyBlue;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.Location = new Point(212, 322);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 46);
+            button5.TabIndex = 24;
+            button5.Text = "Clear";
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // MedicineForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(997, 597);
+            Controls.Add(button5);
             Controls.Add(InstructionCb);
             Controls.Add(DaysCb);
             Controls.Add(FrequencyCb);
@@ -336,5 +353,6 @@
         private ComboBox FrequencyCb;
         private ComboBox DaysCb;
         private ComboBox InstructionCb;
+        private Button button5;
     }
 }

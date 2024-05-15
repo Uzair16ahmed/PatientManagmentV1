@@ -59,7 +59,7 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MedId.Text == "" || MedicineName.Text == "" ||
+            if (MedicineName.Text == "" ||
                 DoseCb.SelectedItem == null || RouteCb.SelectedItem == null ||
                 FrequencyCb.SelectedItem == null || DaysCb.SelectedItem == null ||
                 InstructionCb.SelectedItem == null)
@@ -68,20 +68,20 @@ namespace PatientManagmentV1
             }
             else
             {
-                
+
                 try
                 {
                     Con.Open();
                     string query = @"
                         INSERT INTO MedicineTbl 
-                        (MedId, MedicineName, Dose, Route, Frequency, Days, Instruction) 
+                        (MedicineName, Dose, Route, Frequency, Days, Instruction) 
                         VALUES 
-                        (@MedId, @MedicineName, @Dose, @Route, @Frequency, @Days, @Instruction)";
+                        (@MedicineName, @Dose, @Route, @Frequency, @Days, @Instruction)";
 
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
                         // Adding parameters to prevent SQL Injection
-                        cmd.Parameters.AddWithValue("@MedId", MedId.Text);  // Convert to integer if MedId is a numeric field
+                        //cmd.Parameters.AddWithValue("@MedId", MedId.Text);  // Convert to integer if MedId is a numeric field
                         cmd.Parameters.AddWithValue("@MedicineName", MedicineName.Text);
                         cmd.Parameters.AddWithValue("@Dose", DoseCb.SelectedItem.ToString());
                         cmd.Parameters.AddWithValue("@Route", RouteCb.SelectedItem.ToString());
@@ -99,14 +99,14 @@ namespace PatientManagmentV1
                 }
                 finally
                 {
-                    if(Con.State == ConnectionState.Open)
+                    if (Con.State == ConnectionState.Open)
                     {
                         Con.Close();
                     }
                 }
                 Populate();
                 Clear();
-                
+
             }
 
         }
@@ -122,7 +122,7 @@ namespace PatientManagmentV1
             }
             else
             {
-                
+
                 try
                 {
                     Con.Open();
@@ -150,7 +150,7 @@ namespace PatientManagmentV1
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Medicine Successfully Updated");
-                        
+
                     }
                 }
                 catch (Exception ex)
@@ -159,7 +159,7 @@ namespace PatientManagmentV1
                 }
                 finally
                 {
-                    if(Con.State == ConnectionState.Open)
+                    if (Con.State == ConnectionState.Open)
                     {
                         Con.Close();
                     }
@@ -181,11 +181,11 @@ namespace PatientManagmentV1
                 // Check if the logged-in user's role is "Admin"
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete medicines.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("You are not authorized to delete Medicines records.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    
+
                     try
                     {
                         Con.Open();
@@ -205,15 +205,15 @@ namespace PatientManagmentV1
                     }
                     finally
                     {
-                        if(Con.State == ConnectionState.Open)
+                        if (Con.State == ConnectionState.Open)
                         {
                             Con.Close();
                         }
                     }
-                Populate(); // Refresh the data display
-                Clear();    // Clear any form fields
+                    Populate(); // Refresh the data display
+                    Clear();    // Clear any form fields
                 }
-                
+
             }
 
         }
@@ -232,6 +232,11 @@ namespace PatientManagmentV1
             FrequencyCb.Text = MedicineGV.SelectedRows[0].Cells[4].Value.ToString();
             DaysCb.Text = MedicineGV.SelectedRows[0].Cells[5].Value.ToString();
             InstructionCb.Text = MedicineGV.SelectedRows[0].Cells[6].Value.ToString();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }
