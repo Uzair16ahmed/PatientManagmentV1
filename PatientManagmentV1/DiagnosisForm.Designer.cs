@@ -65,6 +65,7 @@
             ExaminationCb = new ComboBox();
             PatId = new TextBox();
             PatGender = new ComboBox();
+            button6 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DiagnosisGV).BeginInit();
             diagsummary.SuspendLayout();
@@ -119,6 +120,7 @@
             // DiagId
             // 
             DiagId.BackColor = Color.White;
+            DiagId.Enabled = false;
             DiagId.Location = new Point(21, 96);
             DiagId.Name = "DiagId";
             DiagId.PlaceholderText = "DiagnosisID";
@@ -160,7 +162,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(159, 438);
+            button4.Location = new Point(116, 434);
             button4.Name = "button4";
             button4.Size = new Size(87, 40);
             button4.TabIndex = 18;
@@ -472,12 +474,27 @@
             PatGender.TabIndex = 39;
             PatGender.Text = "PatientGender";
             // 
+            // button6
+            // 
+            button6.BackColor = Color.DeepSkyBlue;
+            button6.FlatAppearance.BorderSize = 0;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button6.Location = new Point(232, 434);
+            button6.Name = "button6";
+            button6.Size = new Size(87, 40);
+            button6.TabIndex = 40;
+            button6.Text = "Clear";
+            button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
+            // 
             // DiagnosisForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1083, 686);
+            Controls.Add(button6);
             Controls.Add(PatGender);
             Controls.Add(PatId);
             Controls.Add(ExaminationCb);
@@ -549,5 +566,6 @@
         private Label Examinationlbl;
         private TextBox PatId;
         private ComboBox PatGender;
+        private Button button6;
     }
 }
