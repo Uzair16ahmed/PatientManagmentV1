@@ -46,6 +46,7 @@
             button2 = new Button();
             button1 = new Button();
             ExaminationGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            button5 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ExaminationGV).BeginInit();
             SuspendLayout();
@@ -147,6 +148,7 @@
             // ExamId
             // 
             ExamId.BackColor = Color.White;
+            ExamId.Enabled = false;
             ExamId.Location = new Point(25, 157);
             ExamId.Name = "ExamId";
             ExamId.PlaceholderText = "ExaminationID";
@@ -160,7 +162,7 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button4.ForeColor = Color.Black;
-            button4.Location = new Point(120, 422);
+            button4.Location = new Point(62, 418);
             button4.Name = "button4";
             button4.Size = new Size(87, 40);
             button4.TabIndex = 40;
@@ -264,12 +266,28 @@
             ExaminationGV.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             ExaminationGV.CellContentClick += ExaminationGV_CellContentClick_1;
             // 
+            // button5
+            // 
+            button5.BackColor = Color.DeepSkyBlue;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.ForeColor = Color.Black;
+            button5.Location = new Point(173, 418);
+            button5.Name = "button5";
+            button5.Size = new Size(87, 40);
+            button5.TabIndex = 42;
+            button5.Text = "Clear";
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // ExaminationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(1052, 572);
+            Controls.Add(button5);
             Controls.Add(ExaminationGV);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -313,5 +331,6 @@
         private Button button2;
         private Button button1;
         private Guna.UI2.WinForms.Guna2DataGridView ExaminationGV;
+        private Button button5;
     }
 }

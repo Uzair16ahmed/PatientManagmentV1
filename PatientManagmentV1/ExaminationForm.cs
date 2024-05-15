@@ -72,7 +72,7 @@ namespace PatientManagmentV1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (ExamId.Text == "" || Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
+            if (Diagnosis.Text == "" || Symptoms.Text == "" || Examination.Text == "" || LabNameCb.SelectedValue == "")
             {
                 MessageBox.Show("No Empty Values Accepted", "Data Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -83,13 +83,13 @@ namespace PatientManagmentV1
                 {
                     Con.Open();
                     string query = @"
-                            INSERT INTO ExaminationTbl (ExamId, Diagnosis, Symptoms, Examination, LabName) 
-                            VALUES (@ExamId, @Diagnosis, @Symptoms, @Examination, @LabName)";
+                            INSERT INTO ExaminationTbl (Diagnosis, Symptoms, Examination, LabName) 
+                            VALUES (@Diagnosis, @Symptoms, @Examination, @LabName)";
 
                     using (SqlCommand cmd = new SqlCommand(query, Con))
                     {
                         // Add parameters to ensure safe query execution
-                        cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExamId.Text));  // Convert to int if ExamId is an integer field
+                        //cmd.Parameters.AddWithValue("@ExamId", int.Parse(ExamId.Text));  // Convert to int if ExamId is an integer field
                         cmd.Parameters.AddWithValue("@Diagnosis", Diagnosis.Text);
                         cmd.Parameters.AddWithValue("@Symptoms", Symptoms.Text);
                         cmd.Parameters.AddWithValue("@Examination", Examination.Text);
@@ -179,7 +179,7 @@ namespace PatientManagmentV1
                 // Check if the logged-in user's role allows for deletion
                 if (DoctorSession.Role != "Admin")
                 {
-                    MessageBox.Show("You are not authorized to delete diagnosis records.","Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("You are not authorized to delete Examination records.", "Un-Authorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -229,7 +229,7 @@ namespace PatientManagmentV1
 
         private void ExaminationGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void ExaminationGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -240,6 +240,11 @@ namespace PatientManagmentV1
             Examination.Text = ExaminationGV.SelectedRows[0].Cells[3].Value.ToString();
             LabNameCb.Text = ExaminationGV.SelectedRows[0].Cells[4].Value.ToString();
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }
