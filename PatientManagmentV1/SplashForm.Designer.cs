@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Myprogressbar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             label3 = new Label();
             label2 = new Label();
@@ -45,7 +45,7 @@
             Myprogressbar.Location = new Point(219, 89);
             Myprogressbar.Minimum = 0;
             Myprogressbar.Name = "Myprogressbar";
-            Myprogressbar.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            Myprogressbar.ShadowDecoration.CustomizableEdges = customizableEdges3;
             Myprogressbar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             Myprogressbar.Size = new Size(130, 130);
             Myprogressbar.TabIndex = 4;
@@ -56,11 +56,11 @@
             label3.AutoSize = true;
             label3.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(219, 232);
+            label3.Location = new Point(374, 232);
             label3.Name = "label3";
-            label3.Size = new Size(146, 26);
+            label3.Size = new Size(192, 26);
             label3.TabIndex = 3;
-            label3.Text = "By UzairAhmed";
+            label3.Text = "madeBy BAHATMAN";
             // 
             // label2
             // 
